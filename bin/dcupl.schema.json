@@ -1,0 +1,646 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "anyOf": [
+        {
+            "defaultProperties": [],
+            "description": "A model describes a real world object and hols attributes.",
+            "properties": {
+                "fields": {
+                    "items": {
+                        "defaultProperties": [],
+                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                        "properties": {
+                            "derive": {
+                                "defaultProperties": [],
+                                "description": "Derive a specific value from an other object/entity",
+                                "properties": {
+                                    "localField": {
+                                        "description": "xxx",
+                                        "minLength": 1,
+                                        "type": "string"
+                                    },
+                                    "remoteField": {
+                                        "description": "xxx",
+                                        "minLength": 1,
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "localField",
+                                    "remoteField"
+                                ],
+                                "type": "object"
+                            },
+                            "filter": {
+                                "anyOf": [
+                                    {
+                                        "defaultProperties": [],
+                                        "properties": {
+                                            "calculateFacets": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    {
+                                        "type": "boolean"
+                                    }
+                                ]
+                            },
+                            "key": {
+                                "description": "A key is an unique identifier overall fields in this model.",
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "model": {
+                                "description": "xxx",
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "resolve": {
+                                "defaultProperties": [],
+                                "properties": {
+                                    "field": {
+                                        "description": "The field on the foreign object which should be used for resolve the relation.",
+                                        "minLength": 1,
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "description": "The model of the foreign object field.",
+                                        "minLength": 1,
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "field",
+                                    "model"
+                                ],
+                                "type": "object"
+                            },
+                            "type": {
+                                "$ref": "#/definitions/FieldType"
+                            }
+                        },
+                        "required": [
+                            "key",
+                            "model",
+                            "type"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "key": {
+                    "description": "A key is an unique identifier overall models in the application.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "properties": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "defaultProperties": [],
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "properties": {
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype"
+                                            },
+                                            "derive": {
+                                                "defaultProperties": [],
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    {
+                                        "defaultProperties": [],
+                                        "properties": {
+                                            "datatype": {
+                                                "enum": [
+                                                    "float",
+                                                    "int"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "filter": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ],
+                                        "type": "object"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "defaultProperties": [],
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "properties": {
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype"
+                                            },
+                                            "derive": {
+                                                "defaultProperties": [],
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    {
+                                        "defaultProperties": [],
+                                        "properties": {
+                                            "datatype": {
+                                                "enum": [
+                                                    "json"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "filter": {
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ],
+                                        "type": "object"
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "defaultProperties": [],
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "properties": {
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype"
+                                            },
+                                            "derive": {
+                                                "defaultProperties": [],
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    {
+                                        "defaultProperties": [],
+                                        "properties": {
+                                            "datatype": {
+                                                "enum": [
+                                                    "string"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "defaultProperties": [],
+                                                        "properties": {
+                                                            "autocompletion": {
+                                                                "defaultProperties": [],
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "comparisonType": {
+                                                                "$ref": "#/definitions/FilterComparisonType"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ],
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "key"
+            ],
+            "type": "object"
+        },
+        {
+            "items": {
+                "defaultProperties": [],
+                "description": "A model describes a real world object and hols attributes.",
+                "properties": {
+                    "fields": {
+                        "items": {
+                            "defaultProperties": [],
+                            "description": "A Field prepresent a list of elements along a explicite dimension.",
+                            "properties": {
+                                "derive": {
+                                    "defaultProperties": [],
+                                    "description": "Derive a specific value from an other object/entity",
+                                    "properties": {
+                                        "localField": {
+                                            "description": "xxx",
+                                            "minLength": 1,
+                                            "type": "string"
+                                        },
+                                        "remoteField": {
+                                            "description": "xxx",
+                                            "minLength": 1,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "localField",
+                                        "remoteField"
+                                    ],
+                                    "type": "object"
+                                },
+                                "filter": {
+                                    "anyOf": [
+                                        {
+                                            "defaultProperties": [],
+                                            "properties": {
+                                                "calculateFacets": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "type": "boolean"
+                                        }
+                                    ]
+                                },
+                                "key": {
+                                    "description": "A key is an unique identifier overall fields in this model.",
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "model": {
+                                    "description": "xxx",
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "resolve": {
+                                    "defaultProperties": [],
+                                    "properties": {
+                                        "field": {
+                                            "description": "The field on the foreign object which should be used for resolve the relation.",
+                                            "minLength": 1,
+                                            "type": "string"
+                                        },
+                                        "model": {
+                                            "description": "The model of the foreign object field.",
+                                            "minLength": 1,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "field",
+                                        "model"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/FieldType"
+                                }
+                            },
+                            "required": [
+                                "key",
+                                "model",
+                                "type"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "key": {
+                        "description": "A key is an unique identifier overall models in the application.",
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "properties": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "defaultProperties": [],
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "properties": {
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                },
+                                                "derive": {
+                                                    "defaultProperties": [],
+                                                    "properties": {
+                                                        "localField": {
+                                                            "type": "string"
+                                                        },
+                                                        "remoteProperty": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteProperty"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "defaultProperties": [],
+                                            "properties": {
+                                                "datatype": {
+                                                    "enum": [
+                                                        "float",
+                                                        "int"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "filter": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "defaultProperties": [],
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "properties": {
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                },
+                                                "derive": {
+                                                    "defaultProperties": [],
+                                                    "properties": {
+                                                        "localField": {
+                                                            "type": "string"
+                                                        },
+                                                        "remoteProperty": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteProperty"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "defaultProperties": [],
+                                            "properties": {
+                                                "datatype": {
+                                                    "enum": [
+                                                        "json"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "filter": {
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "defaultProperties": [],
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "properties": {
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                },
+                                                "derive": {
+                                                    "defaultProperties": [],
+                                                    "properties": {
+                                                        "localField": {
+                                                            "type": "string"
+                                                        },
+                                                        "remoteProperty": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteProperty"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "defaultProperties": [],
+                                            "properties": {
+                                                "datatype": {
+                                                    "enum": [
+                                                        "string"
+                                                    ],
+                                                    "type": "string"
+                                                },
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "defaultProperties": [],
+                                                            "properties": {
+                                                                "autocompletion": {
+                                                                    "defaultProperties": [],
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "key"
+                ],
+                "type": "object"
+            },
+            "type": "array"
+        }
+    ],
+    "definitions": {
+        "FieldType": {
+            "description": "must be singleValued or  multiValued\nsingleValued contains only one key to an object\nmultiValued contains multiple key of objects",
+            "enum": [
+                "multiValued",
+                "singleValued"
+            ],
+            "minLength": 1,
+            "type": "string"
+        },
+        "FilterComparisonType": {
+            "enum": [
+                "contains",
+                "containsIgnoreCase",
+                "containsIgnoreCaseAndWhitespace",
+                "equal"
+            ],
+            "type": "string"
+        },
+        "PropertyDatatype": {
+            "enum": [
+                "float",
+                "int",
+                "json",
+                "string"
+            ],
+            "type": "string"
+        }
+    }
+}
+
