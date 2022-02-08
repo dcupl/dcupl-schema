@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Information for data loading in dcupl",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string"
+      },
+      "type": {
+        "enum": ["data", "model"]
+      },
+      "if": {
+        "properties": {
+          "type": {
+            "const": "data"
+          },
+          "required": ["type"]
+        }
+      },
+      "then": {
+        "properties": {
+          "model": {
+            "type": "string"
+          }
+        },
+        "required": ["url", "type", "model"]
+      },
+      "else": {
+        "required": ["url", "type"]
+      }
+    }
+  }
+}
