@@ -3,12 +3,15 @@
     "anyOf": [
         {
             "description": "A model describes a real world object and hols attributes.",
-            "defaultSnippets": {
-                "label": "Model Description",
-                "properties": [
-                    "key"
-                ]
-            },
+            "defaultSnippets": [
+                {
+                    "label": "Model Description",
+                    "description": "A model describes a real world object and hols attributes.",
+                    "body": {
+                        "key": "$1"
+                    }
+                }
+            ],
             "type": "object",
             "properties": {
                 "key": {
@@ -25,13 +28,16 @@
                                 "allOf": [
                                     {
                                         "description": "A property is a quality or characteristic belonging an object.",
-                                        "defaultSnippets": {
-                                            "label": "Property",
-                                            "properties": [
-                                                "key",
-                                                "datatype"
-                                            ]
-                                        },
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -94,13 +100,16 @@
                                 "allOf": [
                                     {
                                         "description": "A property is a quality or characteristic belonging an object.",
-                                        "defaultSnippets": {
-                                            "label": "Property",
-                                            "properties": [
-                                                "key",
-                                                "datatype"
-                                            ]
-                                        },
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -162,13 +171,16 @@
                                 "allOf": [
                                     {
                                         "description": "A property is a quality or characteristic belonging an object.",
-                                        "defaultSnippets": {
-                                            "label": "Property",
-                                            "properties": [
-                                                "key",
-                                                "datatype"
-                                            ]
-                                        },
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -267,14 +279,17 @@
                     "type": "array",
                     "items": {
                         "description": "A Field prepresent a list of elements along a explicite dimension.",
-                        "defaultSnippets": {
-                            "label": "Field",
-                            "properties": [
-                                "key",
-                                "model",
-                                "type"
-                            ]
-                        },
+                        "defaultSnippets": [
+                            {
+                                "label": "Field",
+                                "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                "body": {
+                                    "key": "$1",
+                                    "model": "$2",
+                                    "type": "$3"
+                                }
+                            }
+                        ],
                         "type": "object",
                         "properties": {
                             "key": {
@@ -317,13 +332,16 @@
                             },
                             "derive": {
                                 "description": "Derive a specific value from an other object/entity",
-                                "defaultSnippets": {
-                                    "label": "Derive Values",
-                                    "properties": [
-                                        "localField",
-                                        "remoteField"
-                                    ]
-                                },
+                                "defaultSnippets": [
+                                    {
+                                        "label": "Derive Values",
+                                        "description": "Derive a specific value from an other object/entity",
+                                        "body": {
+                                            "localField": "$1",
+                                            "remoteField": "$2"
+                                        }
+                                    }
+                                ],
                                 "type": "object",
                                 "properties": {
                                     "localField": {
@@ -380,12 +398,15 @@
             "type": "array",
             "items": {
                 "description": "A model describes a real world object and hols attributes.",
-                "defaultSnippets": {
-                    "label": "Model Description",
-                    "properties": [
-                        "key"
-                    ]
-                },
+                "defaultSnippets": [
+                    {
+                        "label": "Model Description",
+                        "description": "A model describes a real world object and hols attributes.",
+                        "body": {
+                            "key": "$1"
+                        }
+                    }
+                ],
                 "type": "object",
                 "properties": {
                     "key": {
@@ -402,13 +423,16 @@
                                     "allOf": [
                                         {
                                             "description": "A property is a quality or characteristic belonging an object.",
-                                            "defaultSnippets": {
-                                                "label": "Property",
-                                                "properties": [
-                                                    "key",
-                                                    "datatype"
-                                                ]
-                                            },
+                                            "defaultSnippets": [
+                                                {
+                                                    "label": "Property",
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "body": {
+                                                        "key": "$1",
+                                                        "datatype": "$2"
+                                                    }
+                                                }
+                                            ],
                                             "type": "object",
                                             "properties": {
                                                 "key": {
@@ -471,13 +495,16 @@
                                     "allOf": [
                                         {
                                             "description": "A property is a quality or characteristic belonging an object.",
-                                            "defaultSnippets": {
-                                                "label": "Property",
-                                                "properties": [
-                                                    "key",
-                                                    "datatype"
-                                                ]
-                                            },
+                                            "defaultSnippets": [
+                                                {
+                                                    "label": "Property",
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "body": {
+                                                        "key": "$1",
+                                                        "datatype": "$2"
+                                                    }
+                                                }
+                                            ],
                                             "type": "object",
                                             "properties": {
                                                 "key": {
@@ -539,13 +566,16 @@
                                     "allOf": [
                                         {
                                             "description": "A property is a quality or characteristic belonging an object.",
-                                            "defaultSnippets": {
-                                                "label": "Property",
-                                                "properties": [
-                                                    "key",
-                                                    "datatype"
-                                                ]
-                                            },
+                                            "defaultSnippets": [
+                                                {
+                                                    "label": "Property",
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "body": {
+                                                        "key": "$1",
+                                                        "datatype": "$2"
+                                                    }
+                                                }
+                                            ],
                                             "type": "object",
                                             "properties": {
                                                 "key": {
@@ -644,14 +674,17 @@
                         "type": "array",
                         "items": {
                             "description": "A Field prepresent a list of elements along a explicite dimension.",
-                            "defaultSnippets": {
-                                "label": "Field",
-                                "properties": [
-                                    "key",
-                                    "model",
-                                    "type"
-                                ]
-                            },
+                            "defaultSnippets": [
+                                {
+                                    "label": "Field",
+                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                    "body": {
+                                        "key": "$1",
+                                        "model": "$2",
+                                        "type": "$3"
+                                    }
+                                }
+                            ],
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -694,13 +727,16 @@
                                 },
                                 "derive": {
                                     "description": "Derive a specific value from an other object/entity",
-                                    "defaultSnippets": {
-                                        "label": "Derive Values",
-                                        "properties": [
-                                            "localField",
-                                            "remoteField"
-                                        ]
-                                    },
+                                    "defaultSnippets": [
+                                        {
+                                            "label": "Derive Values",
+                                            "description": "Derive a specific value from an other object/entity",
+                                            "body": {
+                                                "localField": "$1",
+                                                "remoteField": "$2"
+                                            }
+                                        }
+                                    ],
                                     "type": "object",
                                     "properties": {
                                         "localField": {
