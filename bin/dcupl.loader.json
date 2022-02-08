@@ -15,9 +15,9 @@
         "properties": {
           "type": {
             "const": "data"
-          },
-          "required": ["type"]
-        }
+          }
+        },
+        "required": ["type"]
       },
       "then": {
         "properties": {
