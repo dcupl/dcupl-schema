@@ -6,11 +6,13 @@
     "type": "object",
     "properties": {
       "url": {
-        "type": "string"
+        "type": "string",
+        "format": "uri"
       },
       "type": {
         "enum": ["data", "model"]
-      },
+      }
+    },
       "if": {
         "properties": {
           "type": {
@@ -30,6 +32,6 @@
       "else": {
         "required": ["url", "type"]
       }
-    }
+   
   }
 }
