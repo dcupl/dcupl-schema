@@ -247,6 +247,40 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
@@ -258,6 +292,146 @@
                                         ]
                                     }
                                 ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": {
+                                            "label": "Property",
+                                            "properties": [
+                                                "key",
+                                                "datatype"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
+                                            },
+                                            "derive": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string",
+                                                        "title": "localField"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "datatype": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "string"
+                                                ],
+                                                "title": "datatype"
+                                            },
+                                            "expression": {
+                                                "type": "string",
+                                                "title": "expression"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "expression"
+                                        ]
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -266,110 +440,304 @@
                 "fields": {
                     "type": "array",
                     "items": {
-                        "description": "A Field prepresent a list of elements along a explicite dimension.",
-                        "defaultSnippets": {
-                            "label": "Field",
-                            "properties": [
-                                "key",
-                                "model",
-                                "type"
-                            ]
-                        },
-                        "type": "object",
-                        "properties": {
-                            "key": {
-                                "description": "A key is an unique identifier overall fields in this model.",
-                                "minLength": 1,
-                                "type": "string",
-                                "title": "key"
-                            },
-                            "model": {
-                                "description": "xxx",
-                                "minLength": 1,
-                                "type": "string",
-                                "title": "model"
-                            },
-                            "type": {
-                                "$ref": "#/definitions/FieldType",
-                                "title": "type"
-                            },
-                            "resolve": {
-                                "type": "object",
-                                "properties": {
-                                    "field": {
-                                        "description": "The field on the foreign object which should be used for resolve the relation.",
-                                        "minLength": 1,
-                                        "type": "string",
-                                        "title": "field"
-                                    },
-                                    "model": {
-                                        "description": "The model of the foreign object field.",
-                                        "minLength": 1,
-                                        "type": "string",
-                                        "title": "model"
-                                    }
-                                },
-                                "required": [
-                                    "field",
-                                    "model"
-                                ],
-                                "title": "resolve"
-                            },
-                            "derive": {
-                                "description": "Derive a specific value from an other object/entity",
+                        "anyOf": [
+                            {
+                                "description": "A Field prepresent a list of elements along a explicite dimension.",
                                 "defaultSnippets": {
-                                    "label": "Derive Values",
+                                    "label": "Field",
                                     "properties": [
-                                        "localField",
-                                        "remoteField"
+                                        "key",
+                                        "model",
+                                        "type"
                                     ]
                                 },
                                 "type": "object",
                                 "properties": {
-                                    "localField": {
-                                        "description": "xxx",
+                                    "key": {
+                                        "description": "A key is an unique identifier overall fields in this model.",
                                         "minLength": 1,
                                         "type": "string",
-                                        "title": "localField"
+                                        "title": "key"
                                     },
-                                    "remoteField": {
+                                    "model": {
                                         "description": "xxx",
                                         "minLength": 1,
                                         "type": "string",
-                                        "title": "remoteField"
+                                        "title": "model"
+                                    },
+                                    "type": {
+                                        "$ref": "#/definitions/FieldType",
+                                        "title": "type"
+                                    },
+                                    "filter": {
+                                        "description": "Derive a specific value from an other object/entity",
+                                        "defaultSnippets": {
+                                            "label": "Filter"
+                                        },
+                                        "anyOf": [
+                                            {
+                                                "description": "Facet calculation is disabled by default",
+                                                "defaultSnippets": {
+                                                    "label": "Facetting",
+                                                    "properties": [
+                                                        "calculateFacets:boolean"
+                                                    ]
+                                                },
+                                                "type": "object",
+                                                "properties": {
+                                                    "calculateFacets": {
+                                                        "type": "boolean",
+                                                        "title": "calculateFacets"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "boolean"
+                                            }
+                                        ],
+                                        "title": "filter"
                                     }
                                 },
                                 "required": [
-                                    "localField",
-                                    "remoteField"
-                                ],
-                                "title": "derive"
+                                    "key",
+                                    "model",
+                                    "type"
+                                ]
                             },
-                            "filter": {
-                                "anyOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "defaultSnippets": {
+                                            "label": "Field",
+                                            "properties": [
+                                                "key",
+                                                "model",
+                                                "type"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall fields in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "model": {
+                                                "description": "xxx",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "model"
+                                            },
+                                            "type": {
+                                                "$ref": "#/definitions/FieldType",
+                                                "title": "type"
+                                            },
+                                            "filter": {
+                                                "description": "Derive a specific value from an other object/entity",
+                                                "defaultSnippets": {
+                                                    "label": "Filter"
+                                                },
+                                                "anyOf": [
+                                                    {
+                                                        "description": "Facet calculation is disabled by default",
+                                                        "defaultSnippets": {
+                                                            "label": "Facetting",
+                                                            "properties": [
+                                                                "calculateFacets:boolean"
+                                                            ]
+                                                        },
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "calculateFacets": {
+                                                                "type": "boolean",
+                                                                "title": "calculateFacets"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "model",
+                                            "type"
+                                        ]
+                                    },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "calculateFacets": {
-                                                "type": "boolean",
-                                                "title": "calculateFacets"
+                                            "resolve": {
+                                                "description": "Resolve a Relationship to an foreign model",
+                                                "defaultSnippets": {
+                                                    "label": "Resolve Relationship",
+                                                    "properties": [
+                                                        "field",
+                                                        "model"
+                                                    ]
+                                                },
+                                                "type": "object",
+                                                "properties": {
+                                                    "field": {
+                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                        "minLength": 1,
+                                                        "type": "string",
+                                                        "title": "field"
+                                                    },
+                                                    "model": {
+                                                        "description": "The model of the foreign object field.",
+                                                        "minLength": 1,
+                                                        "type": "string",
+                                                        "title": "model"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "field",
+                                                    "model"
+                                                ],
+                                                "title": "resolve"
                                             }
-                                        }
+                                        },
+                                        "required": [
+                                            "resolve"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "defaultSnippets": {
+                                            "label": "Field",
+                                            "properties": [
+                                                "key",
+                                                "model",
+                                                "type"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall fields in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "model": {
+                                                "description": "xxx",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "model"
+                                            },
+                                            "type": {
+                                                "$ref": "#/definitions/FieldType",
+                                                "title": "type"
+                                            },
+                                            "filter": {
+                                                "description": "Derive a specific value from an other object/entity",
+                                                "defaultSnippets": {
+                                                    "label": "Filter"
+                                                },
+                                                "anyOf": [
+                                                    {
+                                                        "description": "Facet calculation is disabled by default",
+                                                        "defaultSnippets": {
+                                                            "label": "Facetting",
+                                                            "properties": [
+                                                                "calculateFacets:boolean"
+                                                            ]
+                                                        },
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "calculateFacets": {
+                                                                "type": "boolean",
+                                                                "title": "calculateFacets"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "model",
+                                            "type"
+                                        ]
                                     },
                                     {
-                                        "type": "boolean"
+                                        "type": "object",
+                                        "properties": {
+                                            "derive": {
+                                                "description": "Derive a specific value from an other object/entity",
+                                                "defaultSnippets": {
+                                                    "label": "Derive Values",
+                                                    "properties": [
+                                                        "localField",
+                                                        "remoteField"
+                                                    ]
+                                                },
+                                                "type": "object",
+                                                "properties": {
+                                                    "localField": {
+                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                        "minLength": 1,
+                                                        "type": "string",
+                                                        "title": "localField"
+                                                    },
+                                                    "remoteField": {
+                                                        "description": "The field on the foreign object which should be derived.",
+                                                        "minLength": 1,
+                                                        "type": "string",
+                                                        "title": "remoteField"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteField"
+                                                ],
+                                                "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "derive"
+                                        ]
                                     }
-                                ],
-                                "title": "filter"
+                                ]
                             }
-                        },
-                        "required": [
-                            "key",
-                            "model",
-                            "type"
                         ]
                     },
                     "title": "fields"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {},
+                        "properties": {
+                            "key": {
+                                "type": "string",
+                                "title": "key"
+                            }
+                        },
+                        "required": [
+                            "key"
+                        ]
+                    },
+                    "title": "data"
+                },
+                "supportsAutoCreation": {
+                    "type": "boolean",
+                    "title": "supportsAutoCreation"
                 }
             },
             "required": [
@@ -624,6 +992,40 @@
                                                             }
                                                         },
                                                         {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
                                                             "type": "boolean"
                                                         }
                                                     ],
@@ -635,6 +1037,146 @@
                                             ]
                                         }
                                     ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "defaultSnippets": {
+                                                "label": "Property",
+                                                "properties": [
+                                                    "key",
+                                                    "datatype"
+                                                ]
+                                            },
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "key"
+                                                },
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
+                                                },
+                                                "derive": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "localField": {
+                                                            "type": "string",
+                                                            "title": "localField"
+                                                        },
+                                                        "remoteProperty": {
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteProperty"
+                                                    ],
+                                                    "title": "derive"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ]
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "datatype": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "string"
+                                                    ],
+                                                    "title": "datatype"
+                                                },
+                                                "expression": {
+                                                    "type": "string",
+                                                    "title": "expression"
+                                                },
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "expression"
+                                            ]
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -643,110 +1185,304 @@
                     "fields": {
                         "type": "array",
                         "items": {
-                            "description": "A Field prepresent a list of elements along a explicite dimension.",
-                            "defaultSnippets": {
-                                "label": "Field",
-                                "properties": [
-                                    "key",
-                                    "model",
-                                    "type"
-                                ]
-                            },
-                            "type": "object",
-                            "properties": {
-                                "key": {
-                                    "description": "A key is an unique identifier overall fields in this model.",
-                                    "minLength": 1,
-                                    "type": "string",
-                                    "title": "key"
-                                },
-                                "model": {
-                                    "description": "xxx",
-                                    "minLength": 1,
-                                    "type": "string",
-                                    "title": "model"
-                                },
-                                "type": {
-                                    "$ref": "#/definitions/FieldType",
-                                    "title": "type"
-                                },
-                                "resolve": {
-                                    "type": "object",
-                                    "properties": {
-                                        "field": {
-                                            "description": "The field on the foreign object which should be used for resolve the relation.",
-                                            "minLength": 1,
-                                            "type": "string",
-                                            "title": "field"
-                                        },
-                                        "model": {
-                                            "description": "The model of the foreign object field.",
-                                            "minLength": 1,
-                                            "type": "string",
-                                            "title": "model"
-                                        }
-                                    },
-                                    "required": [
-                                        "field",
-                                        "model"
-                                    ],
-                                    "title": "resolve"
-                                },
-                                "derive": {
-                                    "description": "Derive a specific value from an other object/entity",
+                            "anyOf": [
+                                {
+                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
                                     "defaultSnippets": {
-                                        "label": "Derive Values",
+                                        "label": "Field",
                                         "properties": [
-                                            "localField",
-                                            "remoteField"
+                                            "key",
+                                            "model",
+                                            "type"
                                         ]
                                     },
                                     "type": "object",
                                     "properties": {
-                                        "localField": {
-                                            "description": "xxx",
+                                        "key": {
+                                            "description": "A key is an unique identifier overall fields in this model.",
                                             "minLength": 1,
                                             "type": "string",
-                                            "title": "localField"
+                                            "title": "key"
                                         },
-                                        "remoteField": {
+                                        "model": {
                                             "description": "xxx",
                                             "minLength": 1,
                                             "type": "string",
-                                            "title": "remoteField"
+                                            "title": "model"
+                                        },
+                                        "type": {
+                                            "$ref": "#/definitions/FieldType",
+                                            "title": "type"
+                                        },
+                                        "filter": {
+                                            "description": "Derive a specific value from an other object/entity",
+                                            "defaultSnippets": {
+                                                "label": "Filter"
+                                            },
+                                            "anyOf": [
+                                                {
+                                                    "description": "Facet calculation is disabled by default",
+                                                    "defaultSnippets": {
+                                                        "label": "Facetting",
+                                                        "properties": [
+                                                            "calculateFacets:boolean"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "calculateFacets": {
+                                                            "type": "boolean",
+                                                            "title": "calculateFacets"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "boolean"
+                                                }
+                                            ],
+                                            "title": "filter"
                                         }
                                     },
                                     "required": [
-                                        "localField",
-                                        "remoteField"
-                                    ],
-                                    "title": "derive"
+                                        "key",
+                                        "model",
+                                        "type"
+                                    ]
                                 },
-                                "filter": {
-                                    "anyOf": [
+                                {
+                                    "allOf": [
+                                        {
+                                            "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                            "defaultSnippets": {
+                                                "label": "Field",
+                                                "properties": [
+                                                    "key",
+                                                    "model",
+                                                    "type"
+                                                ]
+                                            },
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall fields in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "key"
+                                                },
+                                                "model": {
+                                                    "description": "xxx",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "model"
+                                                },
+                                                "type": {
+                                                    "$ref": "#/definitions/FieldType",
+                                                    "title": "type"
+                                                },
+                                                "filter": {
+                                                    "description": "Derive a specific value from an other object/entity",
+                                                    "defaultSnippets": {
+                                                        "label": "Filter"
+                                                    },
+                                                    "anyOf": [
+                                                        {
+                                                            "description": "Facet calculation is disabled by default",
+                                                            "defaultSnippets": {
+                                                                "label": "Facetting",
+                                                                "properties": [
+                                                                    "calculateFacets:boolean"
+                                                                ]
+                                                            },
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "calculateFacets": {
+                                                                    "type": "boolean",
+                                                                    "title": "calculateFacets"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
+                                                }
+                                            },
+                                            "required": [
+                                                "key",
+                                                "model",
+                                                "type"
+                                            ]
+                                        },
                                         {
                                             "type": "object",
                                             "properties": {
-                                                "calculateFacets": {
-                                                    "type": "boolean",
-                                                    "title": "calculateFacets"
+                                                "resolve": {
+                                                    "description": "Resolve a Relationship to an foreign model",
+                                                    "defaultSnippets": {
+                                                        "label": "Resolve Relationship",
+                                                        "properties": [
+                                                            "field",
+                                                            "model"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "field": {
+                                                            "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "field"
+                                                        },
+                                                        "model": {
+                                                            "description": "The model of the foreign object field.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "model"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "field",
+                                                        "model"
+                                                    ],
+                                                    "title": "resolve"
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "resolve"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                            "defaultSnippets": {
+                                                "label": "Field",
+                                                "properties": [
+                                                    "key",
+                                                    "model",
+                                                    "type"
+                                                ]
+                                            },
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall fields in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "key"
+                                                },
+                                                "model": {
+                                                    "description": "xxx",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "model"
+                                                },
+                                                "type": {
+                                                    "$ref": "#/definitions/FieldType",
+                                                    "title": "type"
+                                                },
+                                                "filter": {
+                                                    "description": "Derive a specific value from an other object/entity",
+                                                    "defaultSnippets": {
+                                                        "label": "Filter"
+                                                    },
+                                                    "anyOf": [
+                                                        {
+                                                            "description": "Facet calculation is disabled by default",
+                                                            "defaultSnippets": {
+                                                                "label": "Facetting",
+                                                                "properties": [
+                                                                    "calculateFacets:boolean"
+                                                                ]
+                                                            },
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "calculateFacets": {
+                                                                    "type": "boolean",
+                                                                    "title": "calculateFacets"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
+                                                }
+                                            },
+                                            "required": [
+                                                "key",
+                                                "model",
+                                                "type"
+                                            ]
                                         },
                                         {
-                                            "type": "boolean"
+                                            "type": "object",
+                                            "properties": {
+                                                "derive": {
+                                                    "description": "Derive a specific value from an other object/entity",
+                                                    "defaultSnippets": {
+                                                        "label": "Derive Values",
+                                                        "properties": [
+                                                            "localField",
+                                                            "remoteField"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "localField": {
+                                                            "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "localField"
+                                                        },
+                                                        "remoteField": {
+                                                            "description": "The field on the foreign object which should be derived.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "remoteField"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteField"
+                                                    ],
+                                                    "title": "derive"
+                                                }
+                                            },
+                                            "required": [
+                                                "derive"
+                                            ]
                                         }
-                                    ],
-                                    "title": "filter"
+                                    ]
                                 }
-                            },
-                            "required": [
-                                "key",
-                                "model",
-                                "type"
                             ]
                         },
                         "title": "fields"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "title": "key"
+                                }
+                            },
+                            "required": [
+                                "key"
+                            ]
+                        },
+                        "title": "data"
+                    },
+                    "supportsAutoCreation": {
+                        "type": "boolean",
+                        "title": "supportsAutoCreation"
                     }
                 },
                 "required": [
@@ -763,6 +1499,16 @@
                 "int",
                 "json",
                 "string"
+            ],
+            "type": "string"
+        },
+        "FilterComparisonType": {
+            "title": "FilterComparisonType",
+            "enum": [
+                "contains",
+                "containsIgnoreCase",
+                "containsIgnoreCaseAndWhitespace",
+                "equal"
             ],
             "type": "string"
         },
