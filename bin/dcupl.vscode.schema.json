@@ -25,6 +25,107 @@
                     "items": {
                         "anyOf": [
                             {
+                                "description": "A property is a quality or characteristic belonging an object.",
+                                "defaultSnippets": [
+                                    {
+                                        "label": "Property",
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "body": {
+                                            "key": "$1",
+                                            "datatype": "$2"
+                                        }
+                                    }
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "description": "A key is an unique identifier overall properties in this model.",
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "title": "key"
+                                    },
+                                    "datatype": {
+                                        "$ref": "#/definitions/PropertyDatatype",
+                                        "title": "datatype"
+                                    },
+                                    "filter": {
+                                        "anyOf": [
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "comparisonType": {
+                                                        "enum": [
+                                                            "contains",
+                                                            "containsIgnoreCase",
+                                                            "containsIgnoreCaseAndWhitespace",
+                                                            "equal"
+                                                        ],
+                                                        "type": "string",
+                                                        "title": "comparisonType"
+                                                    },
+                                                    "autocompletion": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "maxNrOfSuggestions": {
+                                                                "type": "integer",
+                                                                "title": "maxNrOfSuggestions"
+                                                            },
+                                                            "stepwiseSuggesting": {
+                                                                "type": "boolean",
+                                                                "title": "stepwiseSuggesting"
+                                                            }
+                                                        },
+                                                        "title": "autocompletion"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "comparisonType": {
+                                                            "$ref": "#/definitions/FilterComparisonType",
+                                                            "title": "comparisonType"
+                                                        },
+                                                        "autocompletion": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "maxNrOfSuggestions": {
+                                                                    "type": "number",
+                                                                    "title": "maxNrOfSuggestions"
+                                                                },
+                                                                "stepwiseSuggesting": {
+                                                                    "type": "boolean",
+                                                                    "title": "stepwiseSuggesting"
+                                                                }
+                                                            },
+                                                            "title": "autocompletion"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "comparisonType",
+                                                        "key"
+                                                    ]
+                                                }
+                                            },
+                                            {
+                                                "type": "boolean"
+                                            }
+                                        ],
+                                        "title": "filter"
+                                    }
+                                },
+                                "required": [
+                                    "datatype",
+                                    "key"
+                                ]
+                            },
+                            {
                                 "allOf": [
                                     {
                                         "description": "A property is a quality or characteristic belonging an object.",
@@ -50,6 +151,86 @@
                                                 "$ref": "#/definitions/PropertyDatatype",
                                                 "title": "datatype"
                                             },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
@@ -67,6 +248,110 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "derive"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -122,23 +407,76 @@
                                                 "$ref": "#/definitions/PropertyDatatype",
                                                 "title": "datatype"
                                             },
-                                            "derive": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "type": "string",
-                                                        "title": "localField"
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
                                                     },
-                                                    "remoteProperty": {
-                                                        "type": "string",
-                                                        "title": "remoteProperty"
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
                                                     }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteProperty"
                                                 ],
-                                                "title": "derive"
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -193,23 +531,76 @@
                                                 "$ref": "#/definitions/PropertyDatatype",
                                                 "title": "datatype"
                                             },
-                                            "derive": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "type": "string",
-                                                        "title": "localField"
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
                                                     },
-                                                    "remoteProperty": {
-                                                        "type": "string",
-                                                        "title": "remoteProperty"
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
                                                     }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteProperty"
                                                 ],
-                                                "title": "derive"
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -331,23 +722,76 @@
                                                 "$ref": "#/definitions/PropertyDatatype",
                                                 "title": "datatype"
                                             },
-                                            "derive": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "type": "string",
-                                                        "title": "localField"
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "integer",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        }
                                                     },
-                                                    "remoteProperty": {
-                                                        "type": "string",
-                                                        "title": "remoteProperty"
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "number",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
                                                     }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteProperty"
                                                 ],
-                                                "title": "derive"
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -488,11 +932,11 @@
                                         "title": "type"
                                     },
                                     "filter": {
-                                        "description": "Derive a specific value from an other object/entity",
+                                        "description": "Filtering the values of the field with or without counting",
                                         "defaultSnippets": [
                                             {
                                                 "label": "Filter",
-                                                "description": "Derive a specific value from an other object/entity"
+                                                "description": "Filtering the values of the field with or without counting"
                                             }
                                         ],
                                         "anyOf": [
@@ -562,11 +1006,11 @@
                                                 "title": "type"
                                             },
                                             "filter": {
-                                                "description": "Derive a specific value from an other object/entity",
+                                                "description": "Filtering the values of the field with or without counting",
                                                 "defaultSnippets": [
                                                     {
                                                         "label": "Filter",
-                                                        "description": "Derive a specific value from an other object/entity"
+                                                        "description": "Filtering the values of the field with or without counting"
                                                     }
                                                 ],
                                                 "anyOf": [
@@ -679,11 +1123,11 @@
                                                 "title": "type"
                                             },
                                             "filter": {
-                                                "description": "Derive a specific value from an other object/entity",
+                                                "description": "Filtering the values of the field with or without counting",
                                                 "defaultSnippets": [
                                                     {
                                                         "label": "Filter",
-                                                        "description": "Derive a specific value from an other object/entity"
+                                                        "description": "Filtering the values of the field with or without counting"
                                                     }
                                                 ],
                                                 "anyOf": [
@@ -818,6 +1262,107 @@
                         "items": {
                             "anyOf": [
                                 {
+                                    "description": "A property is a quality or characteristic belonging an object.",
+                                    "defaultSnippets": [
+                                        {
+                                            "label": "Property",
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "body": {
+                                                "key": "$1",
+                                                "datatype": "$2"
+                                            }
+                                        }
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "key": {
+                                            "description": "A key is an unique identifier overall properties in this model.",
+                                            "minLength": 1,
+                                            "type": "string",
+                                            "title": "key"
+                                        },
+                                        "datatype": {
+                                            "$ref": "#/definitions/PropertyDatatype",
+                                            "title": "datatype"
+                                        },
+                                        "filter": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "comparisonType": {
+                                                            "enum": [
+                                                                "contains",
+                                                                "containsIgnoreCase",
+                                                                "containsIgnoreCaseAndWhitespace",
+                                                                "equal"
+                                                            ],
+                                                            "type": "string",
+                                                            "title": "comparisonType"
+                                                        },
+                                                        "autocompletion": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "maxNrOfSuggestions": {
+                                                                    "type": "integer",
+                                                                    "title": "maxNrOfSuggestions"
+                                                                },
+                                                                "stepwiseSuggesting": {
+                                                                    "type": "boolean",
+                                                                    "title": "stepwiseSuggesting"
+                                                                }
+                                                            },
+                                                            "title": "autocompletion"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "key": {
+                                                                "type": "string",
+                                                                "title": "key"
+                                                            },
+                                                            "comparisonType": {
+                                                                "$ref": "#/definitions/FilterComparisonType",
+                                                                "title": "comparisonType"
+                                                            },
+                                                            "autocompletion": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "maxNrOfSuggestions": {
+                                                                        "type": "number",
+                                                                        "title": "maxNrOfSuggestions"
+                                                                    },
+                                                                    "stepwiseSuggesting": {
+                                                                        "type": "boolean",
+                                                                        "title": "stepwiseSuggesting"
+                                                                    }
+                                                                },
+                                                                "title": "autocompletion"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "comparisonType",
+                                                            "key"
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "type": "boolean"
+                                                }
+                                            ],
+                                            "title": "filter"
+                                        }
+                                    },
+                                    "required": [
+                                        "datatype",
+                                        "key"
+                                    ]
+                                },
+                                {
                                     "allOf": [
                                         {
                                             "description": "A property is a quality or characteristic belonging an object.",
@@ -843,6 +1388,86 @@
                                                     "$ref": "#/definitions/PropertyDatatype",
                                                     "title": "datatype"
                                                 },
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ]
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
                                                 "derive": {
                                                     "type": "object",
                                                     "properties": {
@@ -860,6 +1485,110 @@
                                                         "remoteProperty"
                                                     ],
                                                     "title": "derive"
+                                                }
+                                            },
+                                            "required": [
+                                                "derive"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "defaultSnippets": [
+                                                {
+                                                    "label": "Property",
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "body": {
+                                                        "key": "$1",
+                                                        "datatype": "$2"
+                                                    }
+                                                }
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "key"
+                                                },
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
+                                                },
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -915,23 +1644,76 @@
                                                     "$ref": "#/definitions/PropertyDatatype",
                                                     "title": "datatype"
                                                 },
-                                                "derive": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "type": "string",
-                                                            "title": "localField"
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
                                                         },
-                                                        "remoteProperty": {
-                                                            "type": "string",
-                                                            "title": "remoteProperty"
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
                                                         }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteProperty"
                                                     ],
-                                                    "title": "derive"
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -986,23 +1768,76 @@
                                                     "$ref": "#/definitions/PropertyDatatype",
                                                     "title": "datatype"
                                                 },
-                                                "derive": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "type": "string",
-                                                            "title": "localField"
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
                                                         },
-                                                        "remoteProperty": {
-                                                            "type": "string",
-                                                            "title": "remoteProperty"
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
                                                         }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteProperty"
                                                     ],
-                                                    "title": "derive"
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -1124,23 +1959,76 @@
                                                     "$ref": "#/definitions/PropertyDatatype",
                                                     "title": "datatype"
                                                 },
-                                                "derive": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "type": "string",
-                                                            "title": "localField"
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                },
+                                                                "autocompletion": {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "maxNrOfSuggestions": {
+                                                                            "type": "integer",
+                                                                            "title": "maxNrOfSuggestions"
+                                                                        },
+                                                                        "stepwiseSuggesting": {
+                                                                            "type": "boolean",
+                                                                            "title": "stepwiseSuggesting"
+                                                                        }
+                                                                    },
+                                                                    "title": "autocompletion"
+                                                                }
+                                                            }
                                                         },
-                                                        "remoteProperty": {
-                                                            "type": "string",
-                                                            "title": "remoteProperty"
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    },
+                                                                    "autocompletion": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "maxNrOfSuggestions": {
+                                                                                "type": "number",
+                                                                                "title": "maxNrOfSuggestions"
+                                                                            },
+                                                                            "stepwiseSuggesting": {
+                                                                                "type": "boolean",
+                                                                                "title": "stepwiseSuggesting"
+                                                                            }
+                                                                        },
+                                                                        "title": "autocompletion"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
                                                         }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteProperty"
                                                     ],
-                                                    "title": "derive"
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -1281,11 +2169,11 @@
                                             "title": "type"
                                         },
                                         "filter": {
-                                            "description": "Derive a specific value from an other object/entity",
+                                            "description": "Filtering the values of the field with or without counting",
                                             "defaultSnippets": [
                                                 {
                                                     "label": "Filter",
-                                                    "description": "Derive a specific value from an other object/entity"
+                                                    "description": "Filtering the values of the field with or without counting"
                                                 }
                                             ],
                                             "anyOf": [
@@ -1355,11 +2243,11 @@
                                                     "title": "type"
                                                 },
                                                 "filter": {
-                                                    "description": "Derive a specific value from an other object/entity",
+                                                    "description": "Filtering the values of the field with or without counting",
                                                     "defaultSnippets": [
                                                         {
                                                             "label": "Filter",
-                                                            "description": "Derive a specific value from an other object/entity"
+                                                            "description": "Filtering the values of the field with or without counting"
                                                         }
                                                     ],
                                                     "anyOf": [
@@ -1472,11 +2360,11 @@
                                                     "title": "type"
                                                 },
                                                 "filter": {
-                                                    "description": "Derive a specific value from an other object/entity",
+                                                    "description": "Filtering the values of the field with or without counting",
                                                     "defaultSnippets": [
                                                         {
                                                             "label": "Filter",
-                                                            "description": "Derive a specific value from an other object/entity"
+                                                            "description": "Filtering the values of the field with or without counting"
                                                         }
                                                     ],
                                                     "anyOf": [
