@@ -698,6 +698,78 @@
                     "items": {
                         "anyOf": [
                             {
+                                "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                "defaultSnippets": [
+                                    {
+                                        "label": "Field",
+                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "body": {
+                                            "key": "$1",
+                                            "model": "$2",
+                                            "type": "$3"
+                                        }
+                                    }
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "description": "A key is an unique identifier overall fields in this model.",
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "title": "key"
+                                    },
+                                    "model": {
+                                        "description": "xxx",
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "title": "model"
+                                    },
+                                    "type": {
+                                        "$ref": "#/definitions/FieldType",
+                                        "title": "type"
+                                    },
+                                    "filter": {
+                                        "description": "Filtering the values of the field with or without counting",
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Filter",
+                                                "description": "Filtering the values of the field with or without counting"
+                                            }
+                                        ],
+                                        "anyOf": [
+                                            {
+                                                "description": "Facet calculation is disabled by default",
+                                                "defaultSnippets": [
+                                                    {
+                                                        "label": "Facetting",
+                                                        "description": "Facet calculation is disabled by default",
+                                                        "body": {
+                                                            "calculateFacets": true
+                                                        }
+                                                    }
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "calculateFacets": {
+                                                        "type": "boolean",
+                                                        "title": "calculateFacets"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "type": "boolean"
+                                            }
+                                        ],
+                                        "title": "filter"
+                                    }
+                                },
+                                "required": [
+                                    "key",
+                                    "model",
+                                    "type"
+                                ]
+                            },
+                            {
                                 "allOf": [
                                     {
                                         "description": "A Field prepresent a list of elements along a explicite dimension.",
@@ -1672,6 +1744,78 @@
                         "type": "array",
                         "items": {
                             "anyOf": [
+                                {
+                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                    "defaultSnippets": [
+                                        {
+                                            "label": "Field",
+                                            "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                            "body": {
+                                                "key": "$1",
+                                                "model": "$2",
+                                                "type": "$3"
+                                            }
+                                        }
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "key": {
+                                            "description": "A key is an unique identifier overall fields in this model.",
+                                            "minLength": 1,
+                                            "type": "string",
+                                            "title": "key"
+                                        },
+                                        "model": {
+                                            "description": "xxx",
+                                            "minLength": 1,
+                                            "type": "string",
+                                            "title": "model"
+                                        },
+                                        "type": {
+                                            "$ref": "#/definitions/FieldType",
+                                            "title": "type"
+                                        },
+                                        "filter": {
+                                            "description": "Filtering the values of the field with or without counting",
+                                            "defaultSnippets": [
+                                                {
+                                                    "label": "Filter",
+                                                    "description": "Filtering the values of the field with or without counting"
+                                                }
+                                            ],
+                                            "anyOf": [
+                                                {
+                                                    "description": "Facet calculation is disabled by default",
+                                                    "defaultSnippets": [
+                                                        {
+                                                            "label": "Facetting",
+                                                            "description": "Facet calculation is disabled by default",
+                                                            "body": {
+                                                                "calculateFacets": true
+                                                            }
+                                                        }
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "calculateFacets": {
+                                                            "type": "boolean",
+                                                            "title": "calculateFacets"
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "type": "boolean"
+                                                }
+                                            ],
+                                            "title": "filter"
+                                        }
+                                    },
+                                    "required": [
+                                        "key",
+                                        "model",
+                                        "type"
+                                    ]
+                                },
                                 {
                                     "allOf": [
                                         {
