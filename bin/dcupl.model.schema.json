@@ -14,121 +14,17 @@
                 "key": {
                     "description": "A key is an unique identifier overall models in the application.",
                     "minLength": 1,
-                    "type": "string"
+                    "type": "string",
+                    "title": "key"
                 },
                 "properties": {
                     "type": "array",
                     "items": {
                         "anyOf": [
                             {
-                                "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
-                                "defaultSnippets": {
-                                    "label": "Property",
-                                    "properties": [
-                                        "key",
-                                        "datatype"
-                                    ]
-                                },
-                                "type": "object",
-                                "properties": {
-                                    "key": {
-                                        "description": "A key is an unique identifier overall properties in this model.",
-                                        "minLength": 1,
-                                        "type": "string"
-                                    },
-                                    "datatype": {
-                                        "$ref": "#/definitions/PropertyDatatype"
-                                    },
-                                    "filter": {
-                                        "anyOf": [
-                                            {
-                                                "type": "object",
-                                                "properties": {
-                                                    "comparisonType": {
-                                                        "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
-                                                        "enum": [
-                                                            "contains",
-                                                            "containsIgnoreCase",
-                                                            "containsIgnoreCaseAndWhitespace",
-                                                            "equal"
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "autocompletion": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "maxNrOfSuggestions": {
-                                                                "type": "integer"
-                                                            },
-                                                            "stepwiseSuggesting": {
-                                                                "type": "boolean"
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "key": {
-                                                            "type": "string"
-                                                        },
-                                                        "comparisonType": {
-                                                            "$ref": "#/definitions/FilterComparisonType"
-                                                        },
-                                                        "autocompletion": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "maxNrOfSuggestions": {
-                                                                    "type": "number"
-                                                                },
-                                                                "stepwiseSuggesting": {
-                                                                    "type": "boolean"
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "comparisonType",
-                                                        "key"
-                                                    ]
-                                                }
-                                            },
-                                            {
-                                                "type": "boolean"
-                                            }
-                                        ]
-                                    },
-                                    "derive": {
-                                        "type": "object",
-                                        "properties": {
-                                            "localField": {
-                                                "type": "string"
-                                            },
-                                            "remoteProperty": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "localField",
-                                            "remoteProperty"
-                                        ]
-                                    },
-                                    "expression": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "datatype",
-                                    "key"
-                                ]
-                            },
-                            {
                                 "allOf": [
                                     {
-                                        "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                        "description": "A property is a quality or characteristic belonging an object.",
                                         "defaultSnippets": {
                                             "label": "Property",
                                             "properties": [
@@ -141,10 +37,12 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall properties in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype"
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -152,25 +50,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -180,21 +67,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -206,157 +84,26 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             },
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
                                                     "localField": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "localField"
                                                     },
                                                     "remoteProperty": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
                                                     }
                                                 },
                                                 "required": [
                                                     "localField",
                                                     "remoteProperty"
-                                                ]
-                                            },
-                                            "expression": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "datatype",
-                                            "key"
-                                        ]
-                                    },
-                                    {
-                                        "type": "object",
-                                        "properties": {
-                                            "derive": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "type": "string"
-                                                    },
-                                                    "remoteProperty": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteProperty"
-                                                ]
-                                            }
-                                        },
-                                        "required": [
-                                            "derive"
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "allOf": [
-                                    {
-                                        "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
-                                        "defaultSnippets": {
-                                            "label": "Property",
-                                            "properties": [
-                                                "key",
-                                                "datatype"
-                                            ]
-                                        },
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "description": "A key is an unique identifier overall properties in this model.",
-                                                "minLength": 1,
-                                                "type": "string"
-                                            },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype"
-                                            },
-                                            "filter": {
-                                                "anyOf": [
-                                                    {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
-                                                                "enum": [
-                                                                    "contains",
-                                                                    "containsIgnoreCase",
-                                                                    "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
-                                                                ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "key": {
-                                                                    "type": "string"
-                                                                },
-                                                                "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            "required": [
-                                                                "comparisonType",
-                                                                "key"
-                                                            ]
-                                                        }
-                                                    },
-                                                    {
-                                                        "type": "boolean"
-                                                    }
-                                                ]
-                                            },
-                                            "derive": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "type": "string"
-                                                    },
-                                                    "remoteProperty": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteProperty"
-                                                ]
-                                            },
-                                            "expression": {
-                                                "type": "string"
+                                                ],
+                                                "title": "derive"
                                             }
                                         },
                                         "required": [
@@ -368,14 +115,19 @@
                                         "type": "object",
                                         "properties": {
                                             "datatype": {
+                                                "type": "string",
                                                 "enum": [
-                                                    "float",
                                                     "int"
                                                 ],
-                                                "type": "string"
+                                                "title": "datatype"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "filter": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -387,7 +139,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                        "description": "A property is a quality or characteristic belonging an object.",
                                         "defaultSnippets": {
                                             "label": "Property",
                                             "properties": [
@@ -400,10 +152,12 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall properties in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype"
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -411,25 +165,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -439,21 +182,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -465,25 +199,145 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             },
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
                                                     "localField": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "localField"
                                                     },
                                                     "remoteProperty": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
                                                     }
                                                 },
                                                 "required": [
                                                     "localField",
                                                     "remoteProperty"
-                                                ]
+                                                ],
+                                                "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "datatype": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "float"
+                                                ],
+                                                "title": "datatype"
                                             },
-                                            "expression": {
-                                                "type": "string"
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
+                                            },
+                                            "fractionDigits": {
+                                                "type": "number",
+                                                "title": "fractionDigits"
+                                            },
+                                            "filter": {
+                                                "type": "boolean",
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": {
+                                            "label": "Property",
+                                            "properties": [
+                                                "key",
+                                                "datatype"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            },
+                                            "derive": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string",
+                                                        "title": "localField"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "title": "derive"
                                             }
                                         },
                                         "required": [
@@ -498,10 +352,12 @@
                                                 "type": "string",
                                                 "enum": [
                                                     "json"
-                                                ]
+                                                ],
+                                                "title": "datatype"
                                             },
                                             "filter": {
-                                                "type": "boolean"
+                                                "type": "boolean",
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -513,7 +369,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                        "description": "A property is a quality or characteristic belonging an object.",
                                         "defaultSnippets": {
                                             "label": "Property",
                                             "properties": [
@@ -526,10 +382,12 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall properties in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype"
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -537,25 +395,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -565,21 +412,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -591,25 +429,26 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             },
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
                                                     "localField": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "localField"
                                                     },
                                                     "remoteProperty": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
                                                     }
                                                 },
                                                 "required": [
                                                     "localField",
                                                     "remoteProperty"
-                                                ]
-                                            },
-                                            "expression": {
-                                                "type": "string"
+                                                ],
+                                                "title": "derive"
                                             }
                                         },
                                         "required": [
@@ -624,7 +463,8 @@
                                                 "type": "string",
                                                 "enum": [
                                                     "string"
-                                                ]
+                                                ],
+                                                "title": "datatype"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -632,25 +472,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -660,21 +489,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -686,7 +506,8 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -698,7 +519,7 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                        "description": "A property is a quality or characteristic belonging an object.",
                                         "defaultSnippets": {
                                             "label": "Property",
                                             "properties": [
@@ -711,10 +532,12 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall properties in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype"
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -722,25 +545,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -750,21 +562,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -776,25 +579,26 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             },
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
                                                     "localField": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "localField"
                                                     },
                                                     "remoteProperty": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
                                                     }
                                                 },
                                                 "required": [
                                                     "localField",
                                                     "remoteProperty"
-                                                ]
-                                            },
-                                            "expression": {
-                                                "type": "string"
+                                                ],
+                                                "title": "derive"
                                             }
                                         },
                                         "required": [
@@ -809,10 +613,12 @@
                                                 "type": "string",
                                                 "enum": [
                                                     "string"
-                                                ]
+                                                ],
+                                                "title": "datatype"
                                             },
                                             "expression": {
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "expression"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -820,25 +626,14 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "comparisonType": {
-                                                                "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                 "enum": [
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
                                                                     "equal"
                                                                 ],
-                                                                "type": "string"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "integer"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
+                                                                "type": "string",
+                                                                "title": "comparisonType"
                                                             }
                                                         }
                                                     },
@@ -848,21 +643,12 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "key": {
-                                                                    "type": "string"
+                                                                    "type": "string",
+                                                                    "title": "key"
                                                                 },
                                                                 "comparisonType": {
-                                                                    "$ref": "#/definitions/FilterComparisonType"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             },
                                                             "required": [
@@ -874,7 +660,8 @@
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -885,7 +672,8 @@
                                 ]
                             }
                         ]
-                    }
+                    },
+                    "title": "properties"
                 },
                 "fields": {
                     "type": "array",
@@ -906,15 +694,18 @@
                                     "key": {
                                         "description": "A key is an unique identifier overall fields in this model.",
                                         "minLength": 1,
-                                        "type": "string"
+                                        "type": "string",
+                                        "title": "key"
                                     },
                                     "model": {
-                                        "description": "The model the key element",
+                                        "description": "xxx",
                                         "minLength": 1,
-                                        "type": "string"
+                                        "type": "string",
+                                        "title": "model"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/FieldType"
+                                        "$ref": "#/definitions/FieldType",
+                                        "title": "type"
                                     },
                                     "filter": {
                                         "description": "Filtering the values of the field with or without counting",
@@ -933,41 +724,16 @@
                                                 "type": "object",
                                                 "properties": {
                                                     "calculateFacets": {
-                                                        "type": "boolean"
+                                                        "type": "boolean",
+                                                        "title": "calculateFacets"
                                                     }
                                                 }
                                             },
                                             {
                                                 "type": "boolean"
                                             }
-                                        ]
-                                    },
-                                    "resolve": {
-                                        "description": "Resolve a Relationship to an foreign model",
-                                        "defaultSnippets": {
-                                            "label": "Resolve Relationship",
-                                            "properties": [
-                                                "field",
-                                                "model"
-                                            ]
-                                        },
-                                        "type": "object",
-                                        "properties": {
-                                            "field": {
-                                                "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                "minLength": 1,
-                                                "type": "string"
-                                            },
-                                            "model": {
-                                                "description": "The model of the foreign object field.",
-                                                "minLength": 1,
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "field",
-                                            "model"
-                                        ]
+                                        ],
+                                        "title": "filter"
                                     }
                                 },
                                 "required": [
@@ -993,15 +759,18 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall fields in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "model": {
-                                                "description": "The model the key element",
+                                                "description": "xxx",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "model"
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/FieldType"
+                                                "$ref": "#/definitions/FieldType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "description": "Filtering the values of the field with or without counting",
@@ -1020,41 +789,16 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "calculateFacets": {
-                                                                "type": "boolean"
+                                                                "type": "boolean",
+                                                                "title": "calculateFacets"
                                                             }
                                                         }
                                                     },
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
-                                            },
-                                            "resolve": {
-                                                "description": "Resolve a Relationship to an foreign model",
-                                                "defaultSnippets": {
-                                                    "label": "Resolve Relationship",
-                                                    "properties": [
-                                                        "field",
-                                                        "model"
-                                                    ]
-                                                },
-                                                "type": "object",
-                                                "properties": {
-                                                    "field": {
-                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    },
-                                                    "model": {
-                                                        "description": "The model of the foreign object field.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "field",
-                                                    "model"
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -1080,47 +824,26 @@
                                                     "field": {
                                                         "description": "The field on the foreign object which should be used for resolve the relation.",
                                                         "minLength": 1,
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "field"
                                                     },
                                                     "model": {
                                                         "description": "The model of the foreign object field.",
                                                         "minLength": 1,
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "model"
                                                     }
                                                 },
                                                 "required": [
                                                     "field",
                                                     "model"
-                                                ]
-                                            },
-                                            "derive": {
-                                                "description": "Properties and Fields can be copied from one model to another. This process is called deriving. To derive a field or a property from modelA to modelB there has to be a connection (singleValued/multiValued Field) between the models.",
-                                                "defaultSnippets": {
-                                                    "label": "Derive Values",
-                                                    "properties": [
-                                                        "localField",
-                                                        "remoteField"
-                                                    ]
-                                                },
-                                                "type": "object",
-                                                "properties": {
-                                                    "localField": {
-                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    },
-                                                    "remoteField": {
-                                                        "description": "The field on the foreign object which should be derived.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "localField",
-                                                    "remoteField"
-                                                ]
+                                                ],
+                                                "title": "resolve"
                                             }
-                                        }
+                                        },
+                                        "required": [
+                                            "resolve"
+                                        ]
                                     }
                                 ]
                             },
@@ -1141,15 +864,18 @@
                                             "key": {
                                                 "description": "A key is an unique identifier overall fields in this model.",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "key"
                                             },
                                             "model": {
-                                                "description": "The model the key element",
+                                                "description": "xxx",
                                                 "minLength": 1,
-                                                "type": "string"
+                                                "type": "string",
+                                                "title": "model"
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/FieldType"
+                                                "$ref": "#/definitions/FieldType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "description": "Filtering the values of the field with or without counting",
@@ -1168,41 +894,16 @@
                                                         "type": "object",
                                                         "properties": {
                                                             "calculateFacets": {
-                                                                "type": "boolean"
+                                                                "type": "boolean",
+                                                                "title": "calculateFacets"
                                                             }
                                                         }
                                                     },
                                                     {
                                                         "type": "boolean"
                                                     }
-                                                ]
-                                            },
-                                            "resolve": {
-                                                "description": "Resolve a Relationship to an foreign model",
-                                                "defaultSnippets": {
-                                                    "label": "Resolve Relationship",
-                                                    "properties": [
-                                                        "field",
-                                                        "model"
-                                                    ]
-                                                },
-                                                "type": "object",
-                                                "properties": {
-                                                    "field": {
-                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    },
-                                                    "model": {
-                                                        "description": "The model of the foreign object field.",
-                                                        "minLength": 1,
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "field",
-                                                    "model"
-                                                ]
+                                                ],
+                                                "title": "filter"
                                             }
                                         },
                                         "required": [
@@ -1215,7 +916,7 @@
                                         "type": "object",
                                         "properties": {
                                             "derive": {
-                                                "description": "Properties and Fields can be copied from one model to another. This process is called deriving. To derive a field or a property from modelA to modelB there has to be a connection (singleValued/multiValued Field) between the models.",
+                                                "description": "Derive a specific value from an other object/entity",
                                                 "defaultSnippets": {
                                                     "label": "Derive Values",
                                                     "properties": [
@@ -1228,18 +929,21 @@
                                                     "localField": {
                                                         "description": "The field on the foreign object which should be used for resolve the relation.",
                                                         "minLength": 1,
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "localField"
                                                     },
                                                     "remoteField": {
                                                         "description": "The field on the foreign object which should be derived.",
                                                         "minLength": 1,
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "title": "remoteField"
                                                     }
                                                 },
                                                 "required": [
                                                     "localField",
                                                     "remoteField"
-                                                ]
+                                                ],
+                                                "title": "derive"
                                             }
                                         },
                                         "required": [
@@ -1249,7 +953,8 @@
                                 ]
                             }
                         ]
-                    }
+                    },
+                    "title": "fields"
                 },
                 "data": {
                     "type": "array",
@@ -1258,16 +963,19 @@
                         "additionalProperties": {},
                         "properties": {
                             "key": {
-                                "type": "string"
+                                "type": "string",
+                                "title": "key"
                             }
                         },
                         "required": [
                             "key"
                         ]
-                    }
+                    },
+                    "title": "data"
                 },
                 "supportsAutoCreation": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "title": "supportsAutoCreation"
                 }
             },
             "required": [
@@ -1289,121 +997,17 @@
                     "key": {
                         "description": "A key is an unique identifier overall models in the application.",
                         "minLength": 1,
-                        "type": "string"
+                        "type": "string",
+                        "title": "key"
                     },
                     "properties": {
                         "type": "array",
                         "items": {
                             "anyOf": [
                                 {
-                                    "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
-                                    "defaultSnippets": {
-                                        "label": "Property",
-                                        "properties": [
-                                            "key",
-                                            "datatype"
-                                        ]
-                                    },
-                                    "type": "object",
-                                    "properties": {
-                                        "key": {
-                                            "description": "A key is an unique identifier overall properties in this model.",
-                                            "minLength": 1,
-                                            "type": "string"
-                                        },
-                                        "datatype": {
-                                            "$ref": "#/definitions/PropertyDatatype"
-                                        },
-                                        "filter": {
-                                            "anyOf": [
-                                                {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "comparisonType": {
-                                                            "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
-                                                            "enum": [
-                                                                "contains",
-                                                                "containsIgnoreCase",
-                                                                "containsIgnoreCaseAndWhitespace",
-                                                                "equal"
-                                                            ],
-                                                            "type": "string"
-                                                        },
-                                                        "autocompletion": {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "maxNrOfSuggestions": {
-                                                                    "type": "integer"
-                                                                },
-                                                                "stepwiseSuggesting": {
-                                                                    "type": "boolean"
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "key": {
-                                                                "type": "string"
-                                                            },
-                                                            "comparisonType": {
-                                                                "$ref": "#/definitions/FilterComparisonType"
-                                                            },
-                                                            "autocompletion": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "maxNrOfSuggestions": {
-                                                                        "type": "number"
-                                                                    },
-                                                                    "stepwiseSuggesting": {
-                                                                        "type": "boolean"
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        "required": [
-                                                            "comparisonType",
-                                                            "key"
-                                                        ]
-                                                    }
-                                                },
-                                                {
-                                                    "type": "boolean"
-                                                }
-                                            ]
-                                        },
-                                        "derive": {
-                                            "type": "object",
-                                            "properties": {
-                                                "localField": {
-                                                    "type": "string"
-                                                },
-                                                "remoteProperty": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "localField",
-                                                "remoteProperty"
-                                            ]
-                                        },
-                                        "expression": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "datatype",
-                                        "key"
-                                    ]
-                                },
-                                {
                                     "allOf": [
                                         {
-                                            "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                            "description": "A property is a quality or characteristic belonging an object.",
                                             "defaultSnippets": {
                                                 "label": "Property",
                                                 "properties": [
@@ -1416,10 +1020,12 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall properties in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "datatype": {
-                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -1427,25 +1033,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -1455,21 +1050,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1481,157 +1067,26 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 },
                                                 "derive": {
                                                     "type": "object",
                                                     "properties": {
                                                         "localField": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "localField"
                                                         },
                                                         "remoteProperty": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
                                                         }
                                                     },
                                                     "required": [
                                                         "localField",
                                                         "remoteProperty"
-                                                    ]
-                                                },
-                                                "expression": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "datatype",
-                                                "key"
-                                            ]
-                                        },
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "derive": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "type": "string"
-                                                        },
-                                                        "remoteProperty": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteProperty"
-                                                    ]
-                                                }
-                                            },
-                                            "required": [
-                                                "derive"
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "allOf": [
-                                        {
-                                            "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
-                                            "defaultSnippets": {
-                                                "label": "Property",
-                                                "properties": [
-                                                    "key",
-                                                    "datatype"
-                                                ]
-                                            },
-                                            "type": "object",
-                                            "properties": {
-                                                "key": {
-                                                    "description": "A key is an unique identifier overall properties in this model.",
-                                                    "minLength": 1,
-                                                    "type": "string"
-                                                },
-                                                "datatype": {
-                                                    "$ref": "#/definitions/PropertyDatatype"
-                                                },
-                                                "filter": {
-                                                    "anyOf": [
-                                                        {
-                                                            "type": "object",
-                                                            "properties": {
-                                                                "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
-                                                                    "enum": [
-                                                                        "contains",
-                                                                        "containsIgnoreCase",
-                                                                        "containsIgnoreCaseAndWhitespace",
-                                                                        "equal"
-                                                                    ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
-                                                        {
-                                                            "type": "array",
-                                                            "items": {
-                                                                "type": "object",
-                                                                "properties": {
-                                                                    "key": {
-                                                                        "type": "string"
-                                                                    },
-                                                                    "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "required": [
-                                                                    "comparisonType",
-                                                                    "key"
-                                                                ]
-                                                            }
-                                                        },
-                                                        {
-                                                            "type": "boolean"
-                                                        }
-                                                    ]
-                                                },
-                                                "derive": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "type": "string"
-                                                        },
-                                                        "remoteProperty": {
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteProperty"
-                                                    ]
-                                                },
-                                                "expression": {
-                                                    "type": "string"
+                                                    ],
+                                                    "title": "derive"
                                                 }
                                             },
                                             "required": [
@@ -1643,14 +1098,19 @@
                                             "type": "object",
                                             "properties": {
                                                 "datatype": {
+                                                    "type": "string",
                                                     "enum": [
-                                                        "float",
                                                         "int"
                                                     ],
-                                                    "type": "string"
+                                                    "title": "datatype"
+                                                },
+                                                "aggregate": {
+                                                    "type": "boolean",
+                                                    "title": "aggregate"
                                                 },
                                                 "filter": {
-                                                    "type": "boolean"
+                                                    "type": "boolean",
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -1662,7 +1122,7 @@
                                 {
                                     "allOf": [
                                         {
-                                            "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                            "description": "A property is a quality or characteristic belonging an object.",
                                             "defaultSnippets": {
                                                 "label": "Property",
                                                 "properties": [
@@ -1675,10 +1135,12 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall properties in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "datatype": {
-                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -1686,25 +1148,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -1714,21 +1165,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1740,25 +1182,145 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 },
                                                 "derive": {
                                                     "type": "object",
                                                     "properties": {
                                                         "localField": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "localField"
                                                         },
                                                         "remoteProperty": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
                                                         }
                                                     },
                                                     "required": [
                                                         "localField",
                                                         "remoteProperty"
-                                                    ]
+                                                    ],
+                                                    "title": "derive"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype",
+                                                "key"
+                                            ]
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "datatype": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "float"
+                                                    ],
+                                                    "title": "datatype"
                                                 },
-                                                "expression": {
-                                                    "type": "string"
+                                                "aggregate": {
+                                                    "type": "boolean",
+                                                    "title": "aggregate"
+                                                },
+                                                "fractionDigits": {
+                                                    "type": "number",
+                                                    "title": "fractionDigits"
+                                                },
+                                                "filter": {
+                                                    "type": "boolean",
+                                                    "title": "filter"
+                                                }
+                                            },
+                                            "required": [
+                                                "datatype"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "allOf": [
+                                        {
+                                            "description": "A property is a quality or characteristic belonging an object.",
+                                            "defaultSnippets": {
+                                                "label": "Property",
+                                                "properties": [
+                                                    "key",
+                                                    "datatype"
+                                                ]
+                                            },
+                                            "type": "object",
+                                            "properties": {
+                                                "key": {
+                                                    "description": "A key is an unique identifier overall properties in this model.",
+                                                    "minLength": 1,
+                                                    "type": "string",
+                                                    "title": "key"
+                                                },
+                                                "datatype": {
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
+                                                },
+                                                "filter": {
+                                                    "anyOf": [
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "comparisonType": {
+                                                                    "enum": [
+                                                                        "contains",
+                                                                        "containsIgnoreCase",
+                                                                        "containsIgnoreCaseAndWhitespace",
+                                                                        "equal"
+                                                                    ],
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "type": "string",
+                                                                        "title": "key"
+                                                                    },
+                                                                    "comparisonType": {
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "comparisonType",
+                                                                    "key"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "boolean"
+                                                        }
+                                                    ],
+                                                    "title": "filter"
+                                                },
+                                                "derive": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "localField": {
+                                                            "type": "string",
+                                                            "title": "localField"
+                                                        },
+                                                        "remoteProperty": {
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "localField",
+                                                        "remoteProperty"
+                                                    ],
+                                                    "title": "derive"
                                                 }
                                             },
                                             "required": [
@@ -1773,10 +1335,12 @@
                                                     "type": "string",
                                                     "enum": [
                                                         "json"
-                                                    ]
+                                                    ],
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
-                                                    "type": "boolean"
+                                                    "type": "boolean",
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -1788,7 +1352,7 @@
                                 {
                                     "allOf": [
                                         {
-                                            "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                            "description": "A property is a quality or characteristic belonging an object.",
                                             "defaultSnippets": {
                                                 "label": "Property",
                                                 "properties": [
@@ -1801,10 +1365,12 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall properties in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "datatype": {
-                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -1812,25 +1378,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -1840,21 +1395,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1866,25 +1412,26 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 },
                                                 "derive": {
                                                     "type": "object",
                                                     "properties": {
                                                         "localField": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "localField"
                                                         },
                                                         "remoteProperty": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
                                                         }
                                                     },
                                                     "required": [
                                                         "localField",
                                                         "remoteProperty"
-                                                    ]
-                                                },
-                                                "expression": {
-                                                    "type": "string"
+                                                    ],
+                                                    "title": "derive"
                                                 }
                                             },
                                             "required": [
@@ -1899,7 +1446,8 @@
                                                     "type": "string",
                                                     "enum": [
                                                         "string"
-                                                    ]
+                                                    ],
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -1907,25 +1455,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -1935,21 +1472,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1961,7 +1489,8 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -1973,7 +1502,7 @@
                                 {
                                     "allOf": [
                                         {
-                                            "description": "A property describes the characteristics of a model respectively entity. The following datatypes are currently supported:",
+                                            "description": "A property is a quality or characteristic belonging an object.",
                                             "defaultSnippets": {
                                                 "label": "Property",
                                                 "properties": [
@@ -1986,10 +1515,12 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall properties in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "datatype": {
-                                                    "$ref": "#/definitions/PropertyDatatype"
+                                                    "$ref": "#/definitions/PropertyDatatype",
+                                                    "title": "datatype"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -1997,25 +1528,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -2025,21 +1545,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -2051,25 +1562,26 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 },
                                                 "derive": {
                                                     "type": "object",
                                                     "properties": {
                                                         "localField": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "localField"
                                                         },
                                                         "remoteProperty": {
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "remoteProperty"
                                                         }
                                                     },
                                                     "required": [
                                                         "localField",
                                                         "remoteProperty"
-                                                    ]
-                                                },
-                                                "expression": {
-                                                    "type": "string"
+                                                    ],
+                                                    "title": "derive"
                                                 }
                                             },
                                             "required": [
@@ -2084,10 +1596,12 @@
                                                     "type": "string",
                                                     "enum": [
                                                         "string"
-                                                    ]
+                                                    ],
+                                                    "title": "datatype"
                                                 },
                                                 "expression": {
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "expression"
                                                 },
                                                 "filter": {
                                                     "anyOf": [
@@ -2095,25 +1609,14 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "comparisonType": {
-                                                                    "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
                                                                     "enum": [
                                                                         "contains",
                                                                         "containsIgnoreCase",
                                                                         "containsIgnoreCaseAndWhitespace",
                                                                         "equal"
                                                                     ],
-                                                                    "type": "string"
-                                                                },
-                                                                "autocompletion": {
-                                                                    "type": "object",
-                                                                    "properties": {
-                                                                        "maxNrOfSuggestions": {
-                                                                            "type": "integer"
-                                                                        },
-                                                                        "stepwiseSuggesting": {
-                                                                            "type": "boolean"
-                                                                        }
-                                                                    }
+                                                                    "type": "string",
+                                                                    "title": "comparisonType"
                                                                 }
                                                             }
                                                         },
@@ -2123,21 +1626,12 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "key": {
-                                                                        "type": "string"
+                                                                        "type": "string",
+                                                                        "title": "key"
                                                                     },
                                                                     "comparisonType": {
-                                                                        "$ref": "#/definitions/FilterComparisonType"
-                                                                    },
-                                                                    "autocompletion": {
-                                                                        "type": "object",
-                                                                        "properties": {
-                                                                            "maxNrOfSuggestions": {
-                                                                                "type": "number"
-                                                                            },
-                                                                            "stepwiseSuggesting": {
-                                                                                "type": "boolean"
-                                                                            }
-                                                                        }
+                                                                        "$ref": "#/definitions/FilterComparisonType",
+                                                                        "title": "comparisonType"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -2149,7 +1643,8 @@
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -2160,7 +1655,8 @@
                                     ]
                                 }
                             ]
-                        }
+                        },
+                        "title": "properties"
                     },
                     "fields": {
                         "type": "array",
@@ -2181,15 +1677,18 @@
                                         "key": {
                                             "description": "A key is an unique identifier overall fields in this model.",
                                             "minLength": 1,
-                                            "type": "string"
+                                            "type": "string",
+                                            "title": "key"
                                         },
                                         "model": {
-                                            "description": "The model the key element",
+                                            "description": "xxx",
                                             "minLength": 1,
-                                            "type": "string"
+                                            "type": "string",
+                                            "title": "model"
                                         },
                                         "type": {
-                                            "$ref": "#/definitions/FieldType"
+                                            "$ref": "#/definitions/FieldType",
+                                            "title": "type"
                                         },
                                         "filter": {
                                             "description": "Filtering the values of the field with or without counting",
@@ -2208,41 +1707,16 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "calculateFacets": {
-                                                            "type": "boolean"
+                                                            "type": "boolean",
+                                                            "title": "calculateFacets"
                                                         }
                                                     }
                                                 },
                                                 {
                                                     "type": "boolean"
                                                 }
-                                            ]
-                                        },
-                                        "resolve": {
-                                            "description": "Resolve a Relationship to an foreign model",
-                                            "defaultSnippets": {
-                                                "label": "Resolve Relationship",
-                                                "properties": [
-                                                    "field",
-                                                    "model"
-                                                ]
-                                            },
-                                            "type": "object",
-                                            "properties": {
-                                                "field": {
-                                                    "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                    "minLength": 1,
-                                                    "type": "string"
-                                                },
-                                                "model": {
-                                                    "description": "The model of the foreign object field.",
-                                                    "minLength": 1,
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "field",
-                                                "model"
-                                            ]
+                                            ],
+                                            "title": "filter"
                                         }
                                     },
                                     "required": [
@@ -2268,15 +1742,18 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall fields in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "model": {
-                                                    "description": "The model the key element",
+                                                    "description": "xxx",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "model"
                                                 },
                                                 "type": {
-                                                    "$ref": "#/definitions/FieldType"
+                                                    "$ref": "#/definitions/FieldType",
+                                                    "title": "type"
                                                 },
                                                 "filter": {
                                                     "description": "Filtering the values of the field with or without counting",
@@ -2295,41 +1772,16 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "calculateFacets": {
-                                                                    "type": "boolean"
+                                                                    "type": "boolean",
+                                                                    "title": "calculateFacets"
                                                                 }
                                                             }
                                                         },
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
-                                                },
-                                                "resolve": {
-                                                    "description": "Resolve a Relationship to an foreign model",
-                                                    "defaultSnippets": {
-                                                        "label": "Resolve Relationship",
-                                                        "properties": [
-                                                            "field",
-                                                            "model"
-                                                        ]
-                                                    },
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "field": {
-                                                            "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        },
-                                                        "model": {
-                                                            "description": "The model of the foreign object field.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "field",
-                                                        "model"
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -2355,47 +1807,26 @@
                                                         "field": {
                                                             "description": "The field on the foreign object which should be used for resolve the relation.",
                                                             "minLength": 1,
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "field"
                                                         },
                                                         "model": {
                                                             "description": "The model of the foreign object field.",
                                                             "minLength": 1,
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "model"
                                                         }
                                                     },
                                                     "required": [
                                                         "field",
                                                         "model"
-                                                    ]
-                                                },
-                                                "derive": {
-                                                    "description": "Properties and Fields can be copied from one model to another. This process is called deriving. To derive a field or a property from modelA to modelB there has to be a connection (singleValued/multiValued Field) between the models.",
-                                                    "defaultSnippets": {
-                                                        "label": "Derive Values",
-                                                        "properties": [
-                                                            "localField",
-                                                            "remoteField"
-                                                        ]
-                                                    },
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "localField": {
-                                                            "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        },
-                                                        "remoteField": {
-                                                            "description": "The field on the foreign object which should be derived.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "localField",
-                                                        "remoteField"
-                                                    ]
+                                                    ],
+                                                    "title": "resolve"
                                                 }
-                                            }
+                                            },
+                                            "required": [
+                                                "resolve"
+                                            ]
                                         }
                                     ]
                                 },
@@ -2416,15 +1847,18 @@
                                                 "key": {
                                                     "description": "A key is an unique identifier overall fields in this model.",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "key"
                                                 },
                                                 "model": {
-                                                    "description": "The model the key element",
+                                                    "description": "xxx",
                                                     "minLength": 1,
-                                                    "type": "string"
+                                                    "type": "string",
+                                                    "title": "model"
                                                 },
                                                 "type": {
-                                                    "$ref": "#/definitions/FieldType"
+                                                    "$ref": "#/definitions/FieldType",
+                                                    "title": "type"
                                                 },
                                                 "filter": {
                                                     "description": "Filtering the values of the field with or without counting",
@@ -2443,41 +1877,16 @@
                                                             "type": "object",
                                                             "properties": {
                                                                 "calculateFacets": {
-                                                                    "type": "boolean"
+                                                                    "type": "boolean",
+                                                                    "title": "calculateFacets"
                                                                 }
                                                             }
                                                         },
                                                         {
                                                             "type": "boolean"
                                                         }
-                                                    ]
-                                                },
-                                                "resolve": {
-                                                    "description": "Resolve a Relationship to an foreign model",
-                                                    "defaultSnippets": {
-                                                        "label": "Resolve Relationship",
-                                                        "properties": [
-                                                            "field",
-                                                            "model"
-                                                        ]
-                                                    },
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "field": {
-                                                            "description": "The field on the foreign object which should be used for resolve the relation.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        },
-                                                        "model": {
-                                                            "description": "The model of the foreign object field.",
-                                                            "minLength": 1,
-                                                            "type": "string"
-                                                        }
-                                                    },
-                                                    "required": [
-                                                        "field",
-                                                        "model"
-                                                    ]
+                                                    ],
+                                                    "title": "filter"
                                                 }
                                             },
                                             "required": [
@@ -2490,7 +1899,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "derive": {
-                                                    "description": "Properties and Fields can be copied from one model to another. This process is called deriving. To derive a field or a property from modelA to modelB there has to be a connection (singleValued/multiValued Field) between the models.",
+                                                    "description": "Derive a specific value from an other object/entity",
                                                     "defaultSnippets": {
                                                         "label": "Derive Values",
                                                         "properties": [
@@ -2503,18 +1912,21 @@
                                                         "localField": {
                                                             "description": "The field on the foreign object which should be used for resolve the relation.",
                                                             "minLength": 1,
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "localField"
                                                         },
                                                         "remoteField": {
                                                             "description": "The field on the foreign object which should be derived.",
                                                             "minLength": 1,
-                                                            "type": "string"
+                                                            "type": "string",
+                                                            "title": "remoteField"
                                                         }
                                                     },
                                                     "required": [
                                                         "localField",
                                                         "remoteField"
-                                                    ]
+                                                    ],
+                                                    "title": "derive"
                                                 }
                                             },
                                             "required": [
@@ -2524,7 +1936,8 @@
                                     ]
                                 }
                             ]
-                        }
+                        },
+                        "title": "fields"
                     },
                     "data": {
                         "type": "array",
@@ -2533,16 +1946,19 @@
                             "additionalProperties": {},
                             "properties": {
                                 "key": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "title": "key"
                                 }
                             },
                             "required": [
                                 "key"
                             ]
-                        }
+                        },
+                        "title": "data"
                     },
                     "supportsAutoCreation": {
-                        "type": "boolean"
+                        "type": "boolean",
+                        "title": "supportsAutoCreation"
                     }
                 },
                 "required": [
@@ -2553,6 +1969,7 @@
     ],
     "definitions": {
         "PropertyDatatype": {
+            "title": "PropertyDatatype",
             "enum": [
                 "float",
                 "int",
@@ -2562,7 +1979,7 @@
             "type": "string"
         },
         "FilterComparisonType": {
-            "description": "“Textual search” is possible for string-properties and is specified with filter keyword as following. The comparison type describes the behaviour:",
+            "title": "FilterComparisonType",
             "enum": [
                 "contains",
                 "containsIgnoreCase",
@@ -2572,8 +1989,9 @@
             "type": "string"
         },
         "FieldType": {
-            "description": "The type of a field indicates if it contains one (type = \"singleValued\"\") or multiple (type = \"multiValued\") keys of the foreign model. \n- singleValued contains only one key to an object\n- multiValued contains multiple key of objects",
+            "description": "must be singleValued or  multiValued\nsingleValued contains only one key to an object\nmultiValued contains multiple key of objects",
             "minLength": 1,
+            "title": "FieldType",
             "enum": [
                 "multiValued",
                 "singleValued"
