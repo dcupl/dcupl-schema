@@ -1,37 +1,261 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "description": "Information for data loading in dcupl",
-  "type": "array",
-  "items": {
+    "description": "The base structure for configuration file contains all resources, evnironments and headers\nThe process options define how this file is processed",
     "type": "object",
     "properties": {
-      "url": {
-        "type": "string",
-        "format": "uri"
-      },
-      "type": {
-        "enum": ["data", "model"]
-      }
+        "resources": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "model"
+                                ]
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "url"
+                        ]
+                    },
+                    {
+                        "additionalProperties": false,
+                        "type": "object",
+                        "properties": {
+                            "url": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "data"
+                                ]
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "tags": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "required": [
+                            "model",
+                            "type",
+                            "url"
+                        ]
+                    }
+                ]
+            }
+        },
+        "environments": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "variables": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "key",
+                                "value"
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "key",
+                    "variables"
+                ]
+            }
+        },
+        "headers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "headers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                },
+                                "tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "key",
+                                "value"
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "headers",
+                    "key"
+                ]
+            }
+        },
+        "transformers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "key",
+                    "tags"
+                ]
+            }
+        },
+        "presets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "environmentKeys": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "headerKeys": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "transformerKeys": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "resourceTags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "variables": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "key",
+                                "value"
+                            ]
+                        }
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "key"
+                ]
+            }
+        }
     },
-      "if": {
-        "properties": {
-          "type": {
-            "const": "data"
-          }
-        },
-        "required": ["type"]
-      },
-      "then": {
-        "properties": {
-          "model": {
+    "additionalProperties": false,
+    "required": [
+        "resources"
+    ],
+    "definitions": {
+        "ConfigLoaderType": {
+            "enum": [
+                "data",
+                "model"
+            ],
             "type": "string"
-          }
-        },
-        "required": ["url", "type", "model"]
-      },
-      "else": {
-        "required": ["url", "type"]
-      }
-   
-  }
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
 }
