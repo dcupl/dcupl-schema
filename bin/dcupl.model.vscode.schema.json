@@ -119,7 +119,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -241,7 +242,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -367,7 +369,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -485,7 +488,252 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            },
+                                            "derive": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string",
+                                                        "title": "localField"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
+                                                    },
+                                                    "separator": {
+                                                        "type": "string",
+                                                        "title": "separator"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "datatype": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "any"
+                                                ],
+                                                "title": "datatype"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            },
+                                            "derive": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "localField": {
+                                                        "type": "string",
+                                                        "title": "localField"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
+                                                    },
+                                                    "separator": {
+                                                        "type": "string",
+                                                        "title": "separator"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localField",
+                                                    "remoteProperty"
+                                                ],
+                                                "title": "derive"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype",
+                                            "key"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "datatype": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "date"
+                                                ],
+                                                "title": "datatype"
+                                            },
+                                            "inputFormat": {
+                                                "enum": [
+                                                    "date",
+                                                    "string",
+                                                    "ts_milliseconds",
+                                                    "ts_seconds"
+                                                ],
+                                                "type": "string",
+                                                "title": "inputFormat"
+                                            },
+                                            "filter": {
+                                                "type": "boolean",
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "datatype"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": [
+                                            {
+                                                "label": "Property",
+                                                "description": "A property is a quality or characteristic belonging an object.",
+                                                "body": {
+                                                    "key": "$1",
+                                                    "datatype": "$2"
+                                                }
+                                            }
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "datatype": {
+                                                "$ref": "#/definitions/PropertyDatatype",
+                                                "title": "datatype"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -566,7 +814,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -642,7 +891,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -727,7 +977,8 @@
                                                                     "contains",
                                                                     "containsIgnoreCase",
                                                                     "containsIgnoreCaseAndWhitespace",
-                                                                    "equal"
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
                                                                 ],
                                                                 "type": "string",
                                                                 "title": "comparisonType"
@@ -1298,6 +1549,50 @@
                 "keyProperty": {
                     "type": "string",
                     "title": "keyProperty"
+                },
+                "valueMappings": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "attributes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "title": "attributes"
+                            },
+                            "values": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "from": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "title": "from"
+                                        },
+                                        "to": {
+                                            "type": "string",
+                                            "title": "to"
+                                        }
+                                    },
+                                    "required": [
+                                        "from",
+                                        "to"
+                                    ]
+                                },
+                                "title": "values"
+                            }
+                        },
+                        "required": [
+                            "attributes",
+                            "values"
+                        ]
+                    },
+                    "title": "valueMappings"
                 }
             },
             "required": [
@@ -1426,7 +1721,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -1548,7 +1844,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -1674,7 +1971,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -1792,7 +2090,252 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
+                                                                            ],
+                                                                            "type": "string",
+                                                                            "title": "comparisonType"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            },
+                                                                            "comparisonType": {
+                                                                                "$ref": "#/definitions/FilterComparisonType",
+                                                                                "title": "comparisonType"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "comparisonType",
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "boolean"
+                                                                }
+                                                            ],
+                                                            "title": "filter"
+                                                        },
+                                                        "derive": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "localField": {
+                                                                    "type": "string",
+                                                                    "title": "localField"
+                                                                },
+                                                                "remoteProperty": {
+                                                                    "type": "string",
+                                                                    "title": "remoteProperty"
+                                                                },
+                                                                "separator": {
+                                                                    "type": "string",
+                                                                    "title": "separator"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "localField",
+                                                                "remoteProperty"
+                                                            ],
+                                                            "title": "derive"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "datatype",
+                                                        "key"
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "datatype": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "any"
+                                                            ],
+                                                            "title": "datatype"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "datatype"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "defaultSnippets": [
+                                                        {
+                                                            "label": "Property",
+                                                            "description": "A property is a quality or characteristic belonging an object.",
+                                                            "body": {
+                                                                "key": "$1",
+                                                                "datatype": "$2"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "description": "A key is an unique identifier overall properties in this model.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "datatype": {
+                                                            "$ref": "#/definitions/PropertyDatatype",
+                                                            "title": "datatype"
+                                                        },
+                                                        "filter": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "comparisonType": {
+                                                                            "enum": [
+                                                                                "contains",
+                                                                                "containsIgnoreCase",
+                                                                                "containsIgnoreCaseAndWhitespace",
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
+                                                                            ],
+                                                                            "type": "string",
+                                                                            "title": "comparisonType"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            },
+                                                                            "comparisonType": {
+                                                                                "$ref": "#/definitions/FilterComparisonType",
+                                                                                "title": "comparisonType"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "comparisonType",
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "boolean"
+                                                                }
+                                                            ],
+                                                            "title": "filter"
+                                                        },
+                                                        "derive": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "localField": {
+                                                                    "type": "string",
+                                                                    "title": "localField"
+                                                                },
+                                                                "remoteProperty": {
+                                                                    "type": "string",
+                                                                    "title": "remoteProperty"
+                                                                },
+                                                                "separator": {
+                                                                    "type": "string",
+                                                                    "title": "separator"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "localField",
+                                                                "remoteProperty"
+                                                            ],
+                                                            "title": "derive"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "datatype",
+                                                        "key"
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "datatype": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "date"
+                                                            ],
+                                                            "title": "datatype"
+                                                        },
+                                                        "inputFormat": {
+                                                            "enum": [
+                                                                "date",
+                                                                "string",
+                                                                "ts_milliseconds",
+                                                                "ts_seconds"
+                                                            ],
+                                                            "type": "string",
+                                                            "title": "inputFormat"
+                                                        },
+                                                        "filter": {
+                                                            "type": "boolean",
+                                                            "title": "filter"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "datatype"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "defaultSnippets": [
+                                                        {
+                                                            "label": "Property",
+                                                            "description": "A property is a quality or characteristic belonging an object.",
+                                                            "body": {
+                                                                "key": "$1",
+                                                                "datatype": "$2"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "description": "A key is an unique identifier overall properties in this model.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "datatype": {
+                                                            "$ref": "#/definitions/PropertyDatatype",
+                                                            "title": "datatype"
+                                                        },
+                                                        "filter": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "comparisonType": {
+                                                                            "enum": [
+                                                                                "contains",
+                                                                                "containsIgnoreCase",
+                                                                                "containsIgnoreCaseAndWhitespace",
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -1873,7 +2416,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -1949,7 +2493,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -2034,7 +2579,8 @@
                                                                                 "contains",
                                                                                 "containsIgnoreCase",
                                                                                 "containsIgnoreCaseAndWhitespace",
-                                                                                "equal"
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
                                                                             ],
                                                                             "type": "string",
                                                                             "title": "comparisonType"
@@ -2605,6 +3151,50 @@
                             "keyProperty": {
                                 "type": "string",
                                 "title": "keyProperty"
+                            },
+                            "valueMappings": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "attributes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "title": "attributes"
+                                        },
+                                        "values": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "from": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "title": "from"
+                                                    },
+                                                    "to": {
+                                                        "type": "string",
+                                                        "title": "to"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "from",
+                                                    "to"
+                                                ]
+                                            },
+                                            "title": "values"
+                                        }
+                                    },
+                                    "required": [
+                                        "attributes",
+                                        "values"
+                                    ]
+                                },
+                                "title": "valueMappings"
                             }
                         },
                         "required": [
@@ -2619,6 +3209,8 @@
         "PropertyDatatype": {
             "title": "PropertyDatatype",
             "enum": [
+                "any",
+                "date",
                 "float",
                 "int",
                 "json",
@@ -2632,7 +3224,8 @@
                 "contains",
                 "containsIgnoreCase",
                 "containsIgnoreCaseAndWhitespace",
-                "equal"
+                "equal",
+                "equalIgnoreCase"
             ],
             "type": "string"
         },
