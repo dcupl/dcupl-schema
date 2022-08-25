@@ -1477,6 +1477,50 @@
                 "keyProperty": {
                     "type": "string",
                     "title": "keyProperty"
+                },
+                "valueMappings": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "attributes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "title": "attributes"
+                            },
+                            "values": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "from": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "title": "from"
+                                        },
+                                        "to": {
+                                            "type": "string",
+                                            "title": "to"
+                                        }
+                                    },
+                                    "required": [
+                                        "from",
+                                        "to"
+                                    ]
+                                },
+                                "title": "values"
+                            }
+                        },
+                        "required": [
+                            "attributes",
+                            "values"
+                        ]
+                    },
+                    "title": "valueMappings"
                 }
             },
             "required": [
@@ -2963,6 +3007,50 @@
                             "keyProperty": {
                                 "type": "string",
                                 "title": "keyProperty"
+                            },
+                            "valueMappings": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "attributes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "title": "attributes"
+                                        },
+                                        "values": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "from": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "title": "from"
+                                                    },
+                                                    "to": {
+                                                        "type": "string",
+                                                        "title": "to"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "from",
+                                                    "to"
+                                                ]
+                                            },
+                                            "title": "values"
+                                        }
+                                    },
+                                    "required": [
+                                        "attributes",
+                                        "values"
+                                    ]
+                                },
+                                "title": "valueMappings"
                             }
                         },
                         "required": [
