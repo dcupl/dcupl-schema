@@ -9,7 +9,7 @@
                     "key",
                     "model",
                     "type",
-                    "primaryField",
+                    "primaryAttribute",
                     "aggregates:array"
                 ]
             },
@@ -34,10 +34,10 @@
                     ],
                     "title": "type"
                 },
-                "primaryField": {
+                "primaryAttribute": {
                     "minLength": 1,
                     "type": "string",
-                    "title": "primaryField"
+                    "title": "primaryAttribute"
                 },
                 "aggregates": {
                     "type": "array",
@@ -51,7 +51,7 @@
                 "aggregates",
                 "key",
                 "model",
-                "primaryField",
+                "primaryAttribute",
                 "type"
             ]
         },
@@ -62,7 +62,7 @@
                 "properties": [
                     "key:string",
                     "properties:array",
-                    "fields:array"
+                    "references:array"
                 ]
             },
             "type": "object",
@@ -85,7 +85,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -96,9 +96,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -147,9 +147,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -161,26 +161,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "int"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "aggregate": {
                                                 "type": "boolean",
@@ -192,7 +192,7 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -205,7 +205,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -216,9 +216,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -267,9 +267,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -281,26 +281,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "float"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "aggregate": {
                                                 "type": "boolean",
@@ -316,7 +316,7 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -329,7 +329,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -340,9 +340,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -391,9 +391,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -405,26 +405,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "json"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "type": "boolean",
@@ -432,7 +432,7 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -445,7 +445,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -456,9 +456,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -507,9 +507,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -521,30 +521,30 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "any"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -557,7 +557,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -568,9 +568,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -619,9 +619,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -633,26 +633,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "date"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "inputFormat": {
                                                 "enum": [
@@ -670,7 +670,7 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -683,7 +683,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -694,9 +694,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -745,9 +745,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -759,26 +759,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "string"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -826,7 +826,7 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype"
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -839,7 +839,7 @@
                                             "label": "Property",
                                             "properties": [
                                                 "key",
-                                                "datatype"
+                                                "type"
                                             ]
                                         },
                                         "type": "object",
@@ -850,9 +850,9 @@
                                                 "type": "string",
                                                 "title": "key"
                                             },
-                                            "datatype": {
-                                                "$ref": "#/definitions/PropertyDatatype",
-                                                "title": "datatype"
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -901,9 +901,9 @@
                                             "derive": {
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
+                                                    "localReference": {
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
                                                     "remoteProperty": {
                                                         "type": "string",
@@ -915,26 +915,26 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
+                                                    "localReference",
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "key"
+                                            "key",
+                                            "type"
                                         ]
                                     },
                                     {
                                         "type": "object",
                                         "properties": {
-                                            "datatype": {
+                                            "type": {
                                                 "type": "string",
                                                 "enum": [
                                                     "string"
                                                 ],
-                                                "title": "datatype"
+                                                "title": "type"
                                             },
                                             "expression": {
                                                 "type": "string",
@@ -986,8 +986,8 @@
                                             }
                                         },
                                         "required": [
-                                            "datatype",
-                                            "expression"
+                                            "expression",
+                                            "type"
                                         ]
                                     }
                                 ]
@@ -996,14 +996,14 @@
                     },
                     "title": "properties"
                 },
-                "fields": {
+                "references": {
                     "type": "array",
                     "items": {
                         "anyOf": [
                             {
-                                "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                 "defaultSnippets": {
-                                    "label": "Field",
+                                    "label": "Reference",
                                     "properties": [
                                         "key",
                                         "model",
@@ -1013,7 +1013,7 @@
                                 "type": "object",
                                 "properties": {
                                     "key": {
-                                        "description": "A key is an unique identifier overall fields in this model.",
+                                        "description": "A key is an unique identifier for all reference in this model.",
                                         "minLength": 1,
                                         "type": "string",
                                         "title": "key"
@@ -1025,23 +1025,17 @@
                                         "title": "model"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/FieldType",
+                                        "$ref": "#/definitions/ReferenceType",
                                         "title": "type"
                                     },
                                     "filter": {
-                                        "description": "Filtering the values of the field with or without counting",
+                                        "description": "Filtering the values of the reference with or without counting",
                                         "defaultSnippets": {
                                             "label": "Filter"
                                         },
                                         "anyOf": [
                                             {
                                                 "description": "Facet calculation is disabled by default",
-                                                "defaultSnippets": {
-                                                    "label": "Facetting",
-                                                    "properties": [
-                                                        "calculateFacets:boolean"
-                                                    ]
-                                                },
                                                 "type": "object",
                                                 "properties": {
                                                     "calculateFacets": {
@@ -1082,9 +1076,9 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                         "defaultSnippets": {
-                                            "label": "Field",
+                                            "label": "Reference",
                                             "properties": [
                                                 "key",
                                                 "model",
@@ -1094,7 +1088,7 @@
                                         "type": "object",
                                         "properties": {
                                             "key": {
-                                                "description": "A key is an unique identifier overall fields in this model.",
+                                                "description": "A key is an unique identifier for all reference in this model.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "key"
@@ -1106,23 +1100,17 @@
                                                 "title": "model"
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/FieldType",
+                                                "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
                                             },
                                             "filter": {
-                                                "description": "Filtering the values of the field with or without counting",
+                                                "description": "Filtering the values of the reference with or without counting",
                                                 "defaultSnippets": {
                                                     "label": "Filter"
                                                 },
                                                 "anyOf": [
                                                     {
                                                         "description": "Facet calculation is disabled by default",
-                                                        "defaultSnippets": {
-                                                            "label": "Facetting",
-                                                            "properties": [
-                                                                "calculateFacets:boolean"
-                                                            ]
-                                                        },
                                                         "type": "object",
                                                         "properties": {
                                                             "calculateFacets": {
@@ -1175,28 +1163,28 @@
                                                 "defaultSnippets": {
                                                     "label": "Resolve Relationship",
                                                     "properties": [
-                                                        "field",
+                                                        "reference",
                                                         "model"
                                                     ]
                                                 },
                                                 "type": "object",
                                                 "properties": {
-                                                    "field": {
-                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                    "reference": {
+                                                        "description": "The reference on the foreign object which should be used for resolve the relation.",
                                                         "minLength": 1,
                                                         "type": "string",
-                                                        "title": "field"
+                                                        "title": "reference"
                                                     },
                                                     "model": {
-                                                        "description": "The model of the foreign object field.",
+                                                        "description": "The model of the foreign object reference.",
                                                         "minLength": 1,
                                                         "type": "string",
                                                         "title": "model"
                                                     }
                                                 },
                                                 "required": [
-                                                    "field",
-                                                    "model"
+                                                    "model",
+                                                    "reference"
                                                 ],
                                                 "title": "resolve"
                                             }
@@ -1211,9 +1199,9 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                         "defaultSnippets": {
-                                            "label": "Field",
+                                            "label": "Reference",
                                             "properties": [
                                                 "key",
                                                 "model",
@@ -1223,7 +1211,7 @@
                                         "type": "object",
                                         "properties": {
                                             "key": {
-                                                "description": "A key is an unique identifier overall fields in this model.",
+                                                "description": "A key is an unique identifier for all reference in this model.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "key"
@@ -1235,23 +1223,17 @@
                                                 "title": "model"
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/FieldType",
+                                                "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
                                             },
                                             "filter": {
-                                                "description": "Filtering the values of the field with or without counting",
+                                                "description": "Filtering the values of the reference with or without counting",
                                                 "defaultSnippets": {
                                                     "label": "Filter"
                                                 },
                                                 "anyOf": [
                                                     {
                                                         "description": "Facet calculation is disabled by default",
-                                                        "defaultSnippets": {
-                                                            "label": "Facetting",
-                                                            "properties": [
-                                                                "calculateFacets:boolean"
-                                                            ]
-                                                        },
                                                         "type": "object",
                                                         "properties": {
                                                             "calculateFacets": {
@@ -1293,7 +1275,7 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "$ref": "#/definitions/FieldType",
+                                                "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
                                             },
                                             "derive": {
@@ -1301,28 +1283,28 @@
                                                 "defaultSnippets": {
                                                     "label": "Derive Values",
                                                     "properties": [
-                                                        "localField",
-                                                        "remoteField"
+                                                        "localReference",
+                                                        "remoteReference"
                                                     ]
                                                 },
                                                 "type": "object",
                                                 "properties": {
-                                                    "localField": {
-                                                        "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                    "localReference": {
+                                                        "description": "The reference on the foreign object which should be used for resolve the relation.",
                                                         "minLength": 1,
                                                         "type": "string",
-                                                        "title": "localField"
+                                                        "title": "localReference"
                                                     },
-                                                    "remoteField": {
-                                                        "description": "The field on the foreign object which should be derived.",
+                                                    "remoteReference": {
+                                                        "description": "The reference on the foreign object which should be derived.",
                                                         "minLength": 1,
                                                         "type": "string",
-                                                        "title": "remoteField"
+                                                        "title": "remoteReference"
                                                     }
                                                 },
                                                 "required": [
-                                                    "localField",
-                                                    "remoteField"
+                                                    "localReference",
+                                                    "remoteReference"
                                                 ],
                                                 "title": "derive"
                                             }
@@ -1337,9 +1319,9 @@
                             {
                                 "allOf": [
                                     {
-                                        "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                        "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                         "defaultSnippets": {
-                                            "label": "Field",
+                                            "label": "Reference",
                                             "properties": [
                                                 "key",
                                                 "model",
@@ -1349,7 +1331,7 @@
                                         "type": "object",
                                         "properties": {
                                             "key": {
-                                                "description": "A key is an unique identifier overall fields in this model.",
+                                                "description": "A key is an unique identifier for all reference in this model.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "key"
@@ -1361,23 +1343,17 @@
                                                 "title": "model"
                                             },
                                             "type": {
-                                                "$ref": "#/definitions/FieldType",
+                                                "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
                                             },
                                             "filter": {
-                                                "description": "Filtering the values of the field with or without counting",
+                                                "description": "Filtering the values of the reference with or without counting",
                                                 "defaultSnippets": {
                                                     "label": "Filter"
                                                 },
                                                 "anyOf": [
                                                     {
                                                         "description": "Facet calculation is disabled by default",
-                                                        "defaultSnippets": {
-                                                            "label": "Facetting",
-                                                            "properties": [
-                                                                "calculateFacets:boolean"
-                                                            ]
-                                                        },
                                                         "type": "object",
                                                         "properties": {
                                                             "calculateFacets": {
@@ -1419,25 +1395,25 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "$ref": "#/definitions/FieldType",
+                                                "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
                                             },
                                             "groupBy": {
-                                                "description": "Group by a specific field",
+                                                "description": "Group by a specific reference",
                                                 "defaultSnippets": {
                                                     "label": "Grouped Values",
                                                     "properties": [
-                                                        "field",
+                                                        "reference",
                                                         "includeSelfInGroup"
                                                     ]
                                                 },
                                                 "type": "object",
                                                 "properties": {
-                                                    "field": {
-                                                        "description": "The field that groups are generated from",
+                                                    "reference": {
+                                                        "description": "The reference that groups are generated from",
                                                         "minLength": 1,
                                                         "type": "string",
-                                                        "title": "field"
+                                                        "title": "reference"
                                                     },
                                                     "includeSelfInGroup": {
                                                         "type": "boolean",
@@ -1445,7 +1421,7 @@
                                                     }
                                                 },
                                                 "required": [
-                                                    "field"
+                                                    "reference"
                                                 ],
                                                 "title": "groupBy"
                                             }
@@ -1459,7 +1435,7 @@
                             }
                         ]
                     },
-                    "title": "fields"
+                    "title": "references"
                 },
                 "data": {
                     "type": "array",
@@ -1539,7 +1515,7 @@
                                 "key",
                                 "model",
                                 "type",
-                                "primaryField",
+                                "primaryAttribute",
                                 "aggregates:array"
                             ]
                         },
@@ -1564,10 +1540,10 @@
                                 ],
                                 "title": "type"
                             },
-                            "primaryField": {
+                            "primaryAttribute": {
                                 "minLength": 1,
                                 "type": "string",
-                                "title": "primaryField"
+                                "title": "primaryAttribute"
                             },
                             "aggregates": {
                                 "type": "array",
@@ -1581,7 +1557,7 @@
                             "aggregates",
                             "key",
                             "model",
-                            "primaryField",
+                            "primaryAttribute",
                             "type"
                         ]
                     },
@@ -1592,7 +1568,7 @@
                             "properties": [
                                 "key:string",
                                 "properties:array",
-                                "fields:array"
+                                "references:array"
                             ]
                         },
                         "type": "object",
@@ -1615,7 +1591,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -1626,9 +1602,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -1677,9 +1653,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -1691,26 +1667,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "int"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "aggregate": {
                                                             "type": "boolean",
@@ -1722,7 +1698,7 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -1735,7 +1711,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -1746,9 +1722,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -1797,9 +1773,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -1811,26 +1787,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "float"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "aggregate": {
                                                             "type": "boolean",
@@ -1846,7 +1822,7 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -1859,7 +1835,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -1870,9 +1846,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -1921,9 +1897,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -1935,26 +1911,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "json"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "type": "boolean",
@@ -1962,7 +1938,7 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -1975,7 +1951,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -1986,9 +1962,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2037,9 +2013,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -2051,30 +2027,30 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "any"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -2087,7 +2063,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -2098,9 +2074,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2149,9 +2125,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -2163,26 +2139,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "date"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "inputFormat": {
                                                             "enum": [
@@ -2200,7 +2176,7 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -2213,7 +2189,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -2224,9 +2200,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2275,9 +2251,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -2289,26 +2265,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "string"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2356,7 +2332,7 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype"
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -2369,7 +2345,7 @@
                                                         "label": "Property",
                                                         "properties": [
                                                             "key",
-                                                            "datatype"
+                                                            "type"
                                                         ]
                                                     },
                                                     "type": "object",
@@ -2380,9 +2356,9 @@
                                                             "type": "string",
                                                             "title": "key"
                                                         },
-                                                        "datatype": {
-                                                            "$ref": "#/definitions/PropertyDatatype",
-                                                            "title": "datatype"
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2431,9 +2407,9 @@
                                                         "derive": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
+                                                                "localReference": {
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
                                                                 "remoteProperty": {
                                                                     "type": "string",
@@ -2445,26 +2421,26 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
+                                                                "localReference",
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "key"
+                                                        "key",
+                                                        "type"
                                                     ]
                                                 },
                                                 {
                                                     "type": "object",
                                                     "properties": {
-                                                        "datatype": {
+                                                        "type": {
                                                             "type": "string",
                                                             "enum": [
                                                                 "string"
                                                             ],
-                                                            "title": "datatype"
+                                                            "title": "type"
                                                         },
                                                         "expression": {
                                                             "type": "string",
@@ -2516,8 +2492,8 @@
                                                         }
                                                     },
                                                     "required": [
-                                                        "datatype",
-                                                        "expression"
+                                                        "expression",
+                                                        "type"
                                                     ]
                                                 }
                                             ]
@@ -2526,14 +2502,14 @@
                                 },
                                 "title": "properties"
                             },
-                            "fields": {
+                            "references": {
                                 "type": "array",
                                 "items": {
                                     "anyOf": [
                                         {
-                                            "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                            "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                             "defaultSnippets": {
-                                                "label": "Field",
+                                                "label": "Reference",
                                                 "properties": [
                                                     "key",
                                                     "model",
@@ -2543,7 +2519,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "key": {
-                                                    "description": "A key is an unique identifier overall fields in this model.",
+                                                    "description": "A key is an unique identifier for all reference in this model.",
                                                     "minLength": 1,
                                                     "type": "string",
                                                     "title": "key"
@@ -2555,23 +2531,17 @@
                                                     "title": "model"
                                                 },
                                                 "type": {
-                                                    "$ref": "#/definitions/FieldType",
+                                                    "$ref": "#/definitions/ReferenceType",
                                                     "title": "type"
                                                 },
                                                 "filter": {
-                                                    "description": "Filtering the values of the field with or without counting",
+                                                    "description": "Filtering the values of the reference with or without counting",
                                                     "defaultSnippets": {
                                                         "label": "Filter"
                                                     },
                                                     "anyOf": [
                                                         {
                                                             "description": "Facet calculation is disabled by default",
-                                                            "defaultSnippets": {
-                                                                "label": "Facetting",
-                                                                "properties": [
-                                                                    "calculateFacets:boolean"
-                                                                ]
-                                                            },
                                                             "type": "object",
                                                             "properties": {
                                                                 "calculateFacets": {
@@ -2612,9 +2582,9 @@
                                         {
                                             "allOf": [
                                                 {
-                                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                                     "defaultSnippets": {
-                                                        "label": "Field",
+                                                        "label": "Reference",
                                                         "properties": [
                                                             "key",
                                                             "model",
@@ -2624,7 +2594,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
-                                                            "description": "A key is an unique identifier overall fields in this model.",
+                                                            "description": "A key is an unique identifier for all reference in this model.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "key"
@@ -2636,23 +2606,17 @@
                                                             "title": "model"
                                                         },
                                                         "type": {
-                                                            "$ref": "#/definitions/FieldType",
+                                                            "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
                                                         },
                                                         "filter": {
-                                                            "description": "Filtering the values of the field with or without counting",
+                                                            "description": "Filtering the values of the reference with or without counting",
                                                             "defaultSnippets": {
                                                                 "label": "Filter"
                                                             },
                                                             "anyOf": [
                                                                 {
                                                                     "description": "Facet calculation is disabled by default",
-                                                                    "defaultSnippets": {
-                                                                        "label": "Facetting",
-                                                                        "properties": [
-                                                                            "calculateFacets:boolean"
-                                                                        ]
-                                                                    },
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "calculateFacets": {
@@ -2705,28 +2669,28 @@
                                                             "defaultSnippets": {
                                                                 "label": "Resolve Relationship",
                                                                 "properties": [
-                                                                    "field",
+                                                                    "reference",
                                                                     "model"
                                                                 ]
                                                             },
                                                             "type": "object",
                                                             "properties": {
-                                                                "field": {
-                                                                    "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                                "reference": {
+                                                                    "description": "The reference on the foreign object which should be used for resolve the relation.",
                                                                     "minLength": 1,
                                                                     "type": "string",
-                                                                    "title": "field"
+                                                                    "title": "reference"
                                                                 },
                                                                 "model": {
-                                                                    "description": "The model of the foreign object field.",
+                                                                    "description": "The model of the foreign object reference.",
                                                                     "minLength": 1,
                                                                     "type": "string",
                                                                     "title": "model"
                                                                 }
                                                             },
                                                             "required": [
-                                                                "field",
-                                                                "model"
+                                                                "model",
+                                                                "reference"
                                                             ],
                                                             "title": "resolve"
                                                         }
@@ -2741,9 +2705,9 @@
                                         {
                                             "allOf": [
                                                 {
-                                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                                     "defaultSnippets": {
-                                                        "label": "Field",
+                                                        "label": "Reference",
                                                         "properties": [
                                                             "key",
                                                             "model",
@@ -2753,7 +2717,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
-                                                            "description": "A key is an unique identifier overall fields in this model.",
+                                                            "description": "A key is an unique identifier for all reference in this model.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "key"
@@ -2765,23 +2729,17 @@
                                                             "title": "model"
                                                         },
                                                         "type": {
-                                                            "$ref": "#/definitions/FieldType",
+                                                            "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
                                                         },
                                                         "filter": {
-                                                            "description": "Filtering the values of the field with or without counting",
+                                                            "description": "Filtering the values of the reference with or without counting",
                                                             "defaultSnippets": {
                                                                 "label": "Filter"
                                                             },
                                                             "anyOf": [
                                                                 {
                                                                     "description": "Facet calculation is disabled by default",
-                                                                    "defaultSnippets": {
-                                                                        "label": "Facetting",
-                                                                        "properties": [
-                                                                            "calculateFacets:boolean"
-                                                                        ]
-                                                                    },
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "calculateFacets": {
@@ -2823,7 +2781,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "$ref": "#/definitions/FieldType",
+                                                            "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
                                                         },
                                                         "derive": {
@@ -2831,28 +2789,28 @@
                                                             "defaultSnippets": {
                                                                 "label": "Derive Values",
                                                                 "properties": [
-                                                                    "localField",
-                                                                    "remoteField"
+                                                                    "localReference",
+                                                                    "remoteReference"
                                                                 ]
                                                             },
                                                             "type": "object",
                                                             "properties": {
-                                                                "localField": {
-                                                                    "description": "The field on the foreign object which should be used for resolve the relation.",
+                                                                "localReference": {
+                                                                    "description": "The reference on the foreign object which should be used for resolve the relation.",
                                                                     "minLength": 1,
                                                                     "type": "string",
-                                                                    "title": "localField"
+                                                                    "title": "localReference"
                                                                 },
-                                                                "remoteField": {
-                                                                    "description": "The field on the foreign object which should be derived.",
+                                                                "remoteReference": {
+                                                                    "description": "The reference on the foreign object which should be derived.",
                                                                     "minLength": 1,
                                                                     "type": "string",
-                                                                    "title": "remoteField"
+                                                                    "title": "remoteReference"
                                                                 }
                                                             },
                                                             "required": [
-                                                                "localField",
-                                                                "remoteField"
+                                                                "localReference",
+                                                                "remoteReference"
                                                             ],
                                                             "title": "derive"
                                                         }
@@ -2867,9 +2825,9 @@
                                         {
                                             "allOf": [
                                                 {
-                                                    "description": "A Field prepresent a list of elements along a explicite dimension.",
+                                                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                                                     "defaultSnippets": {
-                                                        "label": "Field",
+                                                        "label": "Reference",
                                                         "properties": [
                                                             "key",
                                                             "model",
@@ -2879,7 +2837,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
-                                                            "description": "A key is an unique identifier overall fields in this model.",
+                                                            "description": "A key is an unique identifier for all reference in this model.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "key"
@@ -2891,23 +2849,17 @@
                                                             "title": "model"
                                                         },
                                                         "type": {
-                                                            "$ref": "#/definitions/FieldType",
+                                                            "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
                                                         },
                                                         "filter": {
-                                                            "description": "Filtering the values of the field with or without counting",
+                                                            "description": "Filtering the values of the reference with or without counting",
                                                             "defaultSnippets": {
                                                                 "label": "Filter"
                                                             },
                                                             "anyOf": [
                                                                 {
                                                                     "description": "Facet calculation is disabled by default",
-                                                                    "defaultSnippets": {
-                                                                        "label": "Facetting",
-                                                                        "properties": [
-                                                                            "calculateFacets:boolean"
-                                                                        ]
-                                                                    },
                                                                     "type": "object",
                                                                     "properties": {
                                                                         "calculateFacets": {
@@ -2949,25 +2901,25 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "$ref": "#/definitions/FieldType",
+                                                            "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
                                                         },
                                                         "groupBy": {
-                                                            "description": "Group by a specific field",
+                                                            "description": "Group by a specific reference",
                                                             "defaultSnippets": {
                                                                 "label": "Grouped Values",
                                                                 "properties": [
-                                                                    "field",
+                                                                    "reference",
                                                                     "includeSelfInGroup"
                                                                 ]
                                                             },
                                                             "type": "object",
                                                             "properties": {
-                                                                "field": {
-                                                                    "description": "The field that groups are generated from",
+                                                                "reference": {
+                                                                    "description": "The reference that groups are generated from",
                                                                     "minLength": 1,
                                                                     "type": "string",
-                                                                    "title": "field"
+                                                                    "title": "reference"
                                                                 },
                                                                 "includeSelfInGroup": {
                                                                     "type": "boolean",
@@ -2975,7 +2927,7 @@
                                                                 }
                                                             },
                                                             "required": [
-                                                                "field"
+                                                                "reference"
                                                             ],
                                                             "title": "groupBy"
                                                         }
@@ -2989,7 +2941,7 @@
                                         }
                                     ]
                                 },
-                                "title": "fields"
+                                "title": "references"
                             },
                             "data": {
                                 "type": "array",
@@ -3062,8 +3014,8 @@
         }
     ],
     "definitions": {
-        "PropertyDatatype": {
-            "title": "PropertyDatatype",
+        "PropertyType": {
+            "title": "PropertyType",
             "enum": [
                 "any",
                 "date",
@@ -3085,10 +3037,10 @@
             ],
             "type": "string"
         },
-        "FieldType": {
+        "ReferenceType": {
             "description": "must be singleValued or  multiValued\nsingleValued contains only one key to an object\nmultiValued contains multiple key of objects",
             "minLength": 1,
-            "title": "FieldType",
+            "title": "ReferenceType",
             "enum": [
                 "multiValued",
                 "singleValued"

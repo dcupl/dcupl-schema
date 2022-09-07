@@ -16,7 +16,7 @@
                                         "title": "url"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/ConfigLoaderType",
+                                        "$ref": "#/definitions/AppLoaderResourceType",
                                         "title": "type"
                                     },
                                     "model": {
@@ -68,7 +68,7 @@
                                         "title": "url"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/ConfigLoaderType",
+                                        "$ref": "#/definitions/AppLoaderResourceType",
                                         "title": "type"
                                     },
                                     "model": {
@@ -110,6 +110,7 @@
                                         "enum": [
                                             "delete",
                                             "set",
+                                            "update",
                                             "upsert"
                                         ],
                                         "type": "string",
@@ -165,27 +166,6 @@
                             ]
                         },
                         "title": "variables"
-                    }
-                },
-                "required": [
-                    "key",
-                    "variables"
-                ]
-            },
-            "title": "environments"
-        },
-        "httpConfigs": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "key": {
-                        "type": "string",
-                        "title": "key"
-                    },
-                    "description": {
-                        "type": "string",
-                        "title": "description"
                     },
                     "headers": {
                         "type": "array",
@@ -276,7 +256,7 @@
                     "key"
                 ]
             },
-            "title": "httpConfigs"
+            "title": "environments"
         },
         "transformers": {
             "type": "array",
@@ -292,7 +272,7 @@
                         "title": "description"
                     },
                     "type": {
-                        "$ref": "#/definitions/ConfigLoaderTransformerType",
+                        "$ref": "#/definitions/AppLoaderTransformerType",
                         "title": "type"
                     },
                     "tags": {
@@ -311,7 +291,7 @@
             },
             "title": "transformers"
         },
-        "presets": {
+        "applications": {
             "type": "array",
             "items": {
                 "type": "object",
@@ -330,13 +310,6 @@
                             "type": "string"
                         },
                         "title": "environmentKeys"
-                    },
-                    "httpConfigKey": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "title": "httpConfigKey"
                     },
                     "transformerKeys": {
                         "type": "array",
@@ -395,23 +368,23 @@
                     "key"
                 ]
             },
-            "title": "presets"
+            "title": "applications"
         }
     },
     "required": [
         "resources"
     ],
     "definitions": {
-        "ConfigLoaderType": {
-            "title": "ConfigLoaderType",
+        "AppLoaderResourceType": {
+            "title": "AppLoaderResourceType",
             "enum": [
                 "data",
                 "model"
             ],
             "type": "string"
         },
-        "ConfigLoaderTransformerType": {
-            "title": "ConfigLoaderTransformerType",
+        "AppLoaderTransformerType": {
+            "title": "AppLoaderTransformerType",
             "enum": [
                 "parsedFileTransformer",
                 "rawFileTransformer"
@@ -423,6 +396,7 @@
             "enum": [
                 "delete",
                 "set",
+                "update",
                 "upsert"
             ],
             "type": "string"
