@@ -139,10 +139,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -176,10 +195,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<int>",
                                                     "int"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             },
                                             "aggregate": {
@@ -187,7 +207,26 @@
                                                 "title": "aggregate"
                                             },
                                             "filter": {
-                                                "type": "boolean",
+                                                "anyOf": [
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
                                                 "title": "filter"
                                             }
                                         },
@@ -259,10 +298,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -296,10 +354,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<float>",
                                                     "float"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             },
                                             "aggregate": {
@@ -311,7 +370,26 @@
                                                 "title": "fractionDigits"
                                             },
                                             "filter": {
-                                                "type": "boolean",
+                                                "anyOf": [
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
                                                 "title": "filter"
                                             }
                                         },
@@ -383,10 +461,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -420,10 +517,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<json>",
                                                     "json"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             },
                                             "filter": {
@@ -499,10 +597,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -536,10 +653,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<any>",
                                                     "any"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             }
                                         },
@@ -611,10 +729,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -648,10 +785,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<date>",
                                                     "date"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             },
                                             "inputFormat": {
@@ -737,10 +875,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -774,10 +931,11 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
-                                                "type": "string",
                                                 "enum": [
+                                                    "Array<string>",
                                                     "string"
                                                 ],
+                                                "type": "string",
                                                 "title": "type"
                                             },
                                             "filter": {
@@ -893,10 +1051,29 @@
                                                         }
                                                     },
                                                     {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
                                                         "type": "boolean"
                                                     }
                                                 ],
                                                 "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
                                             },
                                             "derive": {
                                                 "type": "object",
@@ -1645,10 +1822,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -1682,10 +1878,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<int>",
                                                                 "int"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         },
                                                         "aggregate": {
@@ -1693,7 +1890,26 @@
                                                             "title": "aggregate"
                                                         },
                                                         "filter": {
-                                                            "type": "boolean",
+                                                            "anyOf": [
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "boolean"
+                                                                }
+                                                            ],
                                                             "title": "filter"
                                                         }
                                                     },
@@ -1765,10 +1981,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -1802,10 +2037,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<float>",
                                                                 "float"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         },
                                                         "aggregate": {
@@ -1817,7 +2053,26 @@
                                                             "title": "fractionDigits"
                                                         },
                                                         "filter": {
-                                                            "type": "boolean",
+                                                            "anyOf": [
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "boolean"
+                                                                }
+                                                            ],
                                                             "title": "filter"
                                                         }
                                                     },
@@ -1889,10 +2144,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -1926,10 +2200,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<json>",
                                                                 "json"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         },
                                                         "filter": {
@@ -2005,10 +2280,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -2042,10 +2336,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<any>",
                                                                 "any"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         }
                                                     },
@@ -2117,10 +2412,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -2154,10 +2468,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<date>",
                                                                 "date"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         },
                                                         "inputFormat": {
@@ -2243,10 +2558,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -2280,10 +2614,11 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
-                                                            "type": "string",
                                                             "enum": [
+                                                                "Array<string>",
                                                                 "string"
                                                             ],
+                                                            "type": "string",
                                                             "title": "type"
                                                         },
                                                         "filter": {
@@ -2399,10 +2734,29 @@
                                                                     }
                                                                 },
                                                                 {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
                                                                     "type": "boolean"
                                                                 }
                                                             ],
                                                             "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
                                                         },
                                                         "derive": {
                                                             "type": "object",
@@ -3017,6 +3371,10 @@
         "PropertyType": {
             "title": "PropertyType",
             "enum": [
+                "Array<date>",
+                "Array<float>",
+                "Array<int>",
+                "Array<string>",
                 "any",
                 "date",
                 "float",

@@ -106,15 +106,35 @@
                                         "type": "string",
                                         "title": "model"
                                     },
-                                    "updateType": {
-                                        "enum": [
-                                            "delete",
-                                            "set",
-                                            "update",
-                                            "upsert"
-                                        ],
-                                        "type": "string",
-                                        "title": "updateType"
+                                    "options": {
+                                        "type": "object",
+                                        "properties": {
+                                            "updateType": {
+                                                "enum": [
+                                                    "delete",
+                                                    "set",
+                                                    "update",
+                                                    "upsert"
+                                                ],
+                                                "type": "string",
+                                                "title": "updateType"
+                                            },
+                                            "csvParserOptions": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "delimiter": {
+                                                        "type": "string",
+                                                        "title": "delimiter"
+                                                    },
+                                                    "quoteChar": {
+                                                        "type": "string",
+                                                        "title": "quoteChar"
+                                                    }
+                                                },
+                                                "title": "csvParserOptions"
+                                            }
+                                        },
+                                        "title": "options"
                                     }
                                 },
                                 "required": [
@@ -304,13 +324,6 @@
                         "type": "string",
                         "title": "description"
                     },
-                    "environmentKeys": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "title": "environmentKeys"
-                    },
                     "transformerKeys": {
                         "type": "array",
                         "items": {
@@ -349,19 +362,6 @@
                             ]
                         },
                         "title": "variables"
-                    },
-                    "options": {
-                        "type": "object",
-                        "properties": {
-                            "dataContainerDefaultType": {
-                                "$ref": "#/definitions/DataContainerType",
-                                "title": "dataContainerDefaultType"
-                            }
-                        },
-                        "required": [
-                            "dataContainerDefaultType"
-                        ],
-                        "title": "options"
                     }
                 },
                 "required": [
@@ -369,6 +369,36 @@
                 ]
             },
             "title": "applications"
+        },
+        "options": {
+            "type": "object",
+            "properties": {
+                "defaultDataContainerUpdateType": {
+                    "enum": [
+                        "delete",
+                        "set",
+                        "update",
+                        "upsert"
+                    ],
+                    "type": "string",
+                    "title": "defaultDataContainerUpdateType"
+                },
+                "csvParserOptions": {
+                    "type": "object",
+                    "properties": {
+                        "delimiter": {
+                            "type": "string",
+                            "title": "delimiter"
+                        },
+                        "quoteChar": {
+                            "type": "string",
+                            "title": "quoteChar"
+                        }
+                    },
+                    "title": "csvParserOptions"
+                }
+            },
+            "title": "options"
         }
     },
     "required": [
@@ -388,16 +418,6 @@
             "enum": [
                 "parsedFileTransformer",
                 "rawFileTransformer"
-            ],
-            "type": "string"
-        },
-        "DataContainerType": {
-            "title": "DataContainerType",
-            "enum": [
-                "delete",
-                "set",
-                "update",
-                "upsert"
             ],
             "type": "string"
         }
