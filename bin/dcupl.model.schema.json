@@ -45,6 +45,24 @@
                         "type": "string"
                     },
                     "title": "aggregates"
+                },
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "title": "meta"
                 }
             },
             "required": [
@@ -184,6 +202,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -343,6 +383,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -506,6 +568,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -642,6 +726,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -774,6 +880,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -920,6 +1048,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -1096,6 +1246,28 @@
                                                     "remoteProperty"
                                                 ],
                                                 "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -1222,6 +1394,10 @@
                                                     "excludeZeros": {
                                                         "type": "boolean",
                                                         "title": "excludeZeros"
+                                                    },
+                                                    "excludeUndefineds": {
+                                                        "type": "boolean",
+                                                        "title": "excludeUndefineds"
                                                     }
                                                 }
                                             },
@@ -1242,6 +1418,28 @@
                                     "aggregate": {
                                         "type": "boolean",
                                         "title": "aggregate"
+                                    },
+                                    "meta": {
+                                        "type": "object",
+                                        "additionalProperties": {},
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "title": "name"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "title": "description"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "title": "meta"
+                                    },
+                                    "index": {
+                                        "type": "boolean",
+                                        "title": "index"
                                     }
                                 },
                                 "required": [
@@ -1297,6 +1495,10 @@
                                                             "excludeZeros": {
                                                                 "type": "boolean",
                                                                 "title": "excludeZeros"
+                                                            },
+                                                            "excludeUndefineds": {
+                                                                "type": "boolean",
+                                                                "title": "excludeUndefineds"
                                                             }
                                                         }
                                                     },
@@ -1317,6 +1519,28 @@
                                             "aggregate": {
                                                 "type": "boolean",
                                                 "title": "aggregate"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -1420,6 +1644,10 @@
                                                             "excludeZeros": {
                                                                 "type": "boolean",
                                                                 "title": "excludeZeros"
+                                                            },
+                                                            "excludeUndefineds": {
+                                                                "type": "boolean",
+                                                                "title": "excludeUndefineds"
                                                             }
                                                         }
                                                     },
@@ -1440,6 +1668,28 @@
                                             "aggregate": {
                                                 "type": "boolean",
                                                 "title": "aggregate"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -1540,6 +1790,10 @@
                                                             "excludeZeros": {
                                                                 "type": "boolean",
                                                                 "title": "excludeZeros"
+                                                            },
+                                                            "excludeUndefineds": {
+                                                                "type": "boolean",
+                                                                "title": "excludeUndefineds"
                                                             }
                                                         }
                                                     },
@@ -1560,6 +1814,28 @@
                                             "aggregate": {
                                                 "type": "boolean",
                                                 "title": "aggregate"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
                                             }
                                         },
                                         "required": [
@@ -1674,6 +1950,24 @@
                         ]
                     },
                     "title": "valueMappings"
+                },
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "title": "meta"
                 }
             },
             "required": [
@@ -1728,6 +2022,24 @@
                                     "type": "string"
                                 },
                                 "title": "aggregates"
+                            },
+                            "meta": {
+                                "type": "object",
+                                "additionalProperties": {},
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "title": "name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "title": "description"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ],
+                                "title": "meta"
                             }
                         },
                         "required": [
@@ -1867,6 +2179,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2026,6 +2360,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2189,6 +2545,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2325,6 +2703,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2457,6 +2857,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2603,6 +3025,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2779,6 +3223,28 @@
                                                                 "remoteProperty"
                                                             ],
                                                             "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -2905,6 +3371,10 @@
                                                                 "excludeZeros": {
                                                                     "type": "boolean",
                                                                     "title": "excludeZeros"
+                                                                },
+                                                                "excludeUndefineds": {
+                                                                    "type": "boolean",
+                                                                    "title": "excludeUndefineds"
                                                                 }
                                                             }
                                                         },
@@ -2925,6 +3395,28 @@
                                                 "aggregate": {
                                                     "type": "boolean",
                                                     "title": "aggregate"
+                                                },
+                                                "meta": {
+                                                    "type": "object",
+                                                    "additionalProperties": {},
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "title": "name"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "title": "description"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name"
+                                                    ],
+                                                    "title": "meta"
+                                                },
+                                                "index": {
+                                                    "type": "boolean",
+                                                    "title": "index"
                                                 }
                                             },
                                             "required": [
@@ -2980,6 +3472,10 @@
                                                                         "excludeZeros": {
                                                                             "type": "boolean",
                                                                             "title": "excludeZeros"
+                                                                        },
+                                                                        "excludeUndefineds": {
+                                                                            "type": "boolean",
+                                                                            "title": "excludeUndefineds"
                                                                         }
                                                                     }
                                                                 },
@@ -3000,6 +3496,28 @@
                                                         "aggregate": {
                                                             "type": "boolean",
                                                             "title": "aggregate"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -3103,6 +3621,10 @@
                                                                         "excludeZeros": {
                                                                             "type": "boolean",
                                                                             "title": "excludeZeros"
+                                                                        },
+                                                                        "excludeUndefineds": {
+                                                                            "type": "boolean",
+                                                                            "title": "excludeUndefineds"
                                                                         }
                                                                     }
                                                                 },
@@ -3123,6 +3645,28 @@
                                                         "aggregate": {
                                                             "type": "boolean",
                                                             "title": "aggregate"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -3223,6 +3767,10 @@
                                                                         "excludeZeros": {
                                                                             "type": "boolean",
                                                                             "title": "excludeZeros"
+                                                                        },
+                                                                        "excludeUndefineds": {
+                                                                            "type": "boolean",
+                                                                            "title": "excludeUndefineds"
                                                                         }
                                                                     }
                                                                 },
@@ -3243,6 +3791,28 @@
                                                         "aggregate": {
                                                             "type": "boolean",
                                                             "title": "aggregate"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
                                                         }
                                                     },
                                                     "required": [
@@ -3357,6 +3927,24 @@
                                     ]
                                 },
                                 "title": "valueMappings"
+                            },
+                            "meta": {
+                                "type": "object",
+                                "additionalProperties": {},
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "title": "name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "title": "description"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ],
+                                "title": "meta"
                             }
                         },
                         "required": [
