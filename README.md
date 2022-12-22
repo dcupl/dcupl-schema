@@ -1,4 +1,4 @@
-#dcupl-schema
+# dcupl-schema
 Generated schema files for the dcupl loader configuration and model descriptions.
 
 Please see the dcupl documentation for further information - https://docs.dcupl.com
