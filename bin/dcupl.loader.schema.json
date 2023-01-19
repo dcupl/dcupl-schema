@@ -11,6 +11,10 @@
                             {
                                 "type": "object",
                                 "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "title": "key"
+                                    },
                                     "url": {
                                         "type": "string",
                                         "title": "url"
@@ -63,6 +67,10 @@
                             {
                                 "type": "object",
                                 "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "title": "key"
+                                    },
                                     "url": {
                                         "type": "string",
                                         "title": "url"
@@ -300,6 +308,14 @@
                             "type": "string"
                         },
                         "title": "tags"
+                    },
+                    "fetch": {
+                        "type": "boolean",
+                        "title": "fetch"
+                    },
+                    "url": {
+                        "type": "string",
+                        "title": "url"
                     }
                 },
                 "required": [
@@ -318,6 +334,10 @@
                     "key": {
                         "type": "string",
                         "title": "key"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "name"
                     },
                     "description": {
                         "type": "string",

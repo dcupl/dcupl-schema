@@ -235,6 +235,167 @@
                                         "type": "object",
                                         "properties": {
                                             "type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "boolean"
+                                                ],
+                                                "title": "type"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
+                                            },
+                                            "filter": {
+                                                "type": "boolean",
+                                                "title": "filter"
+                                            }
+                                        },
+                                        "required": [
+                                            "type"
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "allOf": [
+                                    {
+                                        "description": "A property is a quality or characteristic belonging an object.",
+                                        "defaultSnippets": {
+                                            "label": "Property",
+                                            "properties": [
+                                                "key",
+                                                "type"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "description": "A key is an unique identifier overall properties in this model.",
+                                                "minLength": 1,
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "type": {
+                                                "$ref": "#/definitions/PropertyType",
+                                                "title": "type"
+                                            },
+                                            "filter": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "comparisonType": {
+                                                                "enum": [
+                                                                    "contains",
+                                                                    "containsIgnoreCase",
+                                                                    "containsIgnoreCaseAndWhitespace",
+                                                                    "equal",
+                                                                    "equalIgnoreCase"
+                                                                ],
+                                                                "type": "string",
+                                                                "title": "comparisonType"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                },
+                                                                "comparisonType": {
+                                                                    "$ref": "#/definitions/FilterComparisonType",
+                                                                    "title": "comparisonType"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "comparisonType",
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "key": {
+                                                                    "type": "string",
+                                                                    "title": "key"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "key"
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "boolean"
+                                                    }
+                                                ],
+                                                "title": "filter"
+                                            },
+                                            "aggregate": {
+                                                "type": "boolean",
+                                                "title": "aggregate"
+                                            },
+                                            "derive": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "localReference": {
+                                                        "type": "string",
+                                                        "title": "localReference"
+                                                    },
+                                                    "remoteProperty": {
+                                                        "type": "string",
+                                                        "title": "remoteProperty"
+                                                    },
+                                                    "separator": {
+                                                        "type": "string",
+                                                        "title": "separator"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "localReference",
+                                                    "remoteProperty"
+                                                ],
+                                                "title": "derive"
+                                            },
+                                            "meta": {
+                                                "type": "object",
+                                                "additionalProperties": {},
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "title": "name"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "title": "description"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "title": "meta"
+                                            },
+                                            "index": {
+                                                "type": "boolean",
+                                                "title": "index"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "type"
+                                        ]
+                                    },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "type": {
                                                 "enum": [
                                                     "Array<int>",
                                                     "int"
@@ -921,14 +1082,13 @@
                                                 "title": "type"
                                             },
                                             "inputFormat": {
-                                                "enum": [
-                                                    "date",
-                                                    "string",
-                                                    "ts_milliseconds",
-                                                    "ts_seconds"
-                                                ],
+                                                "description": "Example: 'yyyy-MM-dd' | 'dd.MM.yyyy' | ...",
                                                 "type": "string",
                                                 "title": "inputFormat"
+                                            },
+                                            "UTC": {
+                                                "type": "boolean",
+                                                "title": "UTC"
                                             },
                                             "filter": {
                                                 "type": "boolean",
@@ -2212,6 +2372,167 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "type": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "boolean"
+                                                            ],
+                                                            "title": "type"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
+                                                        },
+                                                        "filter": {
+                                                            "type": "boolean",
+                                                            "title": "filter"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "type"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "allOf": [
+                                                {
+                                                    "description": "A property is a quality or characteristic belonging an object.",
+                                                    "defaultSnippets": {
+                                                        "label": "Property",
+                                                        "properties": [
+                                                            "key",
+                                                            "type"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "description": "A key is an unique identifier overall properties in this model.",
+                                                            "minLength": 1,
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "type": {
+                                                            "$ref": "#/definitions/PropertyType",
+                                                            "title": "type"
+                                                        },
+                                                        "filter": {
+                                                            "anyOf": [
+                                                                {
+                                                                    "type": "object",
+                                                                    "properties": {
+                                                                        "comparisonType": {
+                                                                            "enum": [
+                                                                                "contains",
+                                                                                "containsIgnoreCase",
+                                                                                "containsIgnoreCaseAndWhitespace",
+                                                                                "equal",
+                                                                                "equalIgnoreCase"
+                                                                            ],
+                                                                            "type": "string",
+                                                                            "title": "comparisonType"
+                                                                        }
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            },
+                                                                            "comparisonType": {
+                                                                                "$ref": "#/definitions/FilterComparisonType",
+                                                                                "title": "comparisonType"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "comparisonType",
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "key": {
+                                                                                "type": "string",
+                                                                                "title": "key"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "boolean"
+                                                                }
+                                                            ],
+                                                            "title": "filter"
+                                                        },
+                                                        "aggregate": {
+                                                            "type": "boolean",
+                                                            "title": "aggregate"
+                                                        },
+                                                        "derive": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "localReference": {
+                                                                    "type": "string",
+                                                                    "title": "localReference"
+                                                                },
+                                                                "remoteProperty": {
+                                                                    "type": "string",
+                                                                    "title": "remoteProperty"
+                                                                },
+                                                                "separator": {
+                                                                    "type": "string",
+                                                                    "title": "separator"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "localReference",
+                                                                "remoteProperty"
+                                                            ],
+                                                            "title": "derive"
+                                                        },
+                                                        "meta": {
+                                                            "type": "object",
+                                                            "additionalProperties": {},
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string",
+                                                                    "title": "name"
+                                                                },
+                                                                "description": {
+                                                                    "type": "string",
+                                                                    "title": "description"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "name"
+                                                            ],
+                                                            "title": "meta"
+                                                        },
+                                                        "index": {
+                                                            "type": "boolean",
+                                                            "title": "index"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "key",
+                                                        "type"
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
                                                             "enum": [
                                                                 "Array<int>",
                                                                 "int"
@@ -2898,14 +3219,13 @@
                                                             "title": "type"
                                                         },
                                                         "inputFormat": {
-                                                            "enum": [
-                                                                "date",
-                                                                "string",
-                                                                "ts_milliseconds",
-                                                                "ts_seconds"
-                                                            ],
+                                                            "description": "Example: 'yyyy-MM-dd' | 'dd.MM.yyyy' | ...",
                                                             "type": "string",
                                                             "title": "inputFormat"
+                                                        },
+                                                        "UTC": {
+                                                            "type": "boolean",
+                                                            "title": "UTC"
                                                         },
                                                         "filter": {
                                                             "type": "boolean",
@@ -3964,6 +4284,7 @@
                 "Array<int>",
                 "Array<string>",
                 "any",
+                "boolean",
                 "date",
                 "float",
                 "int",
