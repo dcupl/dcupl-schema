@@ -118,6 +118,10 @@
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
                                             },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
+                                            },
                                             "filter": {
                                                 "anyOf": [
                                                     {
@@ -278,6 +282,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -459,6 +467,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -645,6 +657,10 @@
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
                                             },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
+                                            },
                                             "filter": {
                                                 "anyOf": [
                                                     {
@@ -803,6 +819,10 @@
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
                                             },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
+                                            },
                                             "filter": {
                                                 "anyOf": [
                                                     {
@@ -956,6 +976,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -1123,6 +1147,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -1321,6 +1349,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/PropertyType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "anyOf": [
@@ -1528,7 +1560,7 @@
                                         "title": "key"
                                     },
                                     "model": {
-                                        "description": "xxx",
+                                        "description": "The Model this reference is pointing to.",
                                         "minLength": 1,
                                         "type": "string",
                                         "title": "model"
@@ -1536,6 +1568,10 @@
                                     "type": {
                                         "$ref": "#/definitions/ReferenceType",
                                         "title": "type"
+                                    },
+                                    "origin": {
+                                        "type": "string",
+                                        "title": "origin"
                                     },
                                     "filter": {
                                         "description": "Filtering the values of the reference with or without counting",
@@ -1629,7 +1665,7 @@
                                                 "title": "key"
                                             },
                                             "model": {
-                                                "description": "xxx",
+                                                "description": "The Model this reference is pointing to.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "model"
@@ -1637,6 +1673,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "description": "Filtering the values of the reference with or without counting",
@@ -1778,7 +1818,7 @@
                                                 "title": "key"
                                             },
                                             "model": {
-                                                "description": "xxx",
+                                                "description": "The Model this reference is pointing to.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "model"
@@ -1786,6 +1826,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "description": "Filtering the values of the reference with or without counting",
@@ -1924,7 +1968,7 @@
                                                 "title": "key"
                                             },
                                             "model": {
-                                                "description": "xxx",
+                                                "description": "The Model this reference is pointing to.",
                                                 "minLength": 1,
                                                 "type": "string",
                                                 "title": "model"
@@ -1932,6 +1976,10 @@
                                             "type": {
                                                 "$ref": "#/definitions/ReferenceType",
                                                 "title": "type"
+                                            },
+                                            "origin": {
+                                                "type": "string",
+                                                "title": "origin"
                                             },
                                             "filter": {
                                                 "description": "Filtering the values of the reference with or without counting",
@@ -2255,6 +2303,10 @@
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
                                                         },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
+                                                        },
                                                         "filter": {
                                                             "anyOf": [
                                                                 {
@@ -2415,6 +2467,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2596,6 +2652,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -2782,6 +2842,10 @@
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
                                                         },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
+                                                        },
                                                         "filter": {
                                                             "anyOf": [
                                                                 {
@@ -2940,6 +3004,10 @@
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
                                                         },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
+                                                        },
                                                         "filter": {
                                                             "anyOf": [
                                                                 {
@@ -3093,6 +3161,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -3260,6 +3332,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -3458,6 +3534,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/PropertyType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "anyOf": [
@@ -3665,7 +3745,7 @@
                                                     "title": "key"
                                                 },
                                                 "model": {
-                                                    "description": "xxx",
+                                                    "description": "The Model this reference is pointing to.",
                                                     "minLength": 1,
                                                     "type": "string",
                                                     "title": "model"
@@ -3673,6 +3753,10 @@
                                                 "type": {
                                                     "$ref": "#/definitions/ReferenceType",
                                                     "title": "type"
+                                                },
+                                                "origin": {
+                                                    "type": "string",
+                                                    "title": "origin"
                                                 },
                                                 "filter": {
                                                     "description": "Filtering the values of the reference with or without counting",
@@ -3766,7 +3850,7 @@
                                                             "title": "key"
                                                         },
                                                         "model": {
-                                                            "description": "xxx",
+                                                            "description": "The Model this reference is pointing to.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "model"
@@ -3774,6 +3858,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "description": "Filtering the values of the reference with or without counting",
@@ -3915,7 +4003,7 @@
                                                             "title": "key"
                                                         },
                                                         "model": {
-                                                            "description": "xxx",
+                                                            "description": "The Model this reference is pointing to.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "model"
@@ -3923,6 +4011,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "description": "Filtering the values of the reference with or without counting",
@@ -4061,7 +4153,7 @@
                                                             "title": "key"
                                                         },
                                                         "model": {
-                                                            "description": "xxx",
+                                                            "description": "The Model this reference is pointing to.",
                                                             "minLength": 1,
                                                             "type": "string",
                                                             "title": "model"
@@ -4069,6 +4161,10 @@
                                                         "type": {
                                                             "$ref": "#/definitions/ReferenceType",
                                                             "title": "type"
+                                                        },
+                                                        "origin": {
+                                                            "type": "string",
+                                                            "title": "origin"
                                                         },
                                                         "filter": {
                                                             "description": "Filtering the values of the reference with or without counting",
