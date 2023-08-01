@@ -5,159 +5,7 @@
         "resources": {
             "type": "array",
             "items": {
-                "anyOf": [
-                    {
-                        "allOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "key": {
-                                        "type": "string",
-                                        "title": "key"
-                                    },
-                                    "url": {
-                                        "type": "string",
-                                        "title": "url"
-                                    },
-                                    "type": {
-                                        "$ref": "#/definitions/ResourceType",
-                                        "title": "type"
-                                    },
-                                    "model": {
-                                        "type": "string",
-                                        "title": "model"
-                                    },
-                                    "tags": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "title": "tags"
-                                    }
-                                },
-                                "required": [
-                                    "type",
-                                    "url"
-                                ]
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string",
-                                        "title": "url"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "model"
-                                        ],
-                                        "title": "type"
-                                    }
-                                },
-                                "required": [
-                                    "type",
-                                    "url"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "key": {
-                                        "type": "string",
-                                        "title": "key"
-                                    },
-                                    "url": {
-                                        "type": "string",
-                                        "title": "url"
-                                    },
-                                    "type": {
-                                        "$ref": "#/definitions/ResourceType",
-                                        "title": "type"
-                                    },
-                                    "model": {
-                                        "type": "string",
-                                        "title": "model"
-                                    },
-                                    "tags": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        },
-                                        "title": "tags"
-                                    }
-                                },
-                                "required": [
-                                    "type",
-                                    "url"
-                                ]
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string",
-                                        "title": "url"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "data"
-                                        ],
-                                        "title": "type"
-                                    },
-                                    "model": {
-                                        "type": "string",
-                                        "title": "model"
-                                    },
-                                    "options": {
-                                        "type": "object",
-                                        "properties": {
-                                            "updateType": {
-                                                "enum": [
-                                                    "remove",
-                                                    "set",
-                                                    "update",
-                                                    "upsert"
-                                                ],
-                                                "type": "string",
-                                                "title": "updateType"
-                                            },
-                                            "csvParserOptions": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "delimiter": {
-                                                        "type": "string",
-                                                        "title": "delimiter"
-                                                    },
-                                                    "quoteChar": {
-                                                        "type": "string",
-                                                        "title": "quoteChar"
-                                                    },
-                                                    "escapeChar": {
-                                                        "type": "string",
-                                                        "title": "escapeChar"
-                                                    }
-                                                },
-                                                "title": "csvParserOptions"
-                                            }
-                                        },
-                                        "title": "options"
-                                    }
-                                },
-                                "required": [
-                                    "model",
-                                    "type",
-                                    "url"
-                                ]
-                            }
-                        ]
-                    }
-                ]
+                "$ref": "#/definitions/AppLoaderConfiguration.Resource"
             },
             "title": "resources"
         },
@@ -193,7 +41,8 @@
                                 }
                             },
                             "required": [
-                                "key"
+                                "key",
+                                "value"
                             ]
                         },
                         "title": "variables"
@@ -380,7 +229,8 @@
                                 }
                             },
                             "required": [
-                                "key"
+                                "key",
+                                "value"
                             ]
                         },
                         "title": "variables"
@@ -422,6 +272,16 @@
                         }
                     },
                     "title": "csvParserOptions"
+                },
+                "missingModelHandling": {
+                    "type": "object",
+                    "properties": {
+                        "autoGenerateProperties": {
+                            "type": "boolean",
+                            "title": "autoGenerateProperties"
+                        }
+                    },
+                    "title": "missingModelHandling"
                 }
             },
             "title": "options"
@@ -431,6 +291,72 @@
         "resources"
     ],
     "definitions": {
+        "AppLoaderConfiguration.Resource": {
+            "title": "AppLoaderConfiguration.Resource",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.ModelResource"
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.DataResource"
+                }
+            ]
+        },
+        "AppLoaderConfiguration.ModelResource": {
+            "title": "AppLoaderConfiguration.ModelResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "model": {
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "type": "string",
+                            "const": "model",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                }
+            ]
+        },
         "ResourceType": {
             "title": "ResourceType",
             "enum": [
@@ -438,6 +364,108 @@
                 "model"
             ],
             "type": "string"
+        },
+        "AppLoaderConfiguration.DataResource": {
+            "title": "AppLoaderConfiguration.DataResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "model": {
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "type": "string",
+                            "const": "data",
+                            "title": "type"
+                        },
+                        "model": {
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "updateType": {
+                                    "enum": [
+                                        "remove",
+                                        "set",
+                                        "update",
+                                        "upsert"
+                                    ],
+                                    "type": "string",
+                                    "title": "updateType"
+                                },
+                                "autoGenerateProperties": {
+                                    "type": "boolean",
+                                    "title": "autoGenerateProperties"
+                                },
+                                "keyProperty": {
+                                    "type": "string",
+                                    "title": "keyProperty"
+                                },
+                                "csvParserOptions": {
+                                    "type": "object",
+                                    "properties": {
+                                        "delimiter": {
+                                            "type": "string",
+                                            "title": "delimiter"
+                                        },
+                                        "quoteChar": {
+                                            "type": "string",
+                                            "title": "quoteChar"
+                                        },
+                                        "escapeChar": {
+                                            "type": "string",
+                                            "title": "escapeChar"
+                                        }
+                                    },
+                                    "title": "csvParserOptions"
+                                }
+                            },
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "model",
+                        "type",
+                        "url"
+                    ]
+                }
+            ]
         },
         "AppLoaderConfiguration.TransformerType": {
             "title": "AppLoaderConfiguration.TransformerType",
