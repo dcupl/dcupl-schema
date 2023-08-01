@@ -20,7 +20,7 @@
                                         "title": "url"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/AppLoaderResourceType",
+                                        "$ref": "#/definitions/ResourceType",
                                         "title": "type"
                                     },
                                     "model": {
@@ -76,7 +76,7 @@
                                         "title": "url"
                                     },
                                     "type": {
-                                        "$ref": "#/definitions/AppLoaderResourceType",
+                                        "$ref": "#/definitions/ResourceType",
                                         "title": "type"
                                     },
                                     "model": {
@@ -119,7 +119,7 @@
                                         "properties": {
                                             "updateType": {
                                                 "enum": [
-                                                    "delete",
+                                                    "remove",
                                                     "set",
                                                     "update",
                                                     "upsert"
@@ -137,6 +137,10 @@
                                                     "quoteChar": {
                                                         "type": "string",
                                                         "title": "quoteChar"
+                                                    },
+                                                    "escapeChar": {
+                                                        "type": "string",
+                                                        "title": "escapeChar"
                                                     }
                                                 },
                                                 "title": "csvParserOptions"
@@ -299,7 +303,7 @@
                         "title": "description"
                     },
                     "type": {
-                        "$ref": "#/definitions/AppLoaderTransformerType",
+                        "$ref": "#/definitions/AppLoaderConfiguration.TransformerType",
                         "title": "type"
                     },
                     "tags": {
@@ -309,13 +313,13 @@
                         },
                         "title": "tags"
                     },
-                    "fetch": {
-                        "type": "boolean",
-                        "title": "fetch"
-                    },
-                    "url": {
+                    "baseUrl": {
                         "type": "string",
-                        "title": "url"
+                        "title": "baseUrl"
+                    },
+                    "fileName": {
+                        "type": "string",
+                        "title": "fileName"
                     }
                 },
                 "required": [
@@ -393,7 +397,7 @@
             "properties": {
                 "defaultDataContainerUpdateType": {
                     "enum": [
-                        "delete",
+                        "remove",
                         "set",
                         "update",
                         "upsert"
@@ -411,6 +415,10 @@
                         "quoteChar": {
                             "type": "string",
                             "title": "quoteChar"
+                        },
+                        "escapeChar": {
+                            "type": "string",
+                            "title": "escapeChar"
                         }
                     },
                     "title": "csvParserOptions"
@@ -423,16 +431,16 @@
         "resources"
     ],
     "definitions": {
-        "AppLoaderResourceType": {
-            "title": "AppLoaderResourceType",
+        "ResourceType": {
+            "title": "ResourceType",
             "enum": [
                 "data",
                 "model"
             ],
             "type": "string"
         },
-        "AppLoaderTransformerType": {
-            "title": "AppLoaderTransformerType",
+        "AppLoaderConfiguration.TransformerType": {
+            "title": "AppLoaderConfiguration.TransformerType",
             "enum": [
                 "parsedFileTransformer",
                 "rawFileTransformer"
