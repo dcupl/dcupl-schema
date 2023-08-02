@@ -1,0 +1,52 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "key": {
+                "type": "string",
+                "title": "key"
+            },
+            "name": {
+                "type": "string",
+                "title": "name"
+            },
+            "processOptions": {
+                "title": "processOptions"
+            },
+            "testConfigKey": {
+                "type": "string",
+                "title": "testConfigKey"
+            },
+            "trigger": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "chron",
+                            "manual"
+                        ],
+                        "type": "string",
+                        "title": "type"
+                    },
+                    "cron": {
+                        "type": "string",
+                        "title": "cron"
+                    }
+                },
+                "required": [
+                    "type"
+                ],
+                "title": "trigger"
+            }
+        },
+        "required": [
+            "key",
+            "name",
+            "processOptions",
+            "testConfigKey",
+            "trigger"
+        ]
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
