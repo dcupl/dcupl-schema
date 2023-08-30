@@ -10,10 +10,10 @@
         {
             "description": "A model describes a real world object and hols attributes.",
             "defaultSnippets": {
-                "label": "Model Description",
+                "label": "Model Definition",
                 "properties": [
-                    "key:string",
-                    "properties:array",
+                    "key:string:myModel",
+                    "properties:json:[{\"key\":\"my_property\", \"type\": \"string\"}]",
                     "references:array"
                 ]
             },
@@ -140,10 +140,10 @@
                     {
                         "description": "A model describes a real world object and hols attributes.",
                         "defaultSnippets": {
-                            "label": "Model Description",
+                            "label": "Model Definition",
                             "properties": [
-                                "key:string",
-                                "properties:array",
+                                "key:string:myModel",
+                                "properties:json:[{\"key\":\"my_property\", \"type\": \"string\"}]",
                                 "references:array"
                             ]
                         },
@@ -263,20 +263,19 @@
     ],
     "definitions": {
         "ViewDefinitionSection": {
+            "defaultSnippets": {
+                "label": "Dcupl Section View",
+                "properties": [
+                    "key",
+                    "model",
+                    "type:section",
+                    "primaryAttribute",
+                    "aggregates:array"
+                ]
+            },
             "title": "ViewDefinitionSection",
             "allOf": [
                 {
-                    "description": "A model describes a real world object and hols attributes.",
-                    "defaultSnippets": {
-                        "label": "Dcupl View",
-                        "properties": [
-                            "key",
-                            "model",
-                            "type",
-                            "primaryAttribute",
-                            "aggregates:array"
-                        ]
-                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -447,20 +446,18 @@
             "type": "string"
         },
         "ViewDefinitionPivot": {
+            "defaultSnippets": {
+                "label": "Dcupl Pivot View",
+                "properties": [
+                    "key",
+                    "model",
+                    "type:pivot",
+                    "options:json:{\"rows\":[{\"attribute\": \"\"}], \"columns\":[{\"attribute\": \"\"}], \"values\":[{\"attribute\": \"\", \"types\": [\"sum\"]}]}"
+                ]
+            },
             "title": "ViewDefinitionPivot",
             "allOf": [
                 {
-                    "description": "A model describes a real world object and hols attributes.",
-                    "defaultSnippets": {
-                        "label": "Dcupl View",
-                        "properties": [
-                            "key",
-                            "model",
-                            "type",
-                            "primaryAttribute",
-                            "aggregates:array"
-                        ]
-                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -506,157 +503,159 @@
                 {
                     "type": "object",
                     "properties": {
-                        "rows": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "attribute": {
-                                        "type": "string",
-                                        "title": "attribute"
-                                    },
-                                    "calculateTotals": {
-                                        "type": "boolean",
-                                        "title": "calculateTotals"
-                                    }
-                                },
-                                "required": [
-                                    "attribute"
-                                ]
-                            },
-                            "title": "rows"
-                        },
-                        "columns": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "attribute": {
-                                        "type": "string",
-                                        "title": "attribute"
-                                    },
-                                    "calculateTotals": {
-                                        "type": "boolean",
-                                        "title": "calculateTotals"
-                                    }
-                                },
-                                "required": [
-                                    "attribute"
-                                ]
-                            },
-                            "title": "columns"
-                        },
-                        "values": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "attribute": {
-                                        "type": "string",
-                                        "title": "attribute"
-                                    },
-                                    "types": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/definitions/AggregationType"
-                                        },
-                                        "title": "types"
-                                    },
-                                    "distinctOptions": {
-                                        "type": "object",
-                                        "properties": {
-                                            "limit": {
-                                                "type": "number",
-                                                "title": "limit"
-                                            },
-                                            "skipKeys": {
-                                                "type": "boolean",
-                                                "title": "skipKeys"
-                                            }
-                                        },
-                                        "title": "distinctOptions"
-                                    },
-                                    "groupOptions": {
-                                        "type": "object",
-                                        "properties": {
-                                            "limit": {
-                                                "type": "number",
-                                                "title": "limit"
-                                            },
-                                            "calculateNotFound": {
-                                                "type": "boolean",
-                                                "title": "calculateNotFound"
-                                            },
-                                            "groups": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "from": {
-                                                            "title": "from"
-                                                        },
-                                                        "to": {
-                                                            "title": "to"
-                                                        },
-                                                        "value": {
-                                                            "type": "array",
-                                                            "items": {},
-                                                            "title": "value"
-                                                        }
-                                                    }
-                                                },
-                                                "title": "groups"
-                                            }
-                                        },
-                                        "title": "groupOptions"
-                                    },
-                                    "excludeZeros": {
-                                        "type": "boolean",
-                                        "title": "excludeZeros"
-                                    },
-                                    "excludeUndefineds": {
-                                        "type": "boolean",
-                                        "title": "excludeUndefineds"
-                                    },
-                                    "excludeUnresolved": {
-                                        "type": "boolean",
-                                        "title": "excludeUnresolved"
-                                    }
-                                },
-                                "required": [
-                                    "attribute",
-                                    "types"
-                                ]
-                            },
-                            "title": "values"
-                        },
-                        "options": {
-                            "type": "object",
-                            "properties": {
-                                "calculateTotals": {
-                                    "type": "boolean",
-                                    "title": "calculateTotals"
-                                }
-                            },
-                            "title": "options"
-                        }
-                    },
-                    "required": [
-                        "columns",
-                        "rows",
-                        "values"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
                         "type": {
                             "type": "string",
                             "const": "pivot",
                             "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "rows": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "attribute": {
+                                                "type": "string",
+                                                "title": "attribute"
+                                            },
+                                            "calculateTotals": {
+                                                "type": "boolean",
+                                                "title": "calculateTotals"
+                                            }
+                                        },
+                                        "required": [
+                                            "attribute"
+                                        ]
+                                    },
+                                    "title": "rows"
+                                },
+                                "columns": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "attribute": {
+                                                "type": "string",
+                                                "title": "attribute"
+                                            },
+                                            "calculateTotals": {
+                                                "type": "boolean",
+                                                "title": "calculateTotals"
+                                            }
+                                        },
+                                        "required": [
+                                            "attribute"
+                                        ]
+                                    },
+                                    "title": "columns"
+                                },
+                                "values": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "attribute": {
+                                                "type": "string",
+                                                "title": "attribute"
+                                            },
+                                            "types": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/definitions/AggregationType"
+                                                },
+                                                "title": "types"
+                                            },
+                                            "distinctOptions": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "limit": {
+                                                        "type": "number",
+                                                        "title": "limit"
+                                                    },
+                                                    "skipKeys": {
+                                                        "type": "boolean",
+                                                        "title": "skipKeys"
+                                                    }
+                                                },
+                                                "title": "distinctOptions"
+                                            },
+                                            "groupOptions": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "limit": {
+                                                        "type": "number",
+                                                        "title": "limit"
+                                                    },
+                                                    "calculateNotFound": {
+                                                        "type": "boolean",
+                                                        "title": "calculateNotFound"
+                                                    },
+                                                    "groups": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "from": {
+                                                                    "title": "from"
+                                                                },
+                                                                "to": {
+                                                                    "title": "to"
+                                                                },
+                                                                "value": {
+                                                                    "type": "array",
+                                                                    "items": {},
+                                                                    "title": "value"
+                                                                }
+                                                            }
+                                                        },
+                                                        "title": "groups"
+                                                    }
+                                                },
+                                                "title": "groupOptions"
+                                            },
+                                            "excludeZeros": {
+                                                "type": "boolean",
+                                                "title": "excludeZeros"
+                                            },
+                                            "excludeUndefineds": {
+                                                "type": "boolean",
+                                                "title": "excludeUndefineds"
+                                            },
+                                            "excludeUnresolved": {
+                                                "type": "boolean",
+                                                "title": "excludeUnresolved"
+                                            }
+                                        },
+                                        "required": [
+                                            "attribute",
+                                            "types"
+                                        ]
+                                    },
+                                    "title": "values"
+                                },
+                                "options": {
+                                    "type": "object",
+                                    "properties": {
+                                        "calculateTotals": {
+                                            "type": "boolean",
+                                            "title": "calculateTotals"
+                                        }
+                                    },
+                                    "title": "options"
+                                }
+                            },
+                            "required": [
+                                "columns",
+                                "rows",
+                                "values"
+                            ],
+                            "title": "options"
                         }
                     },
                     "required": [
+                        "options",
                         "type"
                     ]
                 }
@@ -692,6 +691,14 @@
             ]
         },
         "PropertyExpression": {
+            "defaultSnippets": {
+                "label": "Dynamic Expression Property",
+                "properties": [
+                    "key",
+                    "type:string:string",
+                    "expression:string:${some_prop}_${another_prop}"
+                ]
+            },
             "title": "PropertyExpression",
             "allOf": [
                 {
@@ -925,6 +932,13 @@
             "type": "string"
         },
         "PropertyString": {
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:string"
+                ]
+            },
             "title": "PropertyString",
             "allOf": [
                 {
@@ -1128,6 +1142,13 @@
             ]
         },
         "PropertyInt": {
+            "defaultSnippets": {
+                "label": "Int Property",
+                "properties": [
+                    "key",
+                    "type:int"
+                ]
+            },
             "title": "PropertyInt",
             "allOf": [
                 {
@@ -1314,6 +1335,13 @@
             ]
         },
         "PropertyFloat": {
+            "defaultSnippets": {
+                "label": "Float Property",
+                "properties": [
+                    "key",
+                    "type:float"
+                ]
+            },
             "title": "PropertyFloat",
             "allOf": [
                 {
@@ -1504,6 +1532,13 @@
             ]
         },
         "PropertyDate": {
+            "defaultSnippets": {
+                "label": "Date Property",
+                "properties": [
+                    "key",
+                    "type:datex"
+                ]
+            },
             "title": "PropertyDate",
             "allOf": [
                 {
@@ -1676,6 +1711,13 @@
             ]
         },
         "PropertyJson": {
+            "defaultSnippets": {
+                "label": "Json Property",
+                "properties": [
+                    "key",
+                    "type:string:json"
+                ]
+            },
             "title": "PropertyJson",
             "allOf": [
                 {
@@ -1839,6 +1881,13 @@
             ]
         },
         "PropertyBoolean": {
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:boolean"
+                ]
+            },
             "title": "PropertyBoolean",
             "allOf": [
                 {
@@ -2003,6 +2052,13 @@
             ]
         },
         "PropertyAny": {
+            "defaultSnippets": {
+                "label": "Any Property",
+                "properties": [
+                    "key",
+                    "type:any"
+                ]
+            },
             "title": "PropertyAny",
             "allOf": [
                 {
@@ -2165,13 +2221,12 @@
             "title": "Reference",
             "anyOf": [
                 {
-                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                     "defaultSnippets": {
-                        "label": "Reference",
+                        "label": "Default Reference",
                         "properties": [
                             "key",
-                            "model",
-                            "type"
+                            "type:singleValued",
+                            "model"
                         ]
                     },
                     "type": "object",
@@ -2268,13 +2323,16 @@
                     ]
                 },
                 {
-                    "$ref": "#/definitions/ResolvedReference"
+                    "$ref": "#/definitions/ResolvedReference",
+                    "description": "Resolves a Reference from a foreign model"
                 },
                 {
-                    "$ref": "#/definitions/DerivedReference"
+                    "$ref": "#/definitions/DerivedReference",
+                    "description": "Derives a References for a specific value from an other model"
                 },
                 {
-                    "$ref": "#/definitions/GroupedRefeference"
+                    "$ref": "#/definitions/GroupedRefeference",
+                    "description": "Groups a Reference by a specific value from an other model"
                 }
             ]
         },
@@ -2289,16 +2347,25 @@
             "type": "string"
         },
         "ResolvedReference": {
+            "description": "Resolves a Reference from a foreign model",
+            "defaultSnippets": {
+                "label": "Resolved Reference",
+                "properties": [
+                    "key",
+                    "type:multiValued",
+                    "model",
+                    "resolve:json:{\"reference\":\"\", \"model\":\"\" }"
+                ]
+            },
             "title": "ResolvedReference",
             "allOf": [
                 {
-                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                     "defaultSnippets": {
-                        "label": "Reference",
+                        "label": "Default Reference",
                         "properties": [
                             "key",
-                            "model",
-                            "type"
+                            "type:singleValued",
+                            "model"
                         ]
                     },
                     "type": "object",
@@ -2441,16 +2508,25 @@
             ]
         },
         "DerivedReference": {
+            "description": "Derives a References for a specific value from an other model",
+            "defaultSnippets": {
+                "label": "Derived Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "derive:json:{\"localReference\":\"\", \"remoteReference\":\"\"}"
+                ]
+            },
             "title": "DerivedReference",
             "allOf": [
                 {
-                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                     "defaultSnippets": {
-                        "label": "Reference",
+                        "label": "Default Reference",
                         "properties": [
                             "key",
-                            "model",
-                            "type"
+                            "type:singleValued",
+                            "model"
                         ]
                     },
                     "type": "object",
@@ -2592,16 +2668,26 @@
             ]
         },
         "GroupedRefeference": {
+            "description": "Groups a Reference by a specific value from an other model",
+            "defaultSnippets": {
+                "label": "Grouped Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "groupBy:json:{\"reference\":\"\" }",
+                    "includeSelfInGroup:boolean"
+                ]
+            },
             "title": "GroupedRefeference",
             "allOf": [
                 {
-                    "description": "A Reference prepresent a list of elements along a explicite dimension.",
                     "defaultSnippets": {
-                        "label": "Reference",
+                        "label": "Default Reference",
                         "properties": [
                             "key",
-                            "model",
-                            "type"
+                            "type:singleValued",
+                            "model"
                         ]
                     },
                     "type": "object",

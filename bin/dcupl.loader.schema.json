@@ -1,5 +1,12 @@
 {
     "description": "The base structure for configuration file contains all resources, evnironments and headers\nThe process options define how this file is processed",
+    "defaultSnippets": {
+        "label": "Default Loader Configuration",
+        "properties": [
+            "applications:json:[{\"key\":\"default\", \"name\":\"My Application\"}]",
+            "resources:json:[{\"url\":\"${baseUrl}/models/my-model.dcupl.json\", \"type\":\"model\"},{\"url\":\"${baseUrl}/data/some-data.json\", \"type\":\"data\", \"model\":\"MyModel\"}]"
+        ]
+    },
     "type": "object",
     "properties": {
         "resources": {
@@ -12,6 +19,16 @@
         "environments": {
             "type": "array",
             "items": {
+                "defaultSnippets": {
+                    "label": "Environment",
+                    "properties": [
+                        "key",
+                        "description",
+                        "variables:array",
+                        "headers:array",
+                        "queryParams:array"
+                    ]
+                },
                 "type": "object",
                 "properties": {
                     "key": {
@@ -25,6 +42,14 @@
                     "variables": {
                         "type": "array",
                         "items": {
+                            "defaultSnippets": {
+                                "label": "Variable",
+                                "properties": [
+                                    "key",
+                                    "description",
+                                    "value:string"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -50,6 +75,15 @@
                     "headers": {
                         "type": "array",
                         "items": {
+                            "defaultSnippets": {
+                                "label": "Header Configuration",
+                                "properties": [
+                                    "key",
+                                    "description",
+                                    "value:string",
+                                    "tags:array"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -92,6 +126,15 @@
                     "queryParams": {
                         "type": "array",
                         "items": {
+                            "defaultSnippets": {
+                                "label": "Query Parameter Configuration",
+                                "properties": [
+                                    "key",
+                                    "description",
+                                    "value:string",
+                                    "tags:array"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -138,50 +181,18 @@
             },
             "title": "environments"
         },
-        "transformers": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "key": {
-                        "type": "string",
-                        "title": "key"
-                    },
-                    "description": {
-                        "type": "string",
-                        "title": "description"
-                    },
-                    "type": {
-                        "$ref": "#/definitions/AppLoaderConfiguration.TransformerType",
-                        "title": "type"
-                    },
-                    "tags": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "title": "tags"
-                    },
-                    "baseUrl": {
-                        "type": "string",
-                        "title": "baseUrl"
-                    },
-                    "fileName": {
-                        "type": "string",
-                        "title": "fileName"
-                    }
-                },
-                "required": [
-                    "key",
-                    "tags",
-                    "type"
-                ]
-            },
-            "title": "transformers"
-        },
         "applications": {
             "type": "array",
             "items": {
+                "defaultSnippets": {
+                    "label": "Application",
+                    "properties": [
+                        "key",
+                        "name",
+                        "description",
+                        "resourceTags:array"
+                    ]
+                },
                 "type": "object",
                 "properties": {
                     "key": {
@@ -196,13 +207,6 @@
                         "type": "string",
                         "title": "description"
                     },
-                    "transformerKeys": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "title": "transformerKeys"
-                    },
                     "resourceTags": {
                         "type": "array",
                         "items": {
@@ -213,6 +217,14 @@
                     "variables": {
                         "type": "array",
                         "items": {
+                            "defaultSnippets": {
+                                "label": "Variable",
+                                "properties": [
+                                    "key",
+                                    "description",
+                                    "value:string"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "key": {
@@ -295,23 +307,38 @@
             "title": "AppLoaderConfiguration.Resource",
             "anyOf": [
                 {
-                    "$ref": "#/definitions/AppLoaderConfiguration.ModelResource"
+                    "$ref": "#/definitions/AppLoaderConfiguration.ModelResource",
+                    "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order."
                 },
                 {
-                    "$ref": "#/definitions/AppLoaderConfiguration.DataResource"
+                    "$ref": "#/definitions/AppLoaderConfiguration.DataResource",
+                    "description": "A data resource contains data for a model."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.TransformerResource",
+                    "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.CustomOperatorResource",
+                    "description": "A query operator resource points to a javascript file that defines a custom query operator."
                 }
             ]
         },
         "AppLoaderConfiguration.ModelResource": {
+            "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order.",
+            "defaultSnippets": {
+                "label": "Model",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-model.dcupl.json",
+                    "type:model",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.ModelResource",
             "allOf": [
                 {
                     "type": "object",
                     "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -319,10 +346,6 @@
                         "type": {
                             "$ref": "#/definitions/ResourceType",
                             "title": "type"
-                        },
-                        "model": {
-                            "type": "string",
-                            "title": "model"
                         },
                         "tags": {
                             "type": "array",
@@ -340,10 +363,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
                         "type": {
                             "type": "string",
                             "const": "model",
@@ -351,8 +370,7 @@
                         }
                     },
                     "required": [
-                        "type",
-                        "url"
+                        "type"
                     ]
                 }
             ]
@@ -361,20 +379,28 @@
             "title": "ResourceType",
             "enum": [
                 "data",
-                "model"
+                "model",
+                "operator",
+                "transformer"
             ],
             "type": "string"
         },
         "AppLoaderConfiguration.DataResource": {
+            "description": "A data resource contains data for a model.",
+            "defaultSnippets": {
+                "label": "Data",
+                "properties": [
+                    "url:string:${baseUrl}/data/my-data.json",
+                    "type:data",
+                    "model",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.DataResource",
             "allOf": [
                 {
                     "type": "object",
                     "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -382,10 +408,6 @@
                         "type": {
                             "$ref": "#/definitions/ResourceType",
                             "title": "type"
-                        },
-                        "model": {
-                            "type": "string",
-                            "title": "model"
                         },
                         "tags": {
                             "type": "array",
@@ -403,10 +425,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
                         "type": {
                             "type": "string",
                             "const": "data",
@@ -461,19 +479,137 @@
                     },
                     "required": [
                         "model",
-                        "type",
-                        "url"
+                        "type"
                     ]
                 }
             ]
         },
-        "AppLoaderConfiguration.TransformerType": {
-            "title": "AppLoaderConfiguration.TransformerType",
-            "enum": [
-                "parsedFileTransformer",
-                "rawFileTransformer"
-            ],
-            "type": "string"
+        "AppLoaderConfiguration.TransformerResource": {
+            "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource.",
+            "defaultSnippets": {
+                "label": "Transformer",
+                "properties": [
+                    "url:string:${baseUrl}/transformers/my-transformer.js",
+                    "type:transformer",
+                    "applyTo:array",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.TransformerResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "transformer",
+                            "title": "type"
+                        },
+                        "applyTo": {
+                            "description": "The tags the transformer applies to",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "applyTo"
+                        },
+                        "transformerType": {
+                            "description": "The transformer type\nrawFileTransformer: The transformer is applied to the raw file\nparsedFileTransformer: The transformer is applied to the parsed file\ndefault: rawFileTransformer",
+                            "enum": [
+                                "parsedFileTransformer",
+                                "rawFileTransformer"
+                            ],
+                            "type": "string",
+                            "title": "transformerType"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.CustomOperatorResource": {
+            "description": "A query operator resource points to a javascript file that defines a custom query operator.",
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.CustomOperatorResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "operator",
+                            "title": "type"
+                        },
+                        "operator": {
+                            "description": "The operator name that can be used in a query",
+                            "type": "string",
+                            "title": "operator"
+                        }
+                    },
+                    "required": [
+                        "operator",
+                        "type"
+                    ]
+                }
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
