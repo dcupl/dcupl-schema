@@ -472,6 +472,10 @@
                                     "type": "boolean",
                                     "title": "autoGenerateProperties"
                                 },
+                                "autoGenerateKey": {
+                                    "type": "boolean",
+                                    "title": "autoGenerateKey"
+                                },
                                 "keyProperty": {
                                     "type": "string",
                                     "title": "keyProperty"
