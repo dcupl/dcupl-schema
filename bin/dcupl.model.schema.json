@@ -786,7 +786,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -851,6 +858,17 @@
                             "type": "string",
                             "title": "expression"
                         },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
                         "filter": {
                             "anyOf": [
                                 {
@@ -897,6 +915,7 @@
                         }
                     },
                     "required": [
+                        "aggregate",
                         "expression",
                         "type"
                     ]
@@ -930,6 +949,82 @@
                 "equalIgnoreCase"
             ],
             "type": "string"
+        },
+        "AggregationOptionsModel": {
+            "title": "AggregationOptionsModel",
+            "type": "object",
+            "properties": {
+                "types": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AggregationType"
+                    },
+                    "title": "types"
+                },
+                "distinctOptions": {
+                    "type": "object",
+                    "properties": {
+                        "limit": {
+                            "type": "number",
+                            "title": "limit"
+                        },
+                        "skipKeys": {
+                            "type": "boolean",
+                            "title": "skipKeys"
+                        }
+                    },
+                    "title": "distinctOptions"
+                },
+                "groupOptions": {
+                    "type": "object",
+                    "properties": {
+                        "limit": {
+                            "type": "number",
+                            "title": "limit"
+                        },
+                        "calculateNotFound": {
+                            "type": "boolean",
+                            "title": "calculateNotFound"
+                        },
+                        "groups": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "from": {
+                                        "title": "from"
+                                    },
+                                    "to": {
+                                        "title": "to"
+                                    },
+                                    "value": {
+                                        "type": "array",
+                                        "items": {},
+                                        "title": "value"
+                                    }
+                                }
+                            },
+                            "title": "groups"
+                        }
+                    },
+                    "title": "groupOptions"
+                },
+                "excludeZeros": {
+                    "type": "boolean",
+                    "title": "excludeZeros"
+                },
+                "excludeUndefineds": {
+                    "type": "boolean",
+                    "title": "excludeUndefineds"
+                },
+                "excludeUnresolved": {
+                    "type": "boolean",
+                    "title": "excludeUnresolved"
+                }
+            },
+            "required": [
+                "types"
+            ]
         },
         "PropertyString": {
             "defaultSnippets": {
@@ -1026,7 +1121,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -1236,7 +1338,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -1301,7 +1410,14 @@
                             "title": "type"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "filter": {
@@ -1429,7 +1545,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -1494,7 +1617,14 @@
                             "title": "type"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "fractionDigits": {
@@ -1626,7 +1756,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -1805,7 +1942,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -1975,7 +2119,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -2037,7 +2188,14 @@
                             "title": "type"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "filter": {
@@ -2146,7 +2304,14 @@
                             "title": "filter"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "derive": {
@@ -2290,7 +2455,14 @@
                             "title": "validity"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "meta": {
@@ -2429,7 +2601,14 @@
                             "title": "validity"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "meta": {
@@ -2590,7 +2769,14 @@
                             "title": "validity"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "meta": {
@@ -2751,7 +2937,14 @@
                             "title": "validity"
                         },
                         "aggregate": {
-                            "type": "boolean",
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "aggregate"
                         },
                         "meta": {
