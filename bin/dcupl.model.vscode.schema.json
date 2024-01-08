@@ -1697,7 +1697,7 @@
                     "label": "Date Property",
                     "body": {
                         "key": "$1",
-                        "type": "datex"
+                        "type": "date"
                     }
                 }
             ],
@@ -2706,11 +2706,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "multiValued",
-                            "title": "type"
-                        },
                         "resolve": {
                             "description": "Resolve a Relationship to an foreign model",
                             "defaultSnippets": [
@@ -2746,8 +2741,7 @@
                         }
                     },
                     "required": [
-                        "resolve",
-                        "type"
+                        "resolve"
                     ]
                 }
             ]

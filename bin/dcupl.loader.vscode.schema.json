@@ -336,6 +336,10 @@
                 {
                     "$ref": "#/definitions/AppLoaderConfiguration.CustomOperatorResource",
                     "description": "A query operator resource points to a javascript file that defines a custom query operator."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.CustomScriptResource",
+                    "description": "A script resource."
                 }
             ]
         },
@@ -399,6 +403,7 @@
                 "data",
                 "model",
                 "operator",
+                "script",
                 "transformer"
             ],
             "type": "string"
@@ -637,6 +642,67 @@
                     },
                     "required": [
                         "operator",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.CustomScriptResource": {
+            "description": "A script resource.",
+            "defaultSnippets": [
+                {
+                    "label": "Query Operator",
+                    "description": "A script resource.",
+                    "body": {
+                        "url": "^\"\\${baseUrl}/models/my-operator.js\"",
+                        "type": "operator",
+                        "operator": "my_operator",
+                        "tags": "^[]"
+                    }
+                }
+            ],
+            "title": "AppLoaderConfiguration.CustomScriptResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "script",
+                            "title": "type"
+                        },
+                        "scriptKey": {
+                            "description": "The operator name that can be used in a query",
+                            "type": "string",
+                            "title": "scriptKey"
+                        }
+                    },
+                    "required": [
+                        "scriptKey",
                         "type"
                     ]
                 }

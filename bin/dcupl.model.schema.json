@@ -1666,7 +1666,7 @@
                 "label": "Date Property",
                 "properties": [
                     "key",
-                    "type:datex"
+                    "type:date"
                 ]
             },
             "title": "PropertyDate",
@@ -2643,11 +2643,6 @@
                 {
                     "type": "object",
                     "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "multiValued",
-                            "title": "type"
-                        },
                         "resolve": {
                             "description": "Resolve a Relationship to an foreign model",
                             "defaultSnippets": {
@@ -2680,8 +2675,7 @@
                         }
                     },
                     "required": [
-                        "resolve",
-                        "type"
+                        "resolve"
                     ]
                 }
             ]
