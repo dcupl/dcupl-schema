@@ -1,0 +1,700 @@
+{
+    "type": "object",
+    "properties": {
+        "key": {
+            "type": "string",
+            "title": "key"
+        },
+        "projectId": {
+            "type": "string",
+            "title": "projectId"
+        },
+        "config": {
+            "type": "object",
+            "properties": {
+                "trigger": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workflow.Trigger"
+                    },
+                    "title": "trigger"
+                },
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workflow.WorkflowStep"
+                    },
+                    "title": "steps"
+                },
+                "catch": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepRequest"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepScript"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGit"
+                        }
+                    ],
+                    "title": "catch"
+                },
+                "response": {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseConfig",
+                    "title": "response"
+                }
+            },
+            "required": [
+                "response",
+                "steps",
+                "trigger"
+            ],
+            "title": "config"
+        },
+        "apiKey": {
+            "type": "string",
+            "title": "apiKey"
+        },
+        "name": {
+            "type": "string",
+            "title": "name"
+        },
+        "description": {
+            "type": "string",
+            "title": "description"
+        },
+        "runtime": {
+            "type": "object",
+            "properties": {
+                "workflowTimeout": {
+                    "type": "number",
+                    "title": "workflowTimeout"
+                },
+                "scriptTimeout": {
+                    "type": "number",
+                    "title": "scriptTimeout"
+                }
+            },
+            "required": [
+                "scriptTimeout",
+                "workflowTimeout"
+            ],
+            "title": "runtime"
+        },
+        "variables": {
+            "$ref": "#/definitions/Record<string,string>",
+            "title": "variables"
+        }
+    },
+    "required": [
+        "config",
+        "key",
+        "projectId"
+    ],
+    "definitions": {
+        "Workflow.Trigger": {
+            "title": "Workflow.Trigger",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Workflow.TriggerRequest"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.TriggerManual"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.TriggerCron"
+                }
+            ]
+        },
+        "Workflow.TriggerRequest": {
+            "title": "Workflow.TriggerRequest",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.TriggerType",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "request",
+                            "title": "type"
+                        },
+                        "path": {
+                            "type": "string",
+                            "title": "path"
+                        },
+                        "methods": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Workflow.TriggerRequestMethod"
+                            },
+                            "title": "methods"
+                        },
+                        "scripts": {
+                            "type": "object",
+                            "properties": {
+                                "success": {
+                                    "type": "string",
+                                    "title": "success"
+                                }
+                            },
+                            "title": "scripts"
+                        }
+                    },
+                    "required": [
+                        "methods",
+                        "path",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.TriggerType": {
+            "description": "Trigger",
+            "title": "Workflow.TriggerType",
+            "enum": [
+                "cron",
+                "manual",
+                "request"
+            ],
+            "type": "string"
+        },
+        "Workflow.TriggerRequestMethod": {
+            "title": "Workflow.TriggerRequestMethod",
+            "enum": [
+                "GET",
+                "POST"
+            ],
+            "type": "string"
+        },
+        "Workflow.TriggerManual": {
+            "title": "Workflow.TriggerManual",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.TriggerType",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "manual",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.TriggerCron": {
+            "title": "Workflow.TriggerCron",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.TriggerType",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "cron",
+                            "title": "type"
+                        },
+                        "cronTime": {
+                            "description": "Cron expression\nsecond         0-59\nminute         0-59\nhour           0-23\nday of month   1-31\nmonth          1-12 (or names, see below)\nday of week    0-7 (0 or 7 is Sunday, or use names)",
+                            "type": "string",
+                            "title": "cronTime"
+                        },
+                        "timezone": {
+                            "type": "string",
+                            "title": "timezone"
+                        }
+                    },
+                    "required": [
+                        "cronTime",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStep": {
+            "title": "Workflow.WorkflowStep",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepRequest"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepScript"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepGit"
+                }
+            ]
+        },
+        "Workflow.WorkflowStepRequest": {
+            "title": "Workflow.WorkflowStepRequest",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "request",
+                            "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "url": {
+                                    "type": "string",
+                                    "title": "url"
+                                },
+                                "method": {
+                                    "$ref": "#/definitions/Workflow.WorkflowRequestMethod",
+                                    "title": "method"
+                                },
+                                "body": {
+                                    "title": "body"
+                                },
+                                "headers": {
+                                    "title": "headers"
+                                }
+                            },
+                            "required": [
+                                "method",
+                                "url"
+                            ],
+                            "title": "options"
+                        },
+                        "scripts": {
+                            "type": "object",
+                            "properties": {
+                                "prepare": {
+                                    "type": "string",
+                                    "title": "prepare"
+                                },
+                                "response": {
+                                    "type": "string",
+                                    "title": "response"
+                                },
+                                "error": {
+                                    "type": "string",
+                                    "title": "error"
+                                },
+                                "success": {
+                                    "type": "string",
+                                    "title": "success"
+                                }
+                            },
+                            "title": "scripts"
+                        }
+                    },
+                    "required": [
+                        "options",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorflowStepType": {
+            "description": "Step",
+            "title": "Workflow.WorflowStepType",
+            "enum": [
+                "git-push",
+                "request",
+                "script"
+            ],
+            "type": "string"
+        },
+        "Workflow.WorkflowRequestMethod": {
+            "title": "Workflow.WorkflowRequestMethod",
+            "enum": [
+                "DELETE",
+                "GET",
+                "POST",
+                "PUT"
+            ],
+            "type": "string"
+        },
+        "Workflow.WorkflowStepScript": {
+            "title": "Workflow.WorkflowStepScript",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "script",
+                            "title": "type"
+                        },
+                        "script": {
+                            "type": "string",
+                            "title": "script"
+                        }
+                    },
+                    "required": [
+                        "script",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepGit": {
+            "title": "Workflow.WorkflowStepGit",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "git-push",
+                            "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "auth": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "title": "user"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "title": "token"
+                                        }
+                                    },
+                                    "required": [
+                                        "token",
+                                        "user"
+                                    ],
+                                    "title": "auth"
+                                },
+                                "repository": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "title": "user"
+                                        },
+                                        "repo": {
+                                            "type": "string",
+                                            "title": "repo"
+                                        }
+                                    },
+                                    "required": [
+                                        "repo",
+                                        "user"
+                                    ],
+                                    "title": "repository"
+                                },
+                                "files": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "title": "path"
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "title": "value"
+                                            },
+                                            "commitMessage": {
+                                                "type": "string",
+                                                "title": "commitMessage"
+                                            }
+                                        },
+                                        "required": [
+                                            "path",
+                                            "value"
+                                        ]
+                                    },
+                                    "title": "files"
+                                }
+                            },
+                            "required": [
+                                "auth",
+                                "files",
+                                "repository"
+                            ],
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "options",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowResponseConfig": {
+            "title": "Workflow.WorkflowResponseConfig",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseScript"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseStatus"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseDebug"
+                }
+            ]
+        },
+        "Workflow.WorkflowResponseScript": {
+            "title": "Workflow.WorkflowResponseScript",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorkflowResponseType",
+                            "title": "type"
+                        },
+                        "headers": {
+                            "title": "headers"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "script",
+                            "title": "type"
+                        },
+                        "script": {
+                            "type": "string",
+                            "title": "script"
+                        }
+                    },
+                    "required": [
+                        "script",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowResponseType": {
+            "description": "Response",
+            "title": "Workflow.WorkflowResponseType",
+            "enum": [
+                "debug",
+                "script",
+                "status"
+            ],
+            "type": "string"
+        },
+        "Workflow.WorkflowResponseStatus": {
+            "title": "Workflow.WorkflowResponseStatus",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorkflowResponseType",
+                            "title": "type"
+                        },
+                        "headers": {
+                            "title": "headers"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "status",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowResponseDebug": {
+            "title": "Workflow.WorkflowResponseDebug",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorkflowResponseType",
+                            "title": "type"
+                        },
+                        "headers": {
+                            "title": "headers"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "debug",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Record<string,string>": {
+            "title": "Record<string,string>",
+            "type": "object"
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
