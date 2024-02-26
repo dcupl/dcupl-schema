@@ -5,10 +5,6 @@
             "type": "string",
             "title": "key"
         },
-        "projectId": {
-            "type": "string",
-            "title": "projectId"
-        },
         "config": {
             "type": "object",
             "properties": {
@@ -32,10 +28,23 @@
                             "$ref": "#/definitions/Workflow.WorkflowStepRequest"
                         },
                         {
-                            "$ref": "#/definitions/Workflow.WorkflowStepScript"
+                            "$ref": "#/definitions/Workflow.WorkflowStepScript",
+                            "description": "Script"
                         },
                         {
-                            "$ref": "#/definitions/Workflow.WorkflowStepGit"
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
                         }
                     ],
                     "title": "catch"
@@ -52,9 +61,24 @@
             ],
             "title": "config"
         },
-        "apiKey": {
-            "type": "string",
-            "title": "apiKey"
+        "auth": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "api-key",
+                    "title": "type"
+                },
+                "value": {
+                    "type": "string",
+                    "title": "value"
+                }
+            },
+            "required": [
+                "type",
+                "value"
+            ],
+            "title": "auth"
         },
         "name": {
             "type": "string",
@@ -64,24 +88,6 @@
             "type": "string",
             "title": "description"
         },
-        "runtime": {
-            "type": "object",
-            "properties": {
-                "workflowTimeout": {
-                    "type": "number",
-                    "title": "workflowTimeout"
-                },
-                "scriptTimeout": {
-                    "type": "number",
-                    "title": "scriptTimeout"
-                }
-            },
-            "required": [
-                "scriptTimeout",
-                "workflowTimeout"
-            ],
-            "title": "runtime"
-        },
         "variables": {
             "$ref": "#/definitions/Record<string,string>",
             "title": "variables"
@@ -89,8 +95,7 @@
     },
     "required": [
         "config",
-        "key",
-        "projectId"
+        "key"
     ],
     "definitions": {
         "Workflow.Trigger": {
@@ -270,10 +275,23 @@
                     "$ref": "#/definitions/Workflow.WorkflowStepRequest"
                 },
                 {
-                    "$ref": "#/definitions/Workflow.WorkflowStepScript"
+                    "$ref": "#/definitions/Workflow.WorkflowStepScript",
+                    "description": "Script"
                 },
                 {
-                    "$ref": "#/definitions/Workflow.WorkflowStepGit"
+                    "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
+                },
+                {
+                    "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
                 }
             ]
         },
@@ -332,6 +350,7 @@
                                     "title": "body"
                                 },
                                 "headers": {
+                                    "$ref": "#/definitions/Record<string,string>",
                                     "title": "headers"
                                 }
                             },
@@ -344,14 +363,6 @@
                         "scripts": {
                             "type": "object",
                             "properties": {
-                                "prepare": {
-                                    "type": "string",
-                                    "title": "prepare"
-                                },
-                                "response": {
-                                    "type": "string",
-                                    "title": "response"
-                                },
                                 "error": {
                                     "type": "string",
                                     "title": "error"
@@ -375,6 +386,10 @@
             "description": "Step",
             "title": "Workflow.WorflowStepType",
             "enum": [
+                "dcupl-instance",
+                "files-read",
+                "files-write",
+                "git-pull",
                 "git-push",
                 "request",
                 "script"
@@ -382,6 +397,7 @@
             "type": "string"
         },
         "Workflow.WorkflowRequestMethod": {
+            "description": "Request",
             "title": "Workflow.WorkflowRequestMethod",
             "enum": [
                 "DELETE",
@@ -391,7 +407,12 @@
             ],
             "type": "string"
         },
+        "Record<string,string>": {
+            "title": "Record<string,string>",
+            "type": "object"
+        },
         "Workflow.WorkflowStepScript": {
+            "description": "Script",
             "title": "Workflow.WorkflowStepScript",
             "allOf": [
                 {
@@ -443,8 +464,8 @@
                 }
             ]
         },
-        "Workflow.WorkflowStepGit": {
-            "title": "Workflow.WorkflowStepGit",
+        "Workflow.WorkflowStepGitPush": {
+            "title": "Workflow.WorkflowStepGitPush",
             "allOf": [
                 {
                     "type": "object",
@@ -514,6 +535,11 @@
                                         "repo": {
                                             "type": "string",
                                             "title": "repo"
+                                        },
+                                        "branch": {
+                                            "description": "default: main",
+                                            "type": "string",
+                                            "title": "branch"
                                         }
                                     },
                                     "required": [
@@ -525,24 +551,25 @@
                                 "files": {
                                     "type": "array",
                                     "items": {
+                                        "description": "Git Push",
                                         "type": "object",
                                         "properties": {
                                             "path": {
                                                 "type": "string",
                                                 "title": "path"
                                             },
-                                            "value": {
+                                            "content": {
                                                 "type": "string",
-                                                "title": "value"
+                                                "title": "content"
                                             },
-                                            "commitMessage": {
+                                            "message": {
                                                 "type": "string",
-                                                "title": "commitMessage"
+                                                "title": "message"
                                             }
                                         },
                                         "required": [
-                                            "path",
-                                            "value"
+                                            "content",
+                                            "path"
                                         ]
                                     },
                                     "title": "files"
@@ -552,6 +579,3779 @@
                                 "auth",
                                 "files",
                                 "repository"
+                            ],
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "options",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepGitPull": {
+            "title": "Workflow.WorkflowStepGitPull",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "git-pull",
+                            "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "auth": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "title": "user"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "title": "token"
+                                        }
+                                    },
+                                    "required": [
+                                        "token",
+                                        "user"
+                                    ],
+                                    "title": "auth"
+                                },
+                                "repository": {
+                                    "type": "object",
+                                    "properties": {
+                                        "user": {
+                                            "type": "string",
+                                            "title": "user"
+                                        },
+                                        "repo": {
+                                            "type": "string",
+                                            "title": "repo"
+                                        },
+                                        "branch": {
+                                            "description": "default: main",
+                                            "type": "string",
+                                            "title": "branch"
+                                        }
+                                    },
+                                    "required": [
+                                        "repo",
+                                        "user"
+                                    ],
+                                    "title": "repository"
+                                },
+                                "files": {
+                                    "type": "array",
+                                    "items": {
+                                        "description": "Git Pull",
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "path": {
+                                                "type": "string",
+                                                "title": "path"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "path"
+                                        ]
+                                    },
+                                    "title": "files"
+                                }
+                            },
+                            "required": [
+                                "auth",
+                                "files",
+                                "repository"
+                            ],
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "options",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepDcuplInstance": {
+            "title": "Workflow.WorkflowStepDcuplInstance",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "dcupl-instance",
+                            "title": "type"
+                        },
+                        "apiKey": {
+                            "type": "string",
+                            "title": "apiKey"
+                        },
+                        "processOptions": {
+                            "type": "object",
+                            "properties": {
+                                "applicationKey": {
+                                    "type": "string",
+                                    "title": "applicationKey"
+                                },
+                                "environmentKeys": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "title": "environmentKeys"
+                                },
+                                "resourceTags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "title": "resourceTags"
+                                },
+                                "variables": {
+                                    "type": "array",
+                                    "items": {
+                                        "defaultSnippets": {
+                                            "label": "Variable",
+                                            "properties": [
+                                                "key",
+                                                "description",
+                                                "value:string"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "title": "description"
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "title": "value"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "value"
+                                        ]
+                                    },
+                                    "title": "variables"
+                                },
+                                "options": {
+                                    "type": "object",
+                                    "properties": {
+                                        "defaultDataContainerUpdateType": {
+                                            "enum": [
+                                                "remove",
+                                                "set",
+                                                "update",
+                                                "upsert"
+                                            ],
+                                            "type": "string",
+                                            "title": "defaultDataContainerUpdateType"
+                                        },
+                                        "csvParserOptions": {
+                                            "type": "object",
+                                            "properties": {
+                                                "delimiter": {
+                                                    "type": "string",
+                                                    "title": "delimiter"
+                                                },
+                                                "quoteChar": {
+                                                    "type": "string",
+                                                    "title": "quoteChar"
+                                                },
+                                                "escapeChar": {
+                                                    "type": "string",
+                                                    "title": "escapeChar"
+                                                }
+                                            },
+                                            "title": "csvParserOptions"
+                                        },
+                                        "missingModelHandling": {
+                                            "type": "object",
+                                            "properties": {
+                                                "autoGenerateProperties": {
+                                                    "type": "boolean",
+                                                    "title": "autoGenerateProperties"
+                                                }
+                                            },
+                                            "title": "missingModelHandling"
+                                        }
+                                    },
+                                    "title": "options"
+                                }
+                            },
+                            "title": "processOptions"
+                        },
+                        "fetchOptions": {
+                            "type": "object",
+                            "properties": {
+                                "baseUrl": {
+                                    "type": "string",
+                                    "title": "baseUrl"
+                                },
+                                "loaderFileName": {
+                                    "type": "string",
+                                    "title": "loaderFileName"
+                                },
+                                "headers": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "value": {
+                                                "type": "string",
+                                                "title": "value"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "value"
+                                        ]
+                                    },
+                                    "title": "headers"
+                                },
+                                "skipApply": {
+                                    "type": "boolean",
+                                    "title": "skipApply"
+                                }
+                            },
+                            "title": "fetchOptions"
+                        },
+                        "dataContainers": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstanceDataContainer"
+                            },
+                            "title": "dataContainers"
+                        },
+                        "models": {
+                            "type": "array",
+                            "items": {
+                                "description": "A model describes a real world object and hols attributes.",
+                                "defaultSnippets": {
+                                    "label": "Model Definition",
+                                    "properties": [
+                                        "key:string:myModel",
+                                        "properties:json:[{\"key\":\"my_property\", \"type\": \"string\"}]",
+                                        "references:array"
+                                    ]
+                                },
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "description": "The key is an unique identifier overall models in the application.",
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "title": "key"
+                                    },
+                                    "properties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/Property"
+                                        },
+                                        "title": "properties"
+                                    },
+                                    "references": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/Reference"
+                                        },
+                                        "title": "references"
+                                    },
+                                    "data": {
+                                        "type": "array",
+                                        "items": {},
+                                        "title": "data"
+                                    },
+                                    "supportsAutoCreation": {
+                                        "type": "boolean",
+                                        "title": "supportsAutoCreation"
+                                    },
+                                    "autoGenerateKey": {
+                                        "type": "boolean",
+                                        "title": "autoGenerateKey"
+                                    },
+                                    "autoGenerateProperties": {
+                                        "type": "boolean",
+                                        "title": "autoGenerateProperties"
+                                    },
+                                    "keyProperty": {
+                                        "type": "string",
+                                        "title": "keyProperty"
+                                    },
+                                    "valueMappings": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "attributes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "title": "attributes"
+                                                },
+                                                "values": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "type": "string"
+                                                                },
+                                                                "title": "from"
+                                                            },
+                                                            "to": {
+                                                                "type": "string",
+                                                                "title": "to"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "from",
+                                                            "to"
+                                                        ]
+                                                    },
+                                                    "title": "values"
+                                                }
+                                            },
+                                            "required": [
+                                                "attributes",
+                                                "values"
+                                            ]
+                                        },
+                                        "title": "valueMappings"
+                                    },
+                                    "meta": {
+                                        "type": "object",
+                                        "additionalProperties": {},
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "title": "name"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "title": "description"
+                                            }
+                                        },
+                                        "required": [
+                                            "name"
+                                        ],
+                                        "title": "meta"
+                                    }
+                                },
+                                "required": [
+                                    "key"
+                                ]
+                            },
+                            "title": "models"
+                        },
+                        "loaderConfig": {
+                            "description": "The base structure for configuration file contains all resources, evnironments and headers\nThe process options define how this file is processed",
+                            "defaultSnippets": {
+                                "label": "Default Loader Configuration",
+                                "properties": [
+                                    "applications:json:[{\"key\":\"default\", \"name\":\"My Application\"}]",
+                                    "resources:json:[{\"url\":\"${baseUrl}/models/my-model.dcupl.json\", \"type\":\"model\"},{\"url\":\"${baseUrl}/data/some-data.json\", \"type\":\"data\", \"model\":\"MyModel\"}]"
+                                ]
+                            },
+                            "type": "object",
+                            "properties": {
+                                "resources": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/AppLoaderConfiguration.Resource"
+                                    },
+                                    "title": "resources"
+                                },
+                                "environments": {
+                                    "type": "array",
+                                    "items": {
+                                        "defaultSnippets": {
+                                            "label": "Environment",
+                                            "properties": [
+                                                "key",
+                                                "description",
+                                                "variables:array",
+                                                "headers:array",
+                                                "queryParams:array"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "title": "description"
+                                            },
+                                            "variables": {
+                                                "type": "array",
+                                                "items": {
+                                                    "defaultSnippets": {
+                                                        "label": "Variable",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "title": "description"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "title": "value"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "key",
+                                                        "value"
+                                                    ]
+                                                },
+                                                "title": "variables"
+                                            },
+                                            "headers": {
+                                                "type": "array",
+                                                "items": {
+                                                    "defaultSnippets": {
+                                                        "label": "Header Configuration",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string",
+                                                            "tags:array"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "title": "description"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "title": "value"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "title": "tags"
+                                                        },
+                                                        "condition": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "applyIfVariableHasValue": {
+                                                                    "type": "string",
+                                                                    "title": "applyIfVariableHasValue"
+                                                                }
+                                                            },
+                                                            "title": "condition"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "key",
+                                                        "value"
+                                                    ]
+                                                },
+                                                "title": "headers"
+                                            },
+                                            "queryParams": {
+                                                "type": "array",
+                                                "items": {
+                                                    "defaultSnippets": {
+                                                        "label": "Query Parameter Configuration",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string",
+                                                            "tags:array"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "title": "description"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "title": "value"
+                                                        },
+                                                        "tags": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "string"
+                                                            },
+                                                            "title": "tags"
+                                                        },
+                                                        "condition": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "applyIfVariableHasValue": {
+                                                                    "type": "string",
+                                                                    "title": "applyIfVariableHasValue"
+                                                                }
+                                                            },
+                                                            "title": "condition"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "key",
+                                                        "value"
+                                                    ]
+                                                },
+                                                "title": "queryParams"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    },
+                                    "title": "environments"
+                                },
+                                "applications": {
+                                    "type": "array",
+                                    "items": {
+                                        "defaultSnippets": {
+                                            "label": "Application",
+                                            "properties": [
+                                                "key",
+                                                "name",
+                                                "description",
+                                                "resourceTags:array"
+                                            ]
+                                        },
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "title": "name"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "title": "description"
+                                            },
+                                            "resourceTags": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "title": "resourceTags"
+                                            },
+                                            "variables": {
+                                                "type": "array",
+                                                "items": {
+                                                    "defaultSnippets": {
+                                                        "label": "Variable",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string"
+                                                        ]
+                                                    },
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "key": {
+                                                            "type": "string",
+                                                            "title": "key"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "title": "description"
+                                                        },
+                                                        "value": {
+                                                            "type": "string",
+                                                            "title": "value"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "key",
+                                                        "value"
+                                                    ]
+                                                },
+                                                "title": "variables"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    },
+                                    "title": "applications"
+                                },
+                                "options": {
+                                    "type": "object",
+                                    "properties": {
+                                        "defaultDataContainerUpdateType": {
+                                            "enum": [
+                                                "remove",
+                                                "set",
+                                                "update",
+                                                "upsert"
+                                            ],
+                                            "type": "string",
+                                            "title": "defaultDataContainerUpdateType"
+                                        },
+                                        "csvParserOptions": {
+                                            "type": "object",
+                                            "properties": {
+                                                "delimiter": {
+                                                    "type": "string",
+                                                    "title": "delimiter"
+                                                },
+                                                "quoteChar": {
+                                                    "type": "string",
+                                                    "title": "quoteChar"
+                                                },
+                                                "escapeChar": {
+                                                    "type": "string",
+                                                    "title": "escapeChar"
+                                                }
+                                            },
+                                            "title": "csvParserOptions"
+                                        },
+                                        "missingModelHandling": {
+                                            "type": "object",
+                                            "properties": {
+                                                "autoGenerateProperties": {
+                                                    "type": "boolean",
+                                                    "title": "autoGenerateProperties"
+                                                }
+                                            },
+                                            "title": "missingModelHandling"
+                                        }
+                                    },
+                                    "title": "options"
+                                }
+                            },
+                            "required": [
+                                "resources"
+                            ],
+                            "title": "loaderConfig"
+                        },
+                        "scriptName": {
+                            "type": "string",
+                            "title": "scriptName"
+                        },
+                        "script": {
+                            "type": "string",
+                            "title": "script"
+                        }
+                    },
+                    "required": [
+                        "apiKey",
+                        "processOptions",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepDcuplInstanceDataContainer": {
+            "description": "Dcupl Instance",
+            "title": "Workflow.WorkflowStepDcuplInstanceDataContainer",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Omit<DataContainer<ListItem,string>,\"data\">"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "data": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "additionalProperties": {},
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "title": "data"
+                        }
+                    },
+                    "required": [
+                        "data"
+                    ]
+                }
+            ]
+        },
+        "Omit<DataContainer<ListItem,string>,\"data\">": {
+            "title": "Omit<DataContainer<ListItem,string>,\"data\">",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "enum": [
+                        "remove",
+                        "set",
+                        "update",
+                        "upsert"
+                    ],
+                    "type": "string",
+                    "title": "type"
+                },
+                "model": {
+                    "type": "string",
+                    "title": "model"
+                },
+                "keyProperty": {
+                    "type": "string",
+                    "title": "keyProperty"
+                },
+                "autoGenerateKey": {
+                    "type": "boolean",
+                    "title": "autoGenerateKey"
+                },
+                "autoGenerateProperties": {
+                    "type": "boolean",
+                    "title": "autoGenerateProperties"
+                }
+            },
+            "required": [
+                "model"
+            ]
+        },
+        "Property": {
+            "title": "Property",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/PropertyExpression"
+                },
+                {
+                    "$ref": "#/definitions/PropertyString"
+                },
+                {
+                    "$ref": "#/definitions/PropertyInt"
+                },
+                {
+                    "$ref": "#/definitions/PropertyFloat"
+                },
+                {
+                    "$ref": "#/definitions/PropertyDate"
+                },
+                {
+                    "$ref": "#/definitions/PropertyJson"
+                },
+                {
+                    "$ref": "#/definitions/PropertyBoolean"
+                },
+                {
+                    "$ref": "#/definitions/PropertyAny"
+                }
+            ]
+        },
+        "PropertyExpression": {
+            "defaultSnippets": {
+                "label": "Dynamic Expression Property",
+                "properties": [
+                    "key",
+                    "type:string:string",
+                    "expression:string:${some_prop}_${another_prop}"
+                ]
+            },
+            "title": "PropertyExpression",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "string",
+                            "title": "type"
+                        },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "aggregate",
+                        "expression",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyType": {
+            "title": "PropertyType",
+            "enum": [
+                "Array<date>",
+                "Array<float>",
+                "Array<int>",
+                "Array<string>",
+                "any",
+                "boolean",
+                "date",
+                "float",
+                "int",
+                "json",
+                "string"
+            ],
+            "type": "string"
+        },
+        "FilterComparisonType": {
+            "title": "FilterComparisonType",
+            "enum": [
+                "contains",
+                "containsIgnoreCase",
+                "containsIgnoreCaseAndWhitespace",
+                "equal",
+                "equalIgnoreCase"
+            ],
+            "type": "string"
+        },
+        "AggregationOptionsModel": {
+            "title": "AggregationOptionsModel",
+            "type": "object",
+            "properties": {
+                "types": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AggregationType"
+                    },
+                    "title": "types"
+                },
+                "distinctOptions": {
+                    "type": "object",
+                    "properties": {
+                        "limit": {
+                            "type": "number",
+                            "title": "limit"
+                        },
+                        "skipKeys": {
+                            "type": "boolean",
+                            "title": "skipKeys"
+                        }
+                    },
+                    "title": "distinctOptions"
+                },
+                "groupOptions": {
+                    "type": "object",
+                    "properties": {
+                        "limit": {
+                            "type": "number",
+                            "title": "limit"
+                        },
+                        "calculateNotFound": {
+                            "type": "boolean",
+                            "title": "calculateNotFound"
+                        },
+                        "groups": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "from": {
+                                        "title": "from"
+                                    },
+                                    "to": {
+                                        "title": "to"
+                                    },
+                                    "value": {
+                                        "type": "array",
+                                        "items": {},
+                                        "title": "value"
+                                    }
+                                }
+                            },
+                            "title": "groups"
+                        }
+                    },
+                    "title": "groupOptions"
+                },
+                "excludeZeros": {
+                    "type": "boolean",
+                    "title": "excludeZeros"
+                },
+                "excludeUndefineds": {
+                    "type": "boolean",
+                    "title": "excludeUndefineds"
+                },
+                "excludeUnresolved": {
+                    "type": "boolean",
+                    "title": "excludeUnresolved"
+                }
+            },
+            "required": [
+                "types"
+            ]
+        },
+        "AggregationType": {
+            "title": "AggregationType",
+            "enum": [
+                "avg",
+                "count",
+                "distinct",
+                "group",
+                "max",
+                "min",
+                "sum"
+            ],
+            "type": "string"
+        },
+        "PropertyString": {
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:string"
+                ]
+            },
+            "title": "PropertyString",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<string>",
+                                "string"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyInt": {
+            "defaultSnippets": {
+                "label": "Int Property",
+                "properties": [
+                    "key",
+                    "type:int"
+                ]
+            },
+            "title": "PropertyInt",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<int>",
+                                "int"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyFloat": {
+            "defaultSnippets": {
+                "label": "Float Property",
+                "properties": [
+                    "key",
+                    "type:float"
+                ]
+            },
+            "title": "PropertyFloat",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<float>",
+                                "float"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "fractionDigits": {
+                            "type": "number",
+                            "title": "fractionDigits"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyDate": {
+            "defaultSnippets": {
+                "label": "Date Property",
+                "properties": [
+                    "key",
+                    "type:date"
+                ]
+            },
+            "title": "PropertyDate",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<date>",
+                                "date"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        },
+                        "inputFormat": {
+                            "description": "Example: 'yyyy-MM-dd' | 'dd.MM.yyyy' | ...",
+                            "type": "string",
+                            "title": "inputFormat"
+                        },
+                        "UTC": {
+                            "type": "boolean",
+                            "title": "UTC"
+                        },
+                        "filter": {
+                            "type": "boolean",
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyJson": {
+            "defaultSnippets": {
+                "label": "Json Property",
+                "properties": [
+                    "key",
+                    "type:string:json"
+                ]
+            },
+            "title": "PropertyJson",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<json>",
+                                "json"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        },
+                        "filter": {
+                            "type": "boolean",
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyBoolean": {
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:boolean"
+                ]
+            },
+            "title": "PropertyBoolean",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "boolean",
+                            "title": "type"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "filter": {
+                            "type": "boolean",
+                            "title": "filter"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "PropertyAny": {
+            "defaultSnippets": {
+                "label": "Any Property",
+                "properties": [
+                    "key",
+                    "type:any"
+                ]
+            },
+            "title": "PropertyAny",
+            "allOf": [
+                {
+                    "description": "A property is a quality or characteristic belonging an object.",
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier overall properties in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/PropertyType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "comparisonType": {
+                                            "enum": [
+                                                "contains",
+                                                "containsIgnoreCase",
+                                                "containsIgnoreCaseAndWhitespace",
+                                                "equal",
+                                                "equalIgnoreCase"
+                                            ],
+                                            "type": "string",
+                                            "title": "comparisonType"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "comparisonType": {
+                                                "$ref": "#/definitions/FilterComparisonType",
+                                                "title": "comparisonType"
+                                            }
+                                        },
+                                        "required": [
+                                            "comparisonType",
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            }
+                                        },
+                                        "required": [
+                                            "key"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "Array<any>",
+                                "any"
+                            ],
+                            "type": "string",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Reference": {
+            "title": "Reference",
+            "anyOf": [
+                {
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier for all reference in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "model": {
+                            "description": "The Model this reference is pointing to.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "description": "Filtering the values of the reference with or without counting",
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
+                            "anyOf": [
+                                {
+                                    "description": "Facet calculation is disabled by default",
+                                    "type": "object",
+                                    "properties": {
+                                        "calculateFacets": {
+                                            "type": "boolean",
+                                            "title": "calculateFacets"
+                                        },
+                                        "excludeZeros": {
+                                            "type": "boolean",
+                                            "title": "excludeZeros"
+                                        },
+                                        "excludeUndefineds": {
+                                            "type": "boolean",
+                                            "title": "excludeUndefineds"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "model",
+                        "type"
+                    ]
+                },
+                {
+                    "$ref": "#/definitions/ResolvedReference",
+                    "description": "Resolves a Reference from a foreign model"
+                },
+                {
+                    "$ref": "#/definitions/DerivedReference",
+                    "description": "Derives a References for a specific value from an other model"
+                },
+                {
+                    "$ref": "#/definitions/GroupedRefeference",
+                    "description": "Groups a Reference by a specific value from an other model"
+                }
+            ]
+        },
+        "ReferenceType": {
+            "description": "must be singleValued or  multiValued\nsingleValued contains only one key to an object\nmultiValued contains multiple key of objects",
+            "minLength": 1,
+            "title": "ReferenceType",
+            "enum": [
+                "multiValued",
+                "singleValued"
+            ],
+            "type": "string"
+        },
+        "ResolvedReference": {
+            "description": "Resolves a Reference from a foreign model",
+            "defaultSnippets": {
+                "label": "Resolved Reference",
+                "properties": [
+                    "key",
+                    "type:multiValued",
+                    "model",
+                    "resolve:json:{\"reference\":\"\", \"model\":\"\" }"
+                ]
+            },
+            "title": "ResolvedReference",
+            "allOf": [
+                {
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier for all reference in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "model": {
+                            "description": "The Model this reference is pointing to.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "description": "Filtering the values of the reference with or without counting",
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
+                            "anyOf": [
+                                {
+                                    "description": "Facet calculation is disabled by default",
+                                    "type": "object",
+                                    "properties": {
+                                        "calculateFacets": {
+                                            "type": "boolean",
+                                            "title": "calculateFacets"
+                                        },
+                                        "excludeZeros": {
+                                            "type": "boolean",
+                                            "title": "excludeZeros"
+                                        },
+                                        "excludeUndefineds": {
+                                            "type": "boolean",
+                                            "title": "excludeUndefineds"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "model",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "resolve": {
+                            "description": "Resolve a Relationship to an foreign model",
+                            "defaultSnippets": {
+                                "label": "Resolve Relationship",
+                                "properties": [
+                                    "reference",
+                                    "model"
+                                ]
+                            },
+                            "type": "object",
+                            "properties": {
+                                "reference": {
+                                    "description": "The reference on the foreign object which should be used for resolve the relation.",
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "title": "reference"
+                                },
+                                "model": {
+                                    "description": "The model of the foreign object reference.",
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "title": "model"
+                                }
+                            },
+                            "required": [
+                                "model",
+                                "reference"
+                            ],
+                            "title": "resolve"
+                        }
+                    },
+                    "required": [
+                        "resolve"
+                    ]
+                }
+            ]
+        },
+        "DerivedReference": {
+            "description": "Derives a References for a specific value from an other model",
+            "defaultSnippets": {
+                "label": "Derived Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "derive:json:{\"localReference\":\"\", \"remoteReference\":\"\"}"
+                ]
+            },
+            "title": "DerivedReference",
+            "allOf": [
+                {
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier for all reference in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "model": {
+                            "description": "The Model this reference is pointing to.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "description": "Filtering the values of the reference with or without counting",
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
+                            "anyOf": [
+                                {
+                                    "description": "Facet calculation is disabled by default",
+                                    "type": "object",
+                                    "properties": {
+                                        "calculateFacets": {
+                                            "type": "boolean",
+                                            "title": "calculateFacets"
+                                        },
+                                        "excludeZeros": {
+                                            "type": "boolean",
+                                            "title": "excludeZeros"
+                                        },
+                                        "excludeUndefineds": {
+                                            "type": "boolean",
+                                            "title": "excludeUndefineds"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "model",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "derive": {
+                            "description": "Derive a specific value from an other object/entity",
+                            "defaultSnippets": {
+                                "label": "Derive Values",
+                                "properties": [
+                                    "localReference",
+                                    "remoteReference"
+                                ]
+                            },
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "description": "The reference on the foreign object which should be used for resolve the relation.",
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteReference": {
+                                    "description": "The reference on the foreign object which should be derived.",
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "title": "remoteReference"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteReference"
+                            ],
+                            "title": "derive"
+                        }
+                    },
+                    "required": [
+                        "derive",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "GroupedRefeference": {
+            "description": "Groups a Reference by a specific value from an other model",
+            "defaultSnippets": {
+                "label": "Grouped Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "groupBy:json:{\"reference\":\"\" }",
+                    "includeSelfInGroup:boolean"
+                ]
+            },
+            "title": "GroupedRefeference",
+            "allOf": [
+                {
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "description": "A key is an unique identifier for all reference in this model.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "model": {
+                            "description": "The Model this reference is pointing to.",
+                            "minLength": 1,
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "origin": {
+                            "type": "string",
+                            "title": "origin"
+                        },
+                        "filter": {
+                            "description": "Filtering the values of the reference with or without counting",
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
+                            "anyOf": [
+                                {
+                                    "description": "Facet calculation is disabled by default",
+                                    "type": "object",
+                                    "properties": {
+                                        "calculateFacets": {
+                                            "type": "boolean",
+                                            "title": "calculateFacets"
+                                        },
+                                        "excludeZeros": {
+                                            "type": "boolean",
+                                            "title": "excludeZeros"
+                                        },
+                                        "excludeUndefineds": {
+                                            "type": "boolean",
+                                            "title": "excludeUndefineds"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "filter"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "aggregate": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#/definitions/AggregationOptionsModel"
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "aggregate"
+                        },
+                        "meta": {
+                            "type": "object",
+                            "additionalProperties": {},
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "title": "name"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "title": "description"
+                                }
+                            },
+                            "required": [
+                                "name"
+                            ],
+                            "title": "meta"
+                        },
+                        "index": {
+                            "type": "boolean",
+                            "title": "index"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "model",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
+                        "groupBy": {
+                            "description": "Group by a specific reference",
+                            "defaultSnippets": {
+                                "label": "Grouped Values",
+                                "properties": [
+                                    "reference",
+                                    "includeSelfInGroup"
+                                ]
+                            },
+                            "type": "object",
+                            "properties": {
+                                "reference": {
+                                    "description": "The reference that groups are generated from",
+                                    "minLength": 1,
+                                    "type": "string",
+                                    "title": "reference"
+                                },
+                                "includeSelfInGroup": {
+                                    "type": "boolean",
+                                    "title": "includeSelfInGroup"
+                                }
+                            },
+                            "required": [
+                                "reference"
+                            ],
+                            "title": "groupBy"
+                        }
+                    },
+                    "required": [
+                        "groupBy",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.Resource": {
+            "title": "AppLoaderConfiguration.Resource",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.ModelResource",
+                    "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.DataResource",
+                    "description": "A data resource contains data for a model."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.TransformerResource",
+                    "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.CustomOperatorResource",
+                    "description": "A query operator resource points to a javascript file that defines a custom query operator."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.CustomScriptResource",
+                    "description": "A script resource."
+                }
+            ]
+        },
+        "AppLoaderConfiguration.ModelResource": {
+            "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order.",
+            "defaultSnippets": {
+                "label": "Model",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-model.dcupl.json",
+                    "type:model",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.ModelResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "model",
+                            "title": "type"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "ResourceType": {
+            "title": "ResourceType",
+            "enum": [
+                "data",
+                "model",
+                "operator",
+                "script",
+                "transformer"
+            ],
+            "type": "string"
+        },
+        "AppLoaderConfiguration.DataResource": {
+            "description": "A data resource contains data for a model.",
+            "defaultSnippets": {
+                "label": "Data",
+                "properties": [
+                    "url:string:${baseUrl}/data/my-data.json",
+                    "type:data",
+                    "model",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.DataResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "data",
+                            "title": "type"
+                        },
+                        "model": {
+                            "type": "string",
+                            "title": "model"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "updateType": {
+                                    "enum": [
+                                        "remove",
+                                        "set",
+                                        "update",
+                                        "upsert"
+                                    ],
+                                    "type": "string",
+                                    "title": "updateType"
+                                },
+                                "autoGenerateProperties": {
+                                    "type": "boolean",
+                                    "title": "autoGenerateProperties"
+                                },
+                                "autoGenerateKey": {
+                                    "type": "boolean",
+                                    "title": "autoGenerateKey"
+                                },
+                                "keyProperty": {
+                                    "type": "string",
+                                    "title": "keyProperty"
+                                },
+                                "csvParserOptions": {
+                                    "type": "object",
+                                    "properties": {
+                                        "delimiter": {
+                                            "type": "string",
+                                            "title": "delimiter"
+                                        },
+                                        "quoteChar": {
+                                            "type": "string",
+                                            "title": "quoteChar"
+                                        },
+                                        "escapeChar": {
+                                            "type": "string",
+                                            "title": "escapeChar"
+                                        }
+                                    },
+                                    "title": "csvParserOptions"
+                                }
+                            },
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "model",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.TransformerResource": {
+            "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource.",
+            "defaultSnippets": {
+                "label": "Transformer",
+                "properties": [
+                    "url:string:${baseUrl}/transformers/my-transformer.js",
+                    "type:transformer",
+                    "applyTo:array",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.TransformerResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "transformer",
+                            "title": "type"
+                        },
+                        "applyTo": {
+                            "description": "The tags the transformer applies to",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "applyTo"
+                        },
+                        "transformerType": {
+                            "description": "The transformer type\nrawFileTransformer: The transformer is applied to the raw file\nparsedFileTransformer: The transformer is applied to the parsed file\ndefault: rawFileTransformer",
+                            "enum": [
+                                "parsedFileTransformer",
+                                "rawFileTransformer"
+                            ],
+                            "type": "string",
+                            "title": "transformerType"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.CustomOperatorResource": {
+            "description": "A query operator resource points to a javascript file that defines a custom query operator.",
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.CustomOperatorResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "operator",
+                            "title": "type"
+                        },
+                        "operator": {
+                            "description": "The operator name that can be used in a query",
+                            "type": "string",
+                            "title": "operator"
+                        }
+                    },
+                    "required": [
+                        "operator",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "AppLoaderConfiguration.CustomScriptResource": {
+            "description": "A script resource.",
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.CustomScriptResource",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "url": {
+                            "type": "string",
+                            "title": "url"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/ResourceType",
+                            "title": "type"
+                        },
+                        "tags": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "title": "tags"
+                        }
+                    },
+                    "required": [
+                        "type",
+                        "url"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "script",
+                            "title": "type"
+                        },
+                        "scriptKey": {
+                            "description": "The operator name that can be used in a query",
+                            "type": "string",
+                            "title": "scriptKey"
+                        }
+                    },
+                    "required": [
+                        "scriptKey",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepFilesWrite": {
+            "title": "Workflow.WorkflowStepFilesWrite",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "files-write",
+                            "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "apiKey": {
+                                    "type": "string",
+                                    "title": "apiKey"
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "title": "version"
+                                },
+                                "files": {
+                                    "type": "array",
+                                    "items": {
+                                        "description": "Files Write",
+                                        "type": "object",
+                                        "properties": {
+                                            "path": {
+                                                "type": "string",
+                                                "title": "path"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "title": "content"
+                                            }
+                                        },
+                                        "required": [
+                                            "content",
+                                            "path"
+                                        ]
+                                    },
+                                    "title": "files"
+                                }
+                            },
+                            "required": [
+                                "apiKey",
+                                "files",
+                                "version"
+                            ],
+                            "title": "options"
+                        }
+                    },
+                    "required": [
+                        "options",
+                        "type"
+                    ]
+                }
+            ]
+        },
+        "Workflow.WorkflowStepFilesRead": {
+            "title": "Workflow.WorkflowStepFilesRead",
+            "allOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
+                        "type": {
+                            "$ref": "#/definitions/Workflow.WorflowStepType",
+                            "title": "type"
+                        },
+                        "name": {
+                            "type": "string",
+                            "title": "name"
+                        },
+                        "description": {
+                            "type": "string",
+                            "title": "description"
+                        },
+                        "skip": {
+                            "type": "boolean",
+                            "title": "skip"
+                        }
+                    },
+                    "required": [
+                        "key",
+                        "type"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "const": "files-read",
+                            "title": "type"
+                        },
+                        "options": {
+                            "type": "object",
+                            "properties": {
+                                "apiKey": {
+                                    "type": "string",
+                                    "title": "apiKey"
+                                },
+                                "version": {
+                                    "type": "string",
+                                    "title": "version"
+                                },
+                                "files": {
+                                    "type": "array",
+                                    "items": {
+                                        "description": "Files Read",
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "type": "string",
+                                                "title": "key"
+                                            },
+                                            "path": {
+                                                "type": "string",
+                                                "title": "path"
+                                            }
+                                        },
+                                        "required": [
+                                            "key",
+                                            "path"
+                                        ]
+                                    },
+                                    "title": "files"
+                                }
+                            },
+                            "required": [
+                                "apiKey",
+                                "files",
+                                "version"
                             ],
                             "title": "options"
                         }
@@ -588,6 +4388,7 @@
                             "title": "type"
                         },
                         "headers": {
+                            "$ref": "#/definitions/Record<string,string>",
                             "title": "headers"
                         }
                     },
@@ -636,6 +4437,7 @@
                             "title": "type"
                         },
                         "headers": {
+                            "$ref": "#/definitions/Record<string,string>",
                             "title": "headers"
                         }
                     },
@@ -669,6 +4471,7 @@
                             "title": "type"
                         },
                         "headers": {
+                            "$ref": "#/definitions/Record<string,string>",
                             "title": "headers"
                         }
                     },
@@ -690,10 +4493,6 @@
                     ]
                 }
             ]
-        },
-        "Record<string,string>": {
-            "title": "Record<string,string>",
-            "type": "object"
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

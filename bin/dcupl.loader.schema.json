@@ -343,6 +343,10 @@
                 {
                     "type": "object",
                     "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -406,6 +410,10 @@
                 {
                     "type": "object",
                     "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -509,6 +517,10 @@
                 {
                     "type": "object",
                     "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -578,6 +590,10 @@
                 {
                     "type": "object",
                     "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
                         "url": {
                             "type": "string",
                             "title": "url"
@@ -636,6 +652,10 @@
                 {
                     "type": "object",
                     "properties": {
+                        "key": {
+                            "type": "string",
+                            "title": "key"
+                        },
                         "url": {
                             "type": "string",
                             "title": "url"
