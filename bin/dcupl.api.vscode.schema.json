@@ -1,170 +1,104 @@
 {
     "type": "object",
     "properties": {
-        "uid": {
-            "type": "string",
-            "title": "uid"
-        },
         "key": {
             "type": "string",
             "title": "key"
         },
-        "template": {
+        "config": {
             "type": "object",
             "properties": {
-                "key": {
-                    "type": "string",
-                    "title": "key"
-                },
-                "config": {
-                    "type": "object",
-                    "properties": {
-                        "trigger": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Workflow.Trigger"
-                            },
-                            "title": "trigger"
-                        },
-                        "steps": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Workflow.WorkflowStep"
-                            },
-                            "title": "steps"
-                        },
-                        "catch": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepRequest"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepScript",
-                                    "description": "Script"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
-                                }
-                            ],
-                            "title": "catch"
-                        },
-                        "response": {
-                            "$ref": "#/definitions/Workflow.WorkflowResponseConfig",
-                            "title": "response"
-                        }
-                    },
-                    "required": [
-                        "response",
-                        "steps",
-                        "trigger"
-                    ],
-                    "title": "config"
-                },
-                "auth": {
+                "trigger": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "const": "api-key",
-                                "title": "type"
-                            },
-                            "value": {
-                                "type": "string",
-                                "title": "value"
-                            }
-                        },
-                        "required": [
-                            "type",
-                            "value"
-                        ]
+                        "$ref": "#/definitions/Workflow.Trigger"
                     },
-                    "title": "auth"
+                    "title": "trigger"
                 },
-                "name": {
-                    "type": "string",
-                    "title": "name"
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workflow.WorkflowStep"
+                    },
+                    "title": "steps"
                 },
-                "description": {
-                    "type": "string",
-                    "title": "description"
+                "catch": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepRequest"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepScript",
+                            "description": "Script"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
+                        }
+                    ],
+                    "title": "catch"
                 },
-                "variables": {
-                    "$ref": "#/definitions/Record<string,string>",
-                    "title": "variables"
+                "response": {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseConfig",
+                    "title": "response"
                 }
             },
             "required": [
-                "config",
-                "key"
+                "response",
+                "steps",
+                "trigger"
             ],
-            "title": "template"
+            "title": "config"
         },
-        "runnerUid": {
-            "type": "string",
-            "title": "runnerUid"
-        },
-        "projectId": {
-            "type": "string",
-            "title": "projectId"
-        },
-        "v": {
-            "type": "string",
-            "title": "v"
-        },
-        "createdAt": {
-            "type": "number",
-            "title": "createdAt"
-        },
-        "changedAt": {
-            "type": "number",
-            "title": "changedAt"
-        },
-        "runtime": {
-            "type": "object",
-            "properties": {
-                "workflowTimeout": {
-                    "type": "number",
-                    "title": "workflowTimeout"
+        "auth": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "api-key",
+                        "title": "type"
+                    },
+                    "value": {
+                        "type": "string",
+                        "title": "value"
+                    }
                 },
-                "scriptTimeout": {
-                    "type": "number",
-                    "title": "scriptTimeout"
-                }
+                "required": [
+                    "type",
+                    "value"
+                ]
             },
-            "required": [
-                "scriptTimeout",
-                "workflowTimeout"
-            ],
-            "title": "runtime"
+            "title": "auth"
         },
-        "logContext": {
-            "type": "boolean",
-            "title": "logContext"
+        "name": {
+            "type": "string",
+            "title": "name"
+        },
+        "description": {
+            "type": "string",
+            "title": "description"
+        },
+        "variables": {
+            "$ref": "#/definitions/Record<string,string>",
+            "title": "variables"
         }
     },
     "required": [
-        "changedAt",
-        "createdAt",
-        "key",
-        "projectId",
-        "runnerUid",
-        "template",
-        "uid",
-        "v"
+        "config",
+        "key"
     ],
     "definitions": {
         "Workflow.Trigger": {

@@ -1,170 +1,104 @@
 {
     "type": "object",
     "properties": {
-        "uid": {
-            "type": "string",
-            "title": "uid"
-        },
         "key": {
             "type": "string",
             "title": "key"
         },
-        "template": {
+        "config": {
             "type": "object",
             "properties": {
-                "key": {
-                    "type": "string",
-                    "title": "key"
-                },
-                "config": {
-                    "type": "object",
-                    "properties": {
-                        "trigger": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Workflow.Trigger"
-                            },
-                            "title": "trigger"
-                        },
-                        "steps": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Workflow.WorkflowStep"
-                            },
-                            "title": "steps"
-                        },
-                        "catch": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepRequest"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepScript",
-                                    "description": "Script"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
-                                },
-                                {
-                                    "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
-                                }
-                            ],
-                            "title": "catch"
-                        },
-                        "response": {
-                            "$ref": "#/definitions/Workflow.WorkflowResponseConfig",
-                            "title": "response"
-                        }
-                    },
-                    "required": [
-                        "response",
-                        "steps",
-                        "trigger"
-                    ],
-                    "title": "config"
-                },
-                "auth": {
+                "trigger": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "properties": {
-                            "type": {
-                                "type": "string",
-                                "const": "api-key",
-                                "title": "type"
-                            },
-                            "value": {
-                                "type": "string",
-                                "title": "value"
-                            }
-                        },
-                        "required": [
-                            "type",
-                            "value"
-                        ]
+                        "$ref": "#/definitions/Workflow.Trigger"
                     },
-                    "title": "auth"
+                    "title": "trigger"
                 },
-                "name": {
-                    "type": "string",
-                    "title": "name"
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Workflow.WorkflowStep"
+                    },
+                    "title": "steps"
                 },
-                "description": {
-                    "type": "string",
-                    "title": "description"
+                "catch": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepRequest"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepScript",
+                            "description": "Script"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPush"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepGitPull"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepDcuplInstance"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesWrite"
+                        },
+                        {
+                            "$ref": "#/definitions/Workflow.WorkflowStepFilesRead"
+                        }
+                    ],
+                    "title": "catch"
                 },
-                "variables": {
-                    "$ref": "#/definitions/Record<string,string>",
-                    "title": "variables"
+                "response": {
+                    "$ref": "#/definitions/Workflow.WorkflowResponseConfig",
+                    "title": "response"
                 }
             },
             "required": [
-                "config",
-                "key"
+                "response",
+                "steps",
+                "trigger"
             ],
-            "title": "template"
+            "title": "config"
         },
-        "runnerUid": {
-            "type": "string",
-            "title": "runnerUid"
-        },
-        "projectId": {
-            "type": "string",
-            "title": "projectId"
-        },
-        "v": {
-            "type": "string",
-            "title": "v"
-        },
-        "createdAt": {
-            "type": "number",
-            "title": "createdAt"
-        },
-        "changedAt": {
-            "type": "number",
-            "title": "changedAt"
-        },
-        "runtime": {
-            "type": "object",
-            "properties": {
-                "workflowTimeout": {
-                    "type": "number",
-                    "title": "workflowTimeout"
+        "auth": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "api-key",
+                        "title": "type"
+                    },
+                    "value": {
+                        "type": "string",
+                        "title": "value"
+                    }
                 },
-                "scriptTimeout": {
-                    "type": "number",
-                    "title": "scriptTimeout"
-                }
+                "required": [
+                    "type",
+                    "value"
+                ]
             },
-            "required": [
-                "scriptTimeout",
-                "workflowTimeout"
-            ],
-            "title": "runtime"
+            "title": "auth"
         },
-        "logContext": {
-            "type": "boolean",
-            "title": "logContext"
+        "name": {
+            "type": "string",
+            "title": "name"
+        },
+        "description": {
+            "type": "string",
+            "title": "description"
+        },
+        "variables": {
+            "$ref": "#/definitions/Record<string,string>",
+            "title": "variables"
         }
     },
     "required": [
-        "changedAt",
-        "createdAt",
-        "key",
-        "projectId",
-        "runnerUid",
-        "template",
-        "uid",
-        "v"
+        "config",
+        "key"
     ],
     "definitions": {
         "Workflow.Trigger": {
@@ -859,16 +793,14 @@
                                 "variables": {
                                     "type": "array",
                                     "items": {
-                                        "defaultSnippets": [
-                                            {
-                                                "label": "Variable",
-                                                "body": {
-                                                    "key": "$1",
-                                                    "description": "$2",
-                                                    "value": "^\"\""
-                                                }
-                                            }
-                                        ],
+                                        "defaultSnippets": {
+                                            "label": "Variable",
+                                            "properties": [
+                                                "key",
+                                                "description",
+                                                "value:string"
+                                            ]
+                                        },
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -988,17 +920,14 @@
                             "type": "array",
                             "items": {
                                 "description": "A model describes a real world object and hols attributes.",
-                                "defaultSnippets": [
-                                    {
-                                        "label": "Model Definition",
-                                        "description": "A model describes a real world object and hols attributes.",
-                                        "body": {
-                                            "key": "^\"myModel\"",
-                                            "properties": "^[\n  {\n    \"key\": \"my_property\",\n    \"type\": \"string\"\n  }\n]",
-                                            "references": "^[]"
-                                        }
-                                    }
-                                ],
+                                "defaultSnippets": {
+                                    "label": "Model Definition",
+                                    "properties": [
+                                        "key:string:myModel",
+                                        "properties:json:[{\"key\":\"my_property\", \"type\": \"string\"}]",
+                                        "references:array"
+                                    ]
+                                },
                                 "type": "object",
                                 "properties": {
                                     "key": {
@@ -1113,16 +1042,13 @@
                         },
                         "loaderConfig": {
                             "description": "The base structure for configuration file contains all resources, evnironments and headers\nThe process options define how this file is processed",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Default Loader Configuration",
-                                    "description": "The base structure for configuration file contains all resources, evnironments and headers\nThe process options define how this file is processed",
-                                    "body": {
-                                        "applications": "^[\n  {\n    \"key\": \"default\",\n    \"name\": \"My Application\"\n  }\n]",
-                                        "resources": "^[\n  {\n    \"url\": \"\\${baseUrl}/models/my-model.dcupl.json\",\n    \"type\": \"model\"\n  },\n  {\n    \"url\": \"\\${baseUrl}/data/some-data.json\",\n    \"type\": \"data\",\n    \"model\": \"MyModel\"\n  }\n]"
-                                    }
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Default Loader Configuration",
+                                "properties": [
+                                    "applications:json:[{\"key\":\"default\", \"name\":\"My Application\"}]",
+                                    "resources:json:[{\"url\":\"${baseUrl}/models/my-model.dcupl.json\", \"type\":\"model\"},{\"url\":\"${baseUrl}/data/some-data.json\", \"type\":\"data\", \"model\":\"MyModel\"}]"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "resources": {
@@ -1135,18 +1061,16 @@
                                 "environments": {
                                     "type": "array",
                                     "items": {
-                                        "defaultSnippets": [
-                                            {
-                                                "label": "Environment",
-                                                "body": {
-                                                    "key": "$1",
-                                                    "description": "$2",
-                                                    "variables": "^[]",
-                                                    "headers": "^[]",
-                                                    "queryParams": "^[]"
-                                                }
-                                            }
-                                        ],
+                                        "defaultSnippets": {
+                                            "label": "Environment",
+                                            "properties": [
+                                                "key",
+                                                "description",
+                                                "variables:array",
+                                                "headers:array",
+                                                "queryParams:array"
+                                            ]
+                                        },
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -1160,16 +1084,14 @@
                                             "variables": {
                                                 "type": "array",
                                                 "items": {
-                                                    "defaultSnippets": [
-                                                        {
-                                                            "label": "Variable",
-                                                            "body": {
-                                                                "key": "$1",
-                                                                "description": "$2",
-                                                                "value": "^\"\""
-                                                            }
-                                                        }
-                                                    ],
+                                                    "defaultSnippets": {
+                                                        "label": "Variable",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string"
+                                                        ]
+                                                    },
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
@@ -1195,17 +1117,15 @@
                                             "headers": {
                                                 "type": "array",
                                                 "items": {
-                                                    "defaultSnippets": [
-                                                        {
-                                                            "label": "Header Configuration",
-                                                            "body": {
-                                                                "key": "$1",
-                                                                "description": "$2",
-                                                                "value": "^\"\"",
-                                                                "tags": "^[]"
-                                                            }
-                                                        }
-                                                    ],
+                                                    "defaultSnippets": {
+                                                        "label": "Header Configuration",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string",
+                                                            "tags:array"
+                                                        ]
+                                                    },
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
@@ -1248,17 +1168,15 @@
                                             "queryParams": {
                                                 "type": "array",
                                                 "items": {
-                                                    "defaultSnippets": [
-                                                        {
-                                                            "label": "Query Parameter Configuration",
-                                                            "body": {
-                                                                "key": "$1",
-                                                                "description": "$2",
-                                                                "value": "^\"\"",
-                                                                "tags": "^[]"
-                                                            }
-                                                        }
-                                                    ],
+                                                    "defaultSnippets": {
+                                                        "label": "Query Parameter Configuration",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string",
+                                                            "tags:array"
+                                                        ]
+                                                    },
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
@@ -1308,17 +1226,15 @@
                                 "applications": {
                                     "type": "array",
                                     "items": {
-                                        "defaultSnippets": [
-                                            {
-                                                "label": "Application",
-                                                "body": {
-                                                    "key": "$1",
-                                                    "name": "$2",
-                                                    "description": "$3",
-                                                    "resourceTags": "^[]"
-                                                }
-                                            }
-                                        ],
+                                        "defaultSnippets": {
+                                            "label": "Application",
+                                            "properties": [
+                                                "key",
+                                                "name",
+                                                "description",
+                                                "resourceTags:array"
+                                            ]
+                                        },
                                         "type": "object",
                                         "properties": {
                                             "key": {
@@ -1353,16 +1269,14 @@
                                             "variables": {
                                                 "type": "array",
                                                 "items": {
-                                                    "defaultSnippets": [
-                                                        {
-                                                            "label": "Variable",
-                                                            "body": {
-                                                                "key": "$1",
-                                                                "description": "$2",
-                                                                "value": "^\"\""
-                                                            }
-                                                        }
-                                                    ],
+                                                    "defaultSnippets": {
+                                                        "label": "Variable",
+                                                        "properties": [
+                                                            "key",
+                                                            "description",
+                                                            "value:string"
+                                                        ]
+                                                    },
                                                     "type": "object",
                                                     "properties": {
                                                         "key": {
@@ -1565,30 +1479,25 @@
             ]
         },
         "PropertyExpression": {
-            "defaultSnippets": [
-                {
-                    "label": "Dynamic Expression Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "^\"string\"",
-                        "expression": "^\"\\${some_prop}_\\${another_prop}\""
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Dynamic Expression Property",
+                "properties": [
+                    "key",
+                    "type:string:string",
+                    "expression:string:${some_prop}_${another_prop}"
+                ]
+            },
             "title": "PropertyExpression",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -1919,29 +1828,24 @@
             "type": "string"
         },
         "PropertyString": {
-            "defaultSnippets": [
-                {
-                    "label": "String Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "^\"string\""
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:string"
+                ]
+            },
             "title": "PropertyString",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -2141,29 +2045,24 @@
             ]
         },
         "PropertyInt": {
-            "defaultSnippets": [
-                {
-                    "label": "Int Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "int"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Int Property",
+                "properties": [
+                    "key",
+                    "type:int"
+                ]
+            },
             "title": "PropertyInt",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -2353,29 +2252,24 @@
             ]
         },
         "PropertyFloat": {
-            "defaultSnippets": [
-                {
-                    "label": "Float Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "float"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Float Property",
+                "properties": [
+                    "key",
+                    "type:float"
+                ]
+            },
             "title": "PropertyFloat",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -2569,29 +2463,24 @@
             ]
         },
         "PropertyDate": {
-            "defaultSnippets": [
-                {
-                    "label": "Date Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "date"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Date Property",
+                "properties": [
+                    "key",
+                    "type:date"
+                ]
+            },
             "title": "PropertyDate",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -2760,29 +2649,24 @@
             ]
         },
         "PropertyJson": {
-            "defaultSnippets": [
-                {
-                    "label": "Json Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "^\"json\""
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Json Property",
+                "properties": [
+                    "key",
+                    "type:string:json"
+                ]
+            },
             "title": "PropertyJson",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -2942,29 +2826,24 @@
             ]
         },
         "PropertyBoolean": {
-            "defaultSnippets": [
-                {
-                    "label": "String Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "^\"boolean\""
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "String Property",
+                "properties": [
+                    "key",
+                    "type:string:boolean"
+                ]
+            },
             "title": "PropertyBoolean",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3132,29 +3011,24 @@
             ]
         },
         "PropertyAny": {
-            "defaultSnippets": [
-                {
-                    "label": "Any Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "any"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Any Property",
+                "properties": [
+                    "key",
+                    "type:any"
+                ]
+            },
             "title": "PropertyAny",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Property",
+                        "properties": [
+                            "key",
+                            "type"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3313,16 +3187,14 @@
             "title": "Reference",
             "anyOf": [
                 {
-                    "defaultSnippets": [
-                        {
-                            "label": "Default Reference",
-                            "body": {
-                                "key": "$1",
-                                "type": "singleValued",
-                                "model": "$3"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3347,12 +3219,9 @@
                         },
                         "filter": {
                             "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3452,31 +3321,26 @@
         },
         "ResolvedReference": {
             "description": "Resolves a Reference from a foreign model",
-            "defaultSnippets": [
-                {
-                    "label": "Resolved Reference",
-                    "description": "Resolves a Reference from a foreign model",
-                    "body": {
-                        "key": "$1",
-                        "type": "multiValued",
-                        "model": "$3",
-                        "resolve": "^{\n  \"reference\": \"\",\n  \"model\": \"\"\n}"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Resolved Reference",
+                "properties": [
+                    "key",
+                    "type:multiValued",
+                    "model",
+                    "resolve:json:{\"reference\":\"\", \"model\":\"\" }"
+                ]
+            },
             "title": "ResolvedReference",
             "allOf": [
                 {
-                    "defaultSnippets": [
-                        {
-                            "label": "Default Reference",
-                            "body": {
-                                "key": "$1",
-                                "type": "singleValued",
-                                "model": "$3"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3501,12 +3365,9 @@
                         },
                         "filter": {
                             "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3585,16 +3446,13 @@
                     "properties": {
                         "resolve": {
                             "description": "Resolve a Relationship to an foreign model",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Resolve Relationship",
-                                    "description": "Resolve a Relationship to an foreign model",
-                                    "body": {
-                                        "reference": "$1",
-                                        "model": "$2"
-                                    }
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Resolve Relationship",
+                                "properties": [
+                                    "reference",
+                                    "model"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "reference": {
@@ -3625,31 +3483,26 @@
         },
         "DerivedReference": {
             "description": "Derives a References for a specific value from an other model",
-            "defaultSnippets": [
-                {
-                    "label": "Derived Reference",
-                    "description": "Derives a References for a specific value from an other model",
-                    "body": {
-                        "key": "$1",
-                        "type": "singleValued",
-                        "model": "$3",
-                        "derive": "^{\n  \"localReference\": \"\",\n  \"remoteReference\": \"\"\n}"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Derived Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "derive:json:{\"localReference\":\"\", \"remoteReference\":\"\"}"
+                ]
+            },
             "title": "DerivedReference",
             "allOf": [
                 {
-                    "defaultSnippets": [
-                        {
-                            "label": "Default Reference",
-                            "body": {
-                                "key": "$1",
-                                "type": "singleValued",
-                                "model": "$3"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3674,12 +3527,9 @@
                         },
                         "filter": {
                             "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3762,16 +3612,13 @@
                         },
                         "derive": {
                             "description": "Derive a specific value from an other object/entity",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Derive Values",
-                                    "description": "Derive a specific value from an other object/entity",
-                                    "body": {
-                                        "localReference": "$1",
-                                        "remoteReference": "$2"
-                                    }
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Derive Values",
+                                "properties": [
+                                    "localReference",
+                                    "remoteReference"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "localReference": {
@@ -3803,32 +3650,27 @@
         },
         "GroupedRefeference": {
             "description": "Groups a Reference by a specific value from an other model",
-            "defaultSnippets": [
-                {
-                    "label": "Grouped Reference",
-                    "description": "Groups a Reference by a specific value from an other model",
-                    "body": {
-                        "key": "$1",
-                        "type": "singleValued",
-                        "model": "$3",
-                        "groupBy": "^{\n  \"reference\": \"\"\n}",
-                        "includeSelfInGroup": true
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Grouped Reference",
+                "properties": [
+                    "key",
+                    "type:singleValued",
+                    "model",
+                    "groupBy:json:{\"reference\":\"\" }",
+                    "includeSelfInGroup:boolean"
+                ]
+            },
             "title": "GroupedRefeference",
             "allOf": [
                 {
-                    "defaultSnippets": [
-                        {
-                            "label": "Default Reference",
-                            "body": {
-                                "key": "$1",
-                                "type": "singleValued",
-                                "model": "$3"
-                            }
-                        }
-                    ],
+                    "defaultSnippets": {
+                        "label": "Default Reference",
+                        "properties": [
+                            "key",
+                            "type:singleValued",
+                            "model"
+                        ]
+                    },
                     "type": "object",
                     "properties": {
                         "key": {
@@ -3853,12 +3695,9 @@
                         },
                         "filter": {
                             "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Filter"
+                            },
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3941,16 +3780,13 @@
                         },
                         "groupBy": {
                             "description": "Group by a specific reference",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Grouped Values",
-                                    "description": "Group by a specific reference",
-                                    "body": {
-                                        "reference": "$1",
-                                        "includeSelfInGroup": "$2"
-                                    }
-                                }
-                            ],
+                            "defaultSnippets": {
+                                "label": "Grouped Values",
+                                "properties": [
+                                    "reference",
+                                    "includeSelfInGroup"
+                                ]
+                            },
                             "type": "object",
                             "properties": {
                                 "reference": {
@@ -4004,17 +3840,14 @@
         },
         "AppLoaderConfiguration.ModelResource": {
             "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order.",
-            "defaultSnippets": [
-                {
-                    "label": "Model",
-                    "description": "A model describes a real world object of your applicatoin like a customer, a product or a sales order.",
-                    "body": {
-                        "url": "^\"\\${baseUrl}/models/my-model.dcupl.json\"",
-                        "type": "model",
-                        "tags": "^[]"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Model",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-model.dcupl.json",
+                    "type:model",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.ModelResource",
             "allOf": [
                 {
@@ -4073,18 +3906,15 @@
         },
         "AppLoaderConfiguration.DataResource": {
             "description": "A data resource contains data for a model.",
-            "defaultSnippets": [
-                {
-                    "label": "Data",
-                    "description": "A data resource contains data for a model.",
-                    "body": {
-                        "url": "^\"\\${baseUrl}/data/my-data.json\"",
-                        "type": "data",
-                        "model": "$3",
-                        "tags": "^[]"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Data",
+                "properties": [
+                    "url:string:${baseUrl}/data/my-data.json",
+                    "type:data",
+                    "model",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.DataResource",
             "allOf": [
                 {
@@ -4183,18 +4013,15 @@
         },
         "AppLoaderConfiguration.TransformerResource": {
             "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource.",
-            "defaultSnippets": [
-                {
-                    "label": "Transformer",
-                    "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource.",
-                    "body": {
-                        "url": "^\"\\${baseUrl}/transformers/my-transformer.js\"",
-                        "type": "transformer",
-                        "applyTo": "^[]",
-                        "tags": "^[]"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Transformer",
+                "properties": [
+                    "url:string:${baseUrl}/transformers/my-transformer.js",
+                    "type:transformer",
+                    "applyTo:array",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.TransformerResource",
             "allOf": [
                 {
@@ -4259,18 +4086,15 @@
         },
         "AppLoaderConfiguration.CustomOperatorResource": {
             "description": "A query operator resource points to a javascript file that defines a custom query operator.",
-            "defaultSnippets": [
-                {
-                    "label": "Query Operator",
-                    "description": "A query operator resource points to a javascript file that defines a custom query operator.",
-                    "body": {
-                        "url": "^\"\\${baseUrl}/models/my-operator.js\"",
-                        "type": "operator",
-                        "operator": "my_operator",
-                        "tags": "^[]"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.CustomOperatorResource",
             "allOf": [
                 {
@@ -4324,18 +4148,15 @@
         },
         "AppLoaderConfiguration.CustomScriptResource": {
             "description": "A script resource.",
-            "defaultSnippets": [
-                {
-                    "label": "Query Operator",
-                    "description": "A script resource.",
-                    "body": {
-                        "url": "^\"\\${baseUrl}/models/my-operator.js\"",
-                        "type": "operator",
-                        "operator": "my_operator",
-                        "tags": "^[]"
-                    }
-                }
-            ],
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
             "title": "AppLoaderConfiguration.CustomScriptResource",
             "allOf": [
                 {

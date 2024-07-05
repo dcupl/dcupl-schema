@@ -1,0 +1,129 @@
+{
+    "allOf": [
+        {
+            "type": "object",
+            "properties": {
+                "modelKey": {
+                    "type": "string",
+                    "title": "modelKey"
+                }
+            },
+            "required": [
+                "modelKey"
+            ]
+        },
+        {
+            "type": "object",
+            "properties": {
+                "start": {
+                    "type": "number",
+                    "title": "start"
+                },
+                "count": {
+                    "type": "number",
+                    "title": "count"
+                },
+                "projection": {
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "$": {
+                                    "type": "boolean",
+                                    "title": "$"
+                                },
+                                "$$": {
+                                    "type": "boolean",
+                                    "title": "$$"
+                                }
+                            }
+                        },
+                        {
+                            "$ref": "#/definitions/ProjectionAdvanced<T>"
+                        }
+                    ],
+                    "title": "projection"
+                },
+                "sort": {
+                    "type": "object",
+                    "properties": {
+                        "attributes": {
+                            "type": "array",
+                            "items": {},
+                            "title": "attributes"
+                        },
+                        "order": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SortDirection"
+                            },
+                            "title": "order"
+                        },
+                        "script": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string",
+                                    "title": "key"
+                                },
+                                "options": {
+                                    "title": "options"
+                                }
+                            },
+                            "required": [
+                                "key",
+                                "options"
+                            ],
+                            "title": "script"
+                        }
+                    },
+                    "required": [
+                        "attributes",
+                        "order"
+                    ],
+                    "title": "sort"
+                }
+            }
+        },
+        {
+            "type": "object",
+            "properties": {
+                "groupType": {
+                    "enum": [
+                        "and",
+                        "or"
+                    ],
+                    "type": "string",
+                    "title": "groupType"
+                },
+                "groupKey": {
+                    "type": "string",
+                    "title": "groupKey"
+                },
+                "queries": {
+                    "type": "array",
+                    "items": {},
+                    "title": "queries"
+                }
+            },
+            "required": [
+                "queries"
+            ]
+        }
+    ],
+    "definitions": {
+        "ProjectionAdvanced<T>": {
+            "title": "ProjectionAdvanced<T>",
+            "type": "object"
+        },
+        "SortDirection": {
+            "title": "SortDirection",
+            "enum": [
+                "ASC",
+                "DESC"
+            ],
+            "type": "string"
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
