@@ -27,6 +27,10 @@
             },
             "title": "auth"
         },
+        "vGuardEnabled": {
+            "type": "boolean",
+            "title": "vGuardEnabled"
+        },
         "dcuplConfig": {
             "type": "object",
             "properties": {
@@ -155,14 +159,17 @@
                     "type": "object",
                     "properties": {
                         "baseUrl": {
+                            "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN",
                             "type": "string",
                             "title": "baseUrl"
                         },
                         "loaderFileName": {
+                            "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'",
                             "type": "string",
                             "title": "loaderFileName"
                         },
                         "headers": {
+                            "description": "Custom Headers used for fetching the loader file\nFor example authorization headers",
                             "type": "array",
                             "items": {
                                 "type": "object",
@@ -184,6 +191,7 @@
                             "title": "headers"
                         },
                         "skipApply": {
+                            "description": "If set to false the fetched config is not applied to the loader but only returned",
                             "type": "boolean",
                             "title": "skipApply"
                         }
@@ -205,12 +213,17 @@
         "description": {
             "type": "string",
             "title": "description"
+        },
+        "version": {
+            "type": "string",
+            "title": "version"
         }
     },
     "required": [
         "auth",
         "dcuplConfig",
-        "key"
+        "key",
+        "vGuardEnabled"
     ],
     "$schema": "http://json-schema.org/draft-07/schema#"
 }

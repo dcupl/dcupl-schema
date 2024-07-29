@@ -876,14 +876,17 @@
                             "type": "object",
                             "properties": {
                                 "baseUrl": {
+                                    "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN",
                                     "type": "string",
                                     "title": "baseUrl"
                                 },
                                 "loaderFileName": {
+                                    "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'",
                                     "type": "string",
                                     "title": "loaderFileName"
                                 },
                                 "headers": {
+                                    "description": "Custom Headers used for fetching the loader file\nFor example authorization headers",
                                     "type": "array",
                                     "items": {
                                         "type": "object",
@@ -905,6 +908,7 @@
                                     "title": "headers"
                                 },
                                 "skipApply": {
+                                    "description": "If set to false the fetched config is not applied to the loader but only returned",
                                     "type": "boolean",
                                     "title": "skipApply"
                                 }
@@ -1037,6 +1041,34 @@
                                             "name"
                                         ],
                                         "title": "meta"
+                                    },
+                                    "quality": {
+                                        "type": "object",
+                                        "properties": {
+                                            "enabled": {
+                                                "type": "boolean",
+                                                "title": "enabled"
+                                            },
+                                            "attributes": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "required": {
+                                                        "type": "boolean",
+                                                        "title": "required"
+                                                    },
+                                                    "nullable": {
+                                                        "type": "boolean",
+                                                        "title": "nullable"
+                                                    },
+                                                    "forceStrictDataType": {
+                                                        "type": "boolean",
+                                                        "title": "forceStrictDataType"
+                                                    }
+                                                },
+                                                "title": "attributes"
+                                            }
+                                        },
+                                        "title": "quality"
                                     }
                                 },
                                 "required": [
@@ -1463,6 +1495,10 @@
                 "autoGenerateProperties": {
                     "type": "boolean",
                     "title": "autoGenerateProperties"
+                },
+                "placeholderUid": {
+                    "type": "string",
+                    "title": "placeholderUid"
                 }
             },
             "required": [
@@ -1472,9 +1508,6 @@
         "Property": {
             "title": "Property",
             "anyOf": [
-                {
-                    "$ref": "#/definitions/PropertyExpression"
-                },
                 {
                     "$ref": "#/definitions/PropertyString"
                 },
@@ -1498,18 +1531,17 @@
                 }
             ]
         },
-        "PropertyExpression": {
+        "PropertyString": {
             "defaultSnippets": [
                 {
-                    "label": "Dynamic Expression Property",
+                    "label": "String Property",
                     "body": {
                         "key": "$1",
-                        "type": "^\"string\"",
-                        "expression": "^\"\\${some_prop}_\\${another_prop}\""
+                        "type": "^\"string\""
                     }
                 }
             ],
-            "title": "PropertyExpression",
+            "title": "PropertyString",
             "allOf": [
                 {
                     "description": "A property is a quality or characteristic belonging an object.",
@@ -1534,6 +1566,32 @@
                         "type": {
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
+                        },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
                         },
                         "origin": {
                             "type": "string",
@@ -1609,28 +1667,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -1652,6 +1688,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -1663,24 +1717,12 @@
                     "type": "object",
                     "properties": {
                         "type": {
-                            "type": "string",
-                            "const": "string",
-                            "title": "type"
-                        },
-                        "expression": {
-                            "type": "string",
-                            "title": "expression"
-                        },
-                        "aggregate": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/AggregationOptionsModel"
-                                },
-                                {
-                                    "type": "boolean"
-                                }
+                            "enum": [
+                                "Array<string>",
+                                "string"
                             ],
-                            "title": "aggregate"
+                            "type": "string",
+                            "title": "type"
                         },
                         "filter": {
                             "anyOf": [
@@ -1728,8 +1770,6 @@
                         }
                     },
                     "required": [
-                        "aggregate",
-                        "expression",
                         "type"
                     ]
                 }
@@ -1852,228 +1892,6 @@
             ],
             "type": "string"
         },
-        "PropertyString": {
-            "defaultSnippets": [
-                {
-                    "label": "String Property",
-                    "body": {
-                        "key": "$1",
-                        "type": "^\"string\""
-                    }
-                }
-            ],
-            "title": "PropertyString",
-            "allOf": [
-                {
-                    "description": "A property is a quality or characteristic belonging an object.",
-                    "defaultSnippets": [
-                        {
-                            "label": "Property",
-                            "description": "A property is a quality or characteristic belonging an object.",
-                            "body": {
-                                "key": "$1",
-                                "type": "$2"
-                            }
-                        }
-                    ],
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "description": "A key is an unique identifier overall properties in this model.",
-                            "minLength": 1,
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/PropertyType",
-                            "title": "type"
-                        },
-                        "origin": {
-                            "type": "string",
-                            "title": "origin"
-                        },
-                        "filter": {
-                            "anyOf": [
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "comparisonType": {
-                                            "enum": [
-                                                "contains",
-                                                "containsIgnoreCase",
-                                                "containsIgnoreCaseAndWhitespace",
-                                                "equal",
-                                                "equalIgnoreCase"
-                                            ],
-                                            "type": "string",
-                                            "title": "comparisonType"
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "type": "string",
-                                                "title": "key"
-                                            },
-                                            "comparisonType": {
-                                                "$ref": "#/definitions/FilterComparisonType",
-                                                "title": "comparisonType"
-                                            }
-                                        },
-                                        "required": [
-                                            "comparisonType",
-                                            "key"
-                                        ]
-                                    }
-                                },
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "type": "string",
-                                                "title": "key"
-                                            }
-                                        },
-                                        "required": [
-                                            "key"
-                                        ]
-                                    }
-                                },
-                                {
-                                    "type": "boolean"
-                                }
-                            ],
-                            "title": "filter"
-                        },
-                        "aggregate": {
-                            "anyOf": [
-                                {
-                                    "$ref": "#/definitions/AggregationOptionsModel"
-                                },
-                                {
-                                    "type": "boolean"
-                                }
-                            ],
-                            "title": "aggregate"
-                        },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
-                        "meta": {
-                            "type": "object",
-                            "additionalProperties": {},
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "title": "name"
-                                },
-                                "description": {
-                                    "type": "string",
-                                    "title": "description"
-                                }
-                            },
-                            "required": [
-                                "name"
-                            ],
-                            "title": "meta"
-                        },
-                        "index": {
-                            "type": "boolean",
-                            "title": "index"
-                        }
-                    },
-                    "required": [
-                        "key",
-                        "type"
-                    ]
-                },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "enum": [
-                                "Array<string>",
-                                "string"
-                            ],
-                            "type": "string",
-                            "title": "type"
-                        },
-                        "filter": {
-                            "anyOf": [
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "comparisonType": {
-                                            "enum": [
-                                                "contains",
-                                                "containsIgnoreCase",
-                                                "containsIgnoreCaseAndWhitespace",
-                                                "equal",
-                                                "equalIgnoreCase"
-                                            ],
-                                            "type": "string",
-                                            "title": "comparisonType"
-                                        }
-                                    }
-                                },
-                                {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "type": "string",
-                                                "title": "key"
-                                            },
-                                            "comparisonType": {
-                                                "$ref": "#/definitions/FilterComparisonType",
-                                                "title": "comparisonType"
-                                            }
-                                        },
-                                        "required": [
-                                            "comparisonType",
-                                            "key"
-                                        ]
-                                    }
-                                },
-                                {
-                                    "type": "boolean"
-                                }
-                            ],
-                            "title": "filter"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                }
-            ]
-        },
         "PropertyInt": {
             "defaultSnippets": [
                 {
@@ -2110,6 +1928,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -2184,28 +2028,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -2227,6 +2049,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -2322,6 +2162,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -2396,28 +2262,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -2439,6 +2283,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -2538,6 +2400,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -2612,28 +2500,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -2655,6 +2521,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -2729,6 +2613,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -2803,28 +2713,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -2846,6 +2734,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -2911,6 +2817,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -2985,28 +2917,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -3028,6 +2938,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -3101,6 +3029,32 @@
                             "$ref": "#/definitions/PropertyType",
                             "title": "type"
                         },
+                        "expression": {
+                            "type": "string",
+                            "title": "expression"
+                        },
+                        "derive": {
+                            "type": "object",
+                            "properties": {
+                                "localReference": {
+                                    "type": "string",
+                                    "title": "localReference"
+                                },
+                                "remoteProperty": {
+                                    "type": "string",
+                                    "title": "remoteProperty"
+                                },
+                                "separator": {
+                                    "type": "string",
+                                    "title": "separator"
+                                }
+                            },
+                            "required": [
+                                "localReference",
+                                "remoteProperty"
+                            ],
+                            "title": "derive"
+                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
@@ -3175,28 +3129,6 @@
                             ],
                             "title": "aggregate"
                         },
-                        "derive": {
-                            "type": "object",
-                            "properties": {
-                                "localReference": {
-                                    "type": "string",
-                                    "title": "localReference"
-                                },
-                                "remoteProperty": {
-                                    "type": "string",
-                                    "title": "remoteProperty"
-                                },
-                                "separator": {
-                                    "type": "string",
-                                    "title": "separator"
-                                }
-                            },
-                            "required": [
-                                "localReference",
-                                "remoteProperty"
-                            ],
-                            "title": "derive"
-                        },
                         "meta": {
                             "type": "object",
                             "additionalProperties": {},
@@ -3218,6 +3150,24 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -3265,28 +3215,21 @@
                             "type": "string",
                             "title": "key"
                         },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
                         "model": {
                             "description": "The Model this reference is pointing to.",
                             "minLength": 1,
                             "type": "string",
                             "title": "model"
                         },
-                        "type": {
-                            "$ref": "#/definitions/ReferenceType",
-                            "title": "type"
-                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
                         },
                         "filter": {
-                            "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3311,14 +3254,6 @@
                                 }
                             ],
                             "title": "filter"
-                        },
-                        "validity": {
-                            "enum": [
-                                "loose",
-                                "strict"
-                            ],
-                            "type": "string",
-                            "title": "validity"
                         },
                         "aggregate": {
                             "anyOf": [
@@ -3352,6 +3287,32 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -3419,28 +3380,21 @@
                             "type": "string",
                             "title": "key"
                         },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
                         "model": {
                             "description": "The Model this reference is pointing to.",
                             "minLength": 1,
                             "type": "string",
                             "title": "model"
                         },
-                        "type": {
-                            "$ref": "#/definitions/ReferenceType",
-                            "title": "type"
-                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
                         },
                         "filter": {
-                            "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3465,14 +3419,6 @@
                                 }
                             ],
                             "title": "filter"
-                        },
-                        "validity": {
-                            "enum": [
-                                "loose",
-                                "strict"
-                            ],
-                            "type": "string",
-                            "title": "validity"
                         },
                         "aggregate": {
                             "anyOf": [
@@ -3506,6 +3452,32 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -3592,28 +3564,21 @@
                             "type": "string",
                             "title": "key"
                         },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
                         "model": {
                             "description": "The Model this reference is pointing to.",
                             "minLength": 1,
                             "type": "string",
                             "title": "model"
                         },
-                        "type": {
-                            "$ref": "#/definitions/ReferenceType",
-                            "title": "type"
-                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
                         },
                         "filter": {
-                            "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3638,14 +3603,6 @@
                                 }
                             ],
                             "title": "filter"
-                        },
-                        "validity": {
-                            "enum": [
-                                "loose",
-                                "strict"
-                            ],
-                            "type": "string",
-                            "title": "validity"
                         },
                         "aggregate": {
                             "anyOf": [
@@ -3679,6 +3636,32 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
@@ -3771,28 +3754,21 @@
                             "type": "string",
                             "title": "key"
                         },
+                        "type": {
+                            "$ref": "#/definitions/ReferenceType",
+                            "title": "type"
+                        },
                         "model": {
                             "description": "The Model this reference is pointing to.",
                             "minLength": 1,
                             "type": "string",
                             "title": "model"
                         },
-                        "type": {
-                            "$ref": "#/definitions/ReferenceType",
-                            "title": "type"
-                        },
                         "origin": {
                             "type": "string",
                             "title": "origin"
                         },
                         "filter": {
-                            "description": "Filtering the values of the reference with or without counting",
-                            "defaultSnippets": [
-                                {
-                                    "label": "Filter",
-                                    "description": "Filtering the values of the reference with or without counting"
-                                }
-                            ],
                             "anyOf": [
                                 {
                                     "description": "Facet calculation is disabled by default",
@@ -3817,14 +3793,6 @@
                                 }
                             ],
                             "title": "filter"
-                        },
-                        "validity": {
-                            "enum": [
-                                "loose",
-                                "strict"
-                            ],
-                            "type": "string",
-                            "title": "validity"
                         },
                         "aggregate": {
                             "anyOf": [
@@ -3858,6 +3826,32 @@
                         "index": {
                             "type": "boolean",
                             "title": "index"
+                        },
+                        "validity": {
+                            "enum": [
+                                "loose",
+                                "strict"
+                            ],
+                            "type": "string",
+                            "title": "validity"
+                        },
+                        "quality": {
+                            "type": "object",
+                            "properties": {
+                                "required": {
+                                    "type": "boolean",
+                                    "title": "required"
+                                },
+                                "nullable": {
+                                    "type": "boolean",
+                                    "title": "nullable"
+                                },
+                                "forceStrictDataType": {
+                                    "type": "boolean",
+                                    "title": "forceStrictDataType"
+                                }
+                            },
+                            "title": "quality"
                         }
                     },
                     "required": [
