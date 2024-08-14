@@ -91,6 +91,10 @@
             "type": "string",
             "title": "description"
         },
+        "version": {
+            "type": "string",
+            "title": "version"
+        },
         "variables": {
             "$ref": "#/definitions/Record<string,string>",
             "title": "variables"

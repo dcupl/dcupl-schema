@@ -5,32 +5,6 @@
             "type": "string",
             "title": "key"
         },
-        "auth": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string",
-                        "const": "api-key",
-                        "title": "type"
-                    },
-                    "value": {
-                        "type": "string",
-                        "title": "value"
-                    }
-                },
-                "required": [
-                    "type",
-                    "value"
-                ]
-            },
-            "title": "auth"
-        },
-        "vGuardEnabled": {
-            "type": "boolean",
-            "title": "vGuardEnabled"
-        },
         "dcuplConfig": {
             "type": "object",
             "properties": {
@@ -204,6 +178,32 @@
             ],
             "title": "dcuplConfig"
         },
+        "vGuardEnabled": {
+            "type": "boolean",
+            "title": "vGuardEnabled"
+        },
+        "auth": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "const": "api-key",
+                        "title": "type"
+                    },
+                    "value": {
+                        "type": "string",
+                        "title": "value"
+                    }
+                },
+                "required": [
+                    "type",
+                    "value"
+                ]
+            },
+            "title": "auth"
+        },
         "name": {
             "type": "string",
             "title": "name"
@@ -218,7 +218,6 @@
         }
     },
     "required": [
-        "auth",
         "dcuplConfig",
         "key",
         "vGuardEnabled"
