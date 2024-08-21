@@ -1067,6 +1067,119 @@
                                                     "forceStrictDataType": {
                                                         "type": "boolean",
                                                         "title": "forceStrictDataType"
+                                                    },
+                                                    "validators": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "email": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "email"
+                                                            },
+                                                            "endsWith": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "endsWith"
+                                                            },
+                                                            "enum": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "enum"
+                                                            },
+                                                            "includes": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "includes"
+                                                            },
+                                                            "max": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "max"
+                                                            },
+                                                            "maxLength": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "maxLength"
+                                                            },
+                                                            "min": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "min"
+                                                            },
+                                                            "minLength": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "minLength"
+                                                            },
+                                                            "pattern": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "pattern"
+                                                            },
+                                                            "unique": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "unique"
+                                                            },
+                                                            "startsWith": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "value": {
+                                                                        "title": "value"
+                                                                    }
+                                                                },
+                                                                "title": "startsWith"
+                                                            }
+                                                        },
+                                                        "title": "validators"
+                                                    },
+                                                    "validatorHandling": {
+                                                        "enum": [
+                                                            "loose",
+                                                            "strict"
+                                                        ],
+                                                        "type": "string",
+                                                        "title": "validatorHandling"
                                                     }
                                                 },
                                                 "title": "attributes"
@@ -1707,6 +1820,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -2068,6 +2294,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -2302,6 +2641,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -2540,6 +2992,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -2753,6 +3318,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -2957,6 +3635,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -3169,6 +3960,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -3314,6 +4218,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -3479,6 +4496,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -3663,6 +4793,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
@@ -3853,6 +5096,119 @@
                                 "forceStrictDataType": {
                                     "type": "boolean",
                                     "title": "forceStrictDataType"
+                                },
+                                "validators": {
+                                    "type": "object",
+                                    "properties": {
+                                        "email": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "email"
+                                        },
+                                        "endsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "endsWith"
+                                        },
+                                        "enum": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "enum"
+                                        },
+                                        "includes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "includes"
+                                        },
+                                        "max": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "max"
+                                        },
+                                        "maxLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "maxLength"
+                                        },
+                                        "min": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "min"
+                                        },
+                                        "minLength": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "minLength"
+                                        },
+                                        "pattern": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "pattern"
+                                        },
+                                        "unique": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "unique"
+                                        },
+                                        "startsWith": {
+                                            "type": "object",
+                                            "properties": {
+                                                "value": {
+                                                    "title": "value"
+                                                }
+                                            },
+                                            "title": "startsWith"
+                                        }
+                                    },
+                                    "title": "validators"
+                                },
+                                "validatorHandling": {
+                                    "enum": [
+                                        "loose",
+                                        "strict"
+                                    ],
+                                    "type": "string",
+                                    "title": "validatorHandling"
                                 }
                             },
                             "title": "quality"
