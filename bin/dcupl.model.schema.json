@@ -85,7 +85,6 @@
                                             "title": "from"
                                         },
                                         "to": {
-                                            "type": "string",
                                             "title": "to"
                                         }
                                     },
@@ -356,7 +355,6 @@
                                                         "title": "from"
                                                     },
                                                     "to": {
-                                                        "type": "string",
                                                         "title": "to"
                                                     }
                                                 },
