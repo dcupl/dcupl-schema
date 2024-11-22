@@ -34,12 +34,14 @@
                         "title": "cron"
                     }
                 },
+                "additionalProperties": false,
                 "required": [
                     "type"
                 ],
                 "title": "trigger"
             }
         },
+        "additionalProperties": false,
         "required": [
             "key",
             "name",

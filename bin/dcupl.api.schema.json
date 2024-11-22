@@ -73,6 +73,7 @@
                                         "title": "value"
                                     }
                                 },
+                                "additionalProperties": false,
                                 "required": [
                                     "key",
                                     "value"
@@ -109,6 +110,7 @@
                                             "title": "escapeChar"
                                         }
                                     },
+                                    "additionalProperties": false,
                                     "title": "csvParserOptions"
                                 },
                                 "missingModelHandling": {
@@ -119,12 +121,15 @@
                                             "title": "autoGenerateProperties"
                                         }
                                     },
+                                    "additionalProperties": false,
                                     "title": "missingModelHandling"
                                 }
                             },
+                            "additionalProperties": false,
                             "title": "options"
                         }
                     },
+                    "additionalProperties": false,
                     "title": "processOptions"
                 },
                 "loaderFetchOptions": {
@@ -155,6 +160,7 @@
                                         "title": "value"
                                     }
                                 },
+                                "additionalProperties": false,
                                 "required": [
                                     "key",
                                     "value"
@@ -168,9 +174,11 @@
                             "title": "skipApply"
                         }
                     },
+                    "additionalProperties": false,
                     "title": "loaderFetchOptions"
                 }
             },
+            "additionalProperties": false,
             "required": [
                 "apiKey",
                 "processOptions",
@@ -197,6 +205,7 @@
                         "title": "value"
                     }
                 },
+                "additionalProperties": false,
                 "required": [
                     "type",
                     "value"
@@ -217,6 +226,7 @@
             "title": "version"
         }
     },
+    "additionalProperties": false,
     "required": [
         "dcuplConfig",
         "key",

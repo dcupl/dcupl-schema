@@ -72,6 +72,7 @@
                                     "title": "value"
                                 }
                             },
+                            "additionalProperties": false,
                             "required": [
                                 "key",
                                 "value"
@@ -122,9 +123,11 @@
                                             "title": "applyIfVariableHasValue"
                                         }
                                     },
+                                    "additionalProperties": false,
                                     "title": "condition"
                                 }
                             },
+                            "additionalProperties": false,
                             "required": [
                                 "key",
                                 "value"
@@ -175,9 +178,11 @@
                                             "title": "applyIfVariableHasValue"
                                         }
                                     },
+                                    "additionalProperties": false,
                                     "title": "condition"
                                 }
                             },
+                            "additionalProperties": false,
                             "required": [
                                 "key",
                                 "value"
@@ -186,6 +191,7 @@
                         "title": "queryParams"
                     }
                 },
+                "additionalProperties": false,
                 "required": [
                     "key"
                 ]
@@ -265,6 +271,7 @@
                                     "title": "value"
                                 }
                             },
+                            "additionalProperties": false,
                             "required": [
                                 "key",
                                 "value"
@@ -273,6 +280,7 @@
                         "title": "variables"
                     }
                 },
+                "additionalProperties": false,
                 "required": [
                     "key"
                 ]
@@ -308,6 +316,7 @@
                             "title": "escapeChar"
                         }
                     },
+                    "additionalProperties": false,
                     "title": "csvParserOptions"
                 },
                 "missingModelHandling": {
@@ -318,12 +327,15 @@
                             "title": "autoGenerateProperties"
                         }
                     },
+                    "additionalProperties": false,
                     "title": "missingModelHandling"
                 }
             },
+            "additionalProperties": false,
             "title": "options"
         }
     },
+    "additionalProperties": false,
     "required": [
         "resources"
     ],
@@ -367,48 +379,33 @@
                 }
             ],
             "title": "AppLoaderConfiguration.ModelResource",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/ResourceType",
-                            "title": "type"
-                        },
-                        "tags": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "tags"
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "url"
-                    ]
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "model",
-                            "title": "type"
-                        }
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "model",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     },
-                    "required": [
-                        "type"
-                    ]
+                    "title": "tags"
                 }
+            },
+            "required": [
+                "type",
+                "url"
             ]
         },
         "ResourceType": {
@@ -437,99 +434,86 @@
                 }
             ],
             "title": "AppLoaderConfiguration.DataResource",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/ResourceType",
-                            "title": "type"
-                        },
-                        "tags": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "tags"
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "url"
-                    ]
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
                 },
-                {
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "data",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "tags"
+                },
+                "model": {
+                    "type": "string",
+                    "title": "model"
+                },
+                "options": {
                     "type": "object",
                     "properties": {
-                        "type": {
+                        "updateType": {
+                            "enum": [
+                                "remove",
+                                "set",
+                                "update",
+                                "upsert"
+                            ],
                             "type": "string",
-                            "const": "data",
-                            "title": "type"
+                            "title": "updateType"
                         },
-                        "model": {
+                        "autoGenerateProperties": {
+                            "type": "boolean",
+                            "title": "autoGenerateProperties"
+                        },
+                        "autoGenerateKey": {
+                            "type": "boolean",
+                            "title": "autoGenerateKey"
+                        },
+                        "keyProperty": {
                             "type": "string",
-                            "title": "model"
+                            "title": "keyProperty"
                         },
-                        "options": {
+                        "csvParserOptions": {
                             "type": "object",
                             "properties": {
-                                "updateType": {
-                                    "enum": [
-                                        "remove",
-                                        "set",
-                                        "update",
-                                        "upsert"
-                                    ],
+                                "delimiter": {
                                     "type": "string",
-                                    "title": "updateType"
+                                    "title": "delimiter"
                                 },
-                                "autoGenerateProperties": {
-                                    "type": "boolean",
-                                    "title": "autoGenerateProperties"
-                                },
-                                "autoGenerateKey": {
-                                    "type": "boolean",
-                                    "title": "autoGenerateKey"
-                                },
-                                "keyProperty": {
+                                "quoteChar": {
                                     "type": "string",
-                                    "title": "keyProperty"
+                                    "title": "quoteChar"
                                 },
-                                "csvParserOptions": {
-                                    "type": "object",
-                                    "properties": {
-                                        "delimiter": {
-                                            "type": "string",
-                                            "title": "delimiter"
-                                        },
-                                        "quoteChar": {
-                                            "type": "string",
-                                            "title": "quoteChar"
-                                        },
-                                        "escapeChar": {
-                                            "type": "string",
-                                            "title": "escapeChar"
-                                        }
-                                    },
-                                    "title": "csvParserOptions"
+                                "escapeChar": {
+                                    "type": "string",
+                                    "title": "escapeChar"
                                 }
                             },
-                            "title": "options"
+                            "additionalProperties": false,
+                            "title": "csvParserOptions"
                         }
                     },
-                    "required": [
-                        "model",
-                        "type"
-                    ]
+                    "additionalProperties": false,
+                    "title": "options"
                 }
+            },
+            "required": [
+                "model",
+                "type",
+                "url"
             ]
         },
         "AppLoaderConfiguration.TransformerResource": {
@@ -547,65 +531,50 @@
                 }
             ],
             "title": "AppLoaderConfiguration.TransformerResource",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/ResourceType",
-                            "title": "type"
-                        },
-                        "tags": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "tags"
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "url"
-                    ]
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "transformer",
-                            "title": "type"
-                        },
-                        "applyTo": {
-                            "description": "The tags the transformer applies to",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "applyTo"
-                        },
-                        "transformerType": {
-                            "description": "The transformer type\nrawFileTransformer: The transformer is applied to the raw file\nparsedFileTransformer: The transformer is applied to the parsed file\ndefault: rawFileTransformer",
-                            "enum": [
-                                "parsedFileTransformer",
-                                "rawFileTransformer"
-                            ],
-                            "type": "string",
-                            "title": "transformerType"
-                        }
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "transformer",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     },
-                    "required": [
-                        "type"
-                    ]
+                    "title": "tags"
+                },
+                "applyTo": {
+                    "description": "The tags the transformer applies to",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "applyTo"
+                },
+                "transformerType": {
+                    "description": "The transformer type\nrawFileTransformer: The transformer is applied to the raw file\nparsedFileTransformer: The transformer is applied to the parsed file\ndefault: rawFileTransformer",
+                    "enum": [
+                        "parsedFileTransformer",
+                        "rawFileTransformer"
+                    ],
+                    "type": "string",
+                    "title": "transformerType"
                 }
+            },
+            "required": [
+                "type",
+                "url"
             ]
         },
         "AppLoaderConfiguration.CustomOperatorResource": {
@@ -623,54 +592,39 @@
                 }
             ],
             "title": "AppLoaderConfiguration.CustomOperatorResource",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/ResourceType",
-                            "title": "type"
-                        },
-                        "tags": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "tags"
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "url"
-                    ]
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "operator",
-                            "title": "type"
-                        },
-                        "operator": {
-                            "description": "The operator name that can be used in a query",
-                            "type": "string",
-                            "title": "operator"
-                        }
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "operator",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     },
-                    "required": [
-                        "operator",
-                        "type"
-                    ]
+                    "title": "tags"
+                },
+                "operator": {
+                    "description": "The operator name that can be used in a query",
+                    "type": "string",
+                    "title": "operator"
                 }
+            },
+            "required": [
+                "operator",
+                "type",
+                "url"
             ]
         },
         "AppLoaderConfiguration.CustomScriptResource": {
@@ -688,54 +642,39 @@
                 }
             ],
             "title": "AppLoaderConfiguration.CustomScriptResource",
-            "allOf": [
-                {
-                    "type": "object",
-                    "properties": {
-                        "key": {
-                            "type": "string",
-                            "title": "key"
-                        },
-                        "url": {
-                            "type": "string",
-                            "title": "url"
-                        },
-                        "type": {
-                            "$ref": "#/definitions/ResourceType",
-                            "title": "type"
-                        },
-                        "tags": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "title": "tags"
-                        }
-                    },
-                    "required": [
-                        "type",
-                        "url"
-                    ]
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
                 },
-                {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "const": "script",
-                            "title": "type"
-                        },
-                        "scriptKey": {
-                            "description": "The operator name that can be used in a query",
-                            "type": "string",
-                            "title": "scriptKey"
-                        }
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "script",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     },
-                    "required": [
-                        "scriptKey",
-                        "type"
-                    ]
+                    "title": "tags"
+                },
+                "scriptKey": {
+                    "description": "The operator name that can be used in a query",
+                    "type": "string",
+                    "title": "scriptKey"
                 }
+            },
+            "required": [
+                "scriptKey",
+                "type",
+                "url"
             ]
         }
     },

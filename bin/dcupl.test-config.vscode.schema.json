@@ -41,6 +41,7 @@
                     "title": "allowMissingData"
                 }
             },
+            "additionalProperties": false,
             "title": "errorTracking"
         },
         "models": {
@@ -72,6 +73,7 @@
                         "title": "requiredAttributes"
                     }
                 },
+                "additionalProperties": false,
                 "required": [
                     "key",
                     "modelKey"
@@ -80,6 +82,7 @@
             "title": "models"
         }
     },
+    "additionalProperties": false,
     "required": [
         "key"
     ],
