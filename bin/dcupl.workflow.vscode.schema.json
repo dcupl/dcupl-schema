@@ -156,16 +156,6 @@
                                 "$ref": "#/definitions/Workflow.TriggerRequestMethod"
                             },
                             "title": "methods"
-                        },
-                        "scripts": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "string",
-                                    "title": "success"
-                                }
-                            },
-                            "title": "scripts"
                         }
                     },
                     "required": [
@@ -1056,6 +1046,7 @@
                                     "title": "method"
                                 },
                                 "body": {
+                                    "type": "string",
                                     "title": "body"
                                 },
                                 "headers": {
