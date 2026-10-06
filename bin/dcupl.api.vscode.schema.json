@@ -226,6 +226,59 @@
         "version": {
             "type": "string",
             "title": "version"
+        },
+        "endpoints": {
+            "description": "Scripted endpoints served under instance/<key>/x/<path>, each answered by a type: 'script' loader resource (dcupl-app-runner#88).",
+            "type": "array",
+            "items": {
+                "defaultSnippets": [
+                    {
+                        "label": "Endpoint",
+                        "body": {
+                            "path": "$1",
+                            "method": "GET",
+                            "scriptKey": "$2",
+                            "description": "$3"
+                        }
+                    }
+                ],
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "description": "URL-safe path relative to the instance's x/ prefix: no leading slash, segments separated by /, a segment starting with : is a path parameter (orders, orders/:id/summary). method + path must be unique within the template.",
+                        "type": "string",
+                        "pattern": "^(:?[A-Za-z0-9_.~-]+)(/:?[A-Za-z0-9_.~-]+)*$",
+                        "title": "path"
+                    },
+                    "method": {
+                        "description": "HTTP method the endpoint answers. The runner serves GET and POST.",
+                        "enum": [
+                            "GET",
+                            "POST"
+                        ],
+                        "type": "string",
+                        "title": "method"
+                    },
+                    "scriptKey": {
+                        "description": "The scriptKey of a type: 'script' resource in the loader configuration. Only listed scripts are callable; the script runs in endpoint mode with the request.",
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "scriptKey"
+                    },
+                    "description": {
+                        "description": "Shown as the operation summary in the instance's Swagger document and the console's API tester.",
+                        "type": "string",
+                        "title": "description"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "path",
+                    "method",
+                    "scriptKey"
+                ]
+            },
+            "title": "endpoints"
         }
     },
     "additionalProperties": false,
