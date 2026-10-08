@@ -3,6 +3,8 @@
     "properties": {
         "key": {
             "type": "string",
+            "minLength": 1,
+            "description": "API key",
             "title": "key"
         },
         "dcuplConfig": {
@@ -10,10 +12,14 @@
             "properties": {
                 "projectId": {
                     "type": "string",
+                    "minLength": 1,
+                    "description": "Dcupl project ID",
                     "title": "projectId"
                 },
                 "apiKey": {
                     "type": "string",
+                    "minLength": 1,
+                    "description": "Dcupl API key",
                     "title": "apiKey"
                 },
                 "processOptions": {
@@ -75,8 +81,7 @@
                                 },
                                 "additionalProperties": false,
                                 "required": [
-                                    "key",
-                                    "value"
+                                    "key"
                                 ]
                             },
                             "title": "variables"
@@ -108,6 +113,10 @@
                                         "escapeChar": {
                                             "type": "string",
                                             "title": "escapeChar"
+                                        },
+                                        "commentChar": {
+                                            "type": "string",
+                                            "title": "commentChar"
                                         }
                                     },
                                     "additionalProperties": false,
@@ -117,7 +126,26 @@
                                     "type": "object",
                                     "properties": {
                                         "autoGenerateProperties": {
-                                            "type": "boolean",
+                                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                            "anyOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "deep": {
+                                                            "type": "boolean",
+                                                            "title": "deep"
+                                                        },
+                                                        "sampleSize": {
+                                                            "type": "number",
+                                                            "title": "sampleSize"
+                                                        }
+                                                    },
+                                                    "additionalProperties": false
+                                                },
+                                                {
+                                                    "type": "boolean"
+                                                }
+                                            ],
                                             "title": "autoGenerateProperties"
                                         }
                                     },
@@ -130,6 +158,7 @@
                         }
                     },
                     "additionalProperties": false,
+                    "description": "Dcupl process options",
                     "title": "processOptions"
                 },
                 "loaderFetchOptions": {
@@ -175,22 +204,26 @@
                         }
                     },
                     "additionalProperties": false,
+                    "description": "Dcupl loader fetch options",
                     "title": "loaderFetchOptions"
                 }
             },
-            "additionalProperties": false,
             "required": [
+                "projectId",
                 "apiKey",
-                "processOptions",
-                "projectId"
+                "processOptions"
             ],
+            "additionalProperties": false,
+            "description": "Dcupl configuration",
             "title": "dcuplConfig"
         },
         "vGuardEnabled": {
             "type": "boolean",
+            "description": "Version guard enabled",
             "title": "vGuardEnabled"
         },
         "auth": {
+            "description": "Authentication configuration",
             "type": "array",
             "items": {
                 "type": "object",
@@ -198,39 +231,96 @@
                     "type": {
                         "type": "string",
                         "const": "api-key",
+                        "description": "Authentication type",
                         "title": "type"
                     },
                     "value": {
                         "type": "string",
+                        "minLength": 1,
+                        "description": "API key value",
                         "title": "value"
                     }
                 },
-                "additionalProperties": false,
                 "required": [
                     "type",
                     "value"
-                ]
+                ],
+                "additionalProperties": false
             },
             "title": "auth"
         },
         "name": {
+            "description": "Human-readable name",
             "type": "string",
             "title": "name"
         },
         "description": {
+            "description": "Description",
             "type": "string",
             "title": "description"
         },
         "version": {
+            "description": "Template version",
             "type": "string",
             "title": "version"
+        },
+        "endpoints": {
+            "description": "Scripted endpoints served under the endpoints/ prefix",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "pattern": "^(:?[A-Za-z0-9_.~-]+)(\\/:?[A-Za-z0-9_.~-]+)*$",
+                        "description": "Endpoint path relative to the instance endpoints/ prefix, :name segments are path params",
+                        "title": "path"
+                    },
+                    "method": {
+                        "type": "string",
+                        "enum": [
+                            "GET",
+                            "POST"
+                        ],
+                        "description": "HTTP method",
+                        "title": "method"
+                    },
+                    "scriptKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "scriptKey of the type: script loader resource that answers the request",
+                        "title": "scriptKey"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string",
+                        "title": "description"
+                    }
+                },
+                "required": [
+                    "path",
+                    "method",
+                    "scriptKey"
+                ],
+                "additionalProperties": false,
+                "defaultSnippets": {
+                    "label": "Endpoint",
+                    "properties": [
+                        "path",
+                        "method:GET",
+                        "scriptKey",
+                        "description"
+                    ]
+                }
+            },
+            "title": "endpoints"
         }
     },
-    "additionalProperties": false,
     "required": [
-        "dcuplConfig",
         "key",
+        "dcuplConfig",
         "vGuardEnabled"
     ],
+    "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-07/schema#"
 }

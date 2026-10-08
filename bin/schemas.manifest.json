@@ -1,0 +1,66 @@
+{
+    "sdkVersion": "2.0.0-beta.25",
+    "schemas": {
+        "model": {
+            "source": "ts:@dcupl/common/dist/esm/types/model.types.d.ts#Model",
+            "fileMatch": [
+                "*.dcupl.json"
+            ],
+            "files": [
+                "dcupl.model.schema.json",
+                "dcupl.model.vscode.schema.json"
+            ]
+        },
+        "loader": {
+            "source": "ts:@dcupl/common/dist/esm/types/app-loader.types.d.ts#AppLoaderConfiguration.ProjectConfiguration",
+            "fileMatch": [
+                "dcupl.lc.json",
+                "*.dcupl.lc.json"
+            ],
+            "files": [
+                "dcupl.loader.schema.json",
+                "dcupl.loader.vscode.schema.json"
+            ]
+        },
+        "api": {
+            "source": "zod:@dcupl/common-internal.RestApiTemplateSchema",
+            "fileMatch": [
+                "*.api.json"
+            ],
+            "files": [
+                "dcupl.api.schema.json",
+                "dcupl.api.vscode.schema.json"
+            ]
+        },
+        "workflow": {
+            "source": "ts:@dcupl/common-internal/dist/esm/workflow/workflow.types.d.ts#Workflow.Template",
+            "fileMatch": [
+                "*.workflow.json"
+            ],
+            "files": [
+                "dcupl.workflow.schema.json",
+                "dcupl.workflow.vscode.schema.json"
+            ]
+        },
+        "test-scenario-loader": {
+            "source": "ts:@dcupl/common/dist/esm/types/testing.types.d.ts#DcuplTestScenarioConfig",
+            "fileMatch": [
+                "dcupl.test-scenario-loader.json"
+            ],
+            "files": [
+                "dcupl.test-scenario-loader.schema.json",
+                "dcupl.test-scenario-loader.vscode.schema.json"
+            ]
+        },
+        "test-config": {
+            "source": "ts:@dcupl/common/dist/esm/types/testing.types.d.ts#DcuplApplicationTestingConfig",
+            "fileMatch": [
+                "*.dcupl.test-config.json"
+            ],
+            "files": [
+                "dcupl.test-config.schema.json",
+                "dcupl.test-config.vscode.schema.json"
+            ]
+        }
+    }
+}
