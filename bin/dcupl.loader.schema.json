@@ -67,8 +67,7 @@
                             },
                             "additionalProperties": false,
                             "required": [
-                                "key",
-                                "value"
+                                "key"
                             ]
                         },
                         "title": "variables"
@@ -258,8 +257,7 @@
                             },
                             "additionalProperties": false,
                             "required": [
-                                "key",
-                                "value"
+                                "key"
                             ]
                         },
                         "title": "variables"
@@ -299,6 +297,10 @@
                         "escapeChar": {
                             "type": "string",
                             "title": "escapeChar"
+                        },
+                        "commentChar": {
+                            "type": "string",
+                            "title": "commentChar"
                         }
                     },
                     "additionalProperties": false,
@@ -308,7 +310,26 @@
                     "type": "object",
                     "properties": {
                         "autoGenerateProperties": {
-                            "type": "boolean",
+                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "deep": {
+                                            "type": "boolean",
+                                            "title": "deep"
+                                        },
+                                        "sampleSize": {
+                                            "type": "number",
+                                            "title": "sampleSize"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
                             "title": "autoGenerateProperties"
                         }
                     },
@@ -341,12 +362,12 @@
                     "description": "A transformer resource points to a javascript file that can be used to transform the data of a data resource."
                 },
                 {
-                    "$ref": "#/definitions/AppLoaderConfiguration.CustomOperatorResource",
-                    "description": "A query operator resource points to a javascript file that defines a custom query operator."
-                },
-                {
                     "$ref": "#/definitions/AppLoaderConfiguration.CustomScriptResource",
                     "description": "A script resource."
+                },
+                {
+                    "$ref": "#/definitions/AppLoaderConfiguration.CustomOperatorResource",
+                    "description": "A query operator resource points to a javascript file that defines a custom query operator."
                 }
             ]
         },
@@ -453,17 +474,52 @@
                             "type": "string",
                             "title": "updateType"
                         },
-                        "autoGenerateProperties": {
-                            "type": "boolean",
-                            "title": "autoGenerateProperties"
+                        "keyProperty": {
+                            "description": "Property name(s) on each row that uniquely identify it.\n\nPass a single string for a simple key (`keyProperty: 'ID'`) or a\nnon-empty array for a composite key (`keyProperty: ['ID', 'Language']`).\nComposite parts are joined into the internal `.key` using\n`keyPropertySeparator` (default `::`). Order is preserved literally.\n\nEach part is stringified via `String(value)`, so `null`, `undefined`,\nand `''` produce distinct keys (`'null'`, `'undefined'`, `''`).",
+                            "anyOf": [
+                                {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "title": "keyProperty"
+                        },
+                        "keyPropertySeparator": {
+                            "description": "Separator joining composite `keyProperty` parts. Default `'::'`.\nIgnored when `keyProperty` is a string or a single-element array.",
+                            "type": "string",
+                            "title": "keyPropertySeparator"
                         },
                         "autoGenerateKey": {
                             "type": "boolean",
                             "title": "autoGenerateKey"
                         },
-                        "keyProperty": {
-                            "type": "string",
-                            "title": "keyProperty"
+                        "autoGenerateProperties": {
+                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                            "anyOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "deep": {
+                                            "type": "boolean",
+                                            "title": "deep"
+                                        },
+                                        "sampleSize": {
+                                            "type": "number",
+                                            "title": "sampleSize"
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "title": "autoGenerateProperties"
                         },
                         "csvParserOptions": {
                             "type": "object",
@@ -479,6 +535,10 @@
                                 "escapeChar": {
                                     "type": "string",
                                     "title": "escapeChar"
+                                },
+                                "commentChar": {
+                                    "type": "string",
+                                    "title": "commentChar"
                                 }
                             },
                             "additionalProperties": false,
@@ -553,53 +613,6 @@
                 "url"
             ]
         },
-        "AppLoaderConfiguration.CustomOperatorResource": {
-            "description": "A query operator resource points to a javascript file that defines a custom query operator.",
-            "defaultSnippets": {
-                "label": "Query Operator",
-                "properties": [
-                    "url:string:${baseUrl}/models/my-operator.js",
-                    "type:operator",
-                    "operator:my_operator",
-                    "tags:array"
-                ]
-            },
-            "title": "AppLoaderConfiguration.CustomOperatorResource",
-            "additionalProperties": false,
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string",
-                    "title": "key"
-                },
-                "url": {
-                    "type": "string",
-                    "title": "url"
-                },
-                "type": {
-                    "type": "string",
-                    "const": "operator",
-                    "title": "type"
-                },
-                "tags": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "title": "tags"
-                },
-                "operator": {
-                    "description": "The operator name that can be used in a query",
-                    "type": "string",
-                    "title": "operator"
-                }
-            },
-            "required": [
-                "operator",
-                "type",
-                "url"
-            ]
-        },
         "AppLoaderConfiguration.CustomScriptResource": {
             "description": "A script resource.",
             "defaultSnippets": {
@@ -643,6 +656,53 @@
             },
             "required": [
                 "scriptKey",
+                "type",
+                "url"
+            ]
+        },
+        "AppLoaderConfiguration.CustomOperatorResource": {
+            "description": "A query operator resource points to a javascript file that defines a custom query operator.",
+            "defaultSnippets": {
+                "label": "Query Operator",
+                "properties": [
+                    "url:string:${baseUrl}/models/my-operator.js",
+                    "type:operator",
+                    "operator:my_operator",
+                    "tags:array"
+                ]
+            },
+            "title": "AppLoaderConfiguration.CustomOperatorResource",
+            "additionalProperties": false,
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "key"
+                },
+                "url": {
+                    "type": "string",
+                    "title": "url"
+                },
+                "type": {
+                    "type": "string",
+                    "const": "operator",
+                    "title": "type"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "tags"
+                },
+                "operator": {
+                    "description": "The operator name that can be used in a query",
+                    "type": "string",
+                    "title": "operator"
+                }
+            },
+            "required": [
+                "operator",
                 "type",
                 "url"
             ]
