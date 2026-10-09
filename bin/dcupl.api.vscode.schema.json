@@ -318,6 +318,22 @@
                 ]
             },
             "title": "endpoints"
+        },
+        "mcp": {
+            "description": "Model Context Protocol endpoint of the instance, absent = off",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Serve the MCP endpoint (POST instance/:key/mcp) for this instance. Needs the project feature MCP_ENABLED",
+                    "title": "enabled"
+                }
+            },
+            "required": [
+                "enabled"
+            ],
+            "additionalProperties": false,
+            "title": "mcp"
         }
     },
     "required": [

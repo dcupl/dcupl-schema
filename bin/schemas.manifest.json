@@ -1,5 +1,5 @@
 {
-    "sdkVersion": "2.0.0-beta.25",
+    "sdkVersion": "2.0.0-beta.26",
     "schemas": {
         "model": {
             "source": "ts:@dcupl/common/dist/esm/types/model.types.d.ts#Model",
