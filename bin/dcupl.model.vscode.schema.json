@@ -72,7 +72,7 @@
                     "title": "autoGenerateKey"
                 },
                 "autoGenerateProperties": {
-                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                     "anyOf": [
                         {
                             "type": "object",
@@ -259,7 +259,7 @@
                                 "title": "autoGenerateKey"
                             },
                             "autoGenerateProperties": {
-                                "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                                 "anyOf": [
                                     {
                                         "type": "object",
@@ -466,10 +466,6 @@
                             "groupOptions": {
                                 "type": "object",
                                 "properties": {
-                                    "limit": {
-                                        "type": "number",
-                                        "title": "limit"
-                                    },
                                     "calculateNotFound": {
                                         "type": "boolean",
                                         "title": "calculateNotFound"
@@ -499,17 +495,10 @@
                                 "additionalProperties": false,
                                 "title": "groupOptions"
                             },
-                            "excludeZeros": {
-                                "type": "boolean",
-                                "title": "excludeZeros"
-                            },
                             "excludeUndefineds": {
+                                "description": "Leaves the `undefined` value out of `distinct`; the other types ignore it.",
                                 "type": "boolean",
                                 "title": "excludeUndefineds"
-                            },
-                            "excludeUnresolved": {
-                                "type": "boolean",
-                                "title": "excludeUnresolved"
                             }
                         },
                         "additionalProperties": false,
@@ -679,10 +668,6 @@
                                     "groupOptions": {
                                         "type": "object",
                                         "properties": {
-                                            "limit": {
-                                                "type": "number",
-                                                "title": "limit"
-                                            },
                                             "calculateNotFound": {
                                                 "type": "boolean",
                                                 "title": "calculateNotFound"
@@ -712,17 +697,10 @@
                                         "additionalProperties": false,
                                         "title": "groupOptions"
                                     },
-                                    "excludeZeros": {
-                                        "type": "boolean",
-                                        "title": "excludeZeros"
-                                    },
                                     "excludeUndefineds": {
+                                        "description": "Leaves the `undefined` value out of `distinct`; the other types ignore it.",
                                         "type": "boolean",
                                         "title": "excludeUndefineds"
-                                    },
-                                    "excludeUnresolved": {
-                                        "type": "boolean",
-                                        "title": "excludeUnresolved"
                                     }
                                 },
                                 "additionalProperties": false,
@@ -780,7 +758,8 @@
                     "$ref": "#/definitions/PropertyString"
                 },
                 {
-                    "$ref": "#/definitions/PropertyBoolean"
+                    "$ref": "#/definitions/PropertyBoolean",
+                    "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted."
                 },
                 {
                     "$ref": "#/definitions/PropertyJson"
@@ -1104,10 +1083,6 @@
                 "groupOptions": {
                     "type": "object",
                     "properties": {
-                        "limit": {
-                            "type": "number",
-                            "title": "limit"
-                        },
                         "calculateNotFound": {
                             "type": "boolean",
                             "title": "calculateNotFound"
@@ -1137,17 +1112,10 @@
                     "additionalProperties": false,
                     "title": "groupOptions"
                 },
-                "excludeZeros": {
-                    "type": "boolean",
-                    "title": "excludeZeros"
-                },
                 "excludeUndefineds": {
+                    "description": "Leaves the `undefined` value out of `distinct`; the other types ignore it.",
                     "type": "boolean",
                     "title": "excludeUndefineds"
-                },
-                "excludeUnresolved": {
-                    "type": "boolean",
-                    "title": "excludeUnresolved"
                 }
             },
             "additionalProperties": false,
@@ -2186,9 +2154,11 @@
             ]
         },
         "PropertyBoolean": {
+            "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted.",
             "defaultSnippets": [
                 {
                     "label": "String Property",
+                    "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted.",
                     "body": {
                         "key": "$1",
                         "type": "^\"boolean\""
@@ -3769,9 +3739,11 @@
             "title": "Reference",
             "anyOf": [
                 {
+                    "description": "A reference to items of another model. A raw value of `null` (also a CSV `null` cell) is kept as\n`null` on the item and in the reference's index, as for a property, so `eq null` matches it and\n`typeof 'undefined'` does not; an absent or empty value leaves the reference undefined. A null\nreference reports `NullValue` unless `quality.nullable` is set, as a property does.",
                     "defaultSnippets": [
                         {
                             "label": "Default Reference",
+                            "description": "A reference to items of another model. A raw value of `null` (also a CSV `null` cell) is kept as\n`null` on the item and in the reference's index, as for a property, so `eq null` matches it and\n`typeof 'undefined'` does not; an absent or empty value leaves the reference undefined. A null\nreference reports `NullValue` unless `quality.nullable` is set, as a property does.",
                             "body": {
                                 "key": "$1",
                                 "type": "singleValued",
@@ -4032,7 +4004,7 @@
                 },
                 {
                     "$ref": "#/definitions/QueryReference",
-                    "description": "Queries a Reference from a foreign model"
+                    "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one."
                 },
                 {
                     "$ref": "#/definitions/DerivedReference",
@@ -4352,11 +4324,11 @@
             ]
         },
         "QueryReference": {
-            "description": "Queries a Reference from a foreign model",
+            "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one.",
             "defaultSnippets": [
                 {
                     "label": "Resolved Reference",
-                    "description": "Queries a Reference from a foreign model",
+                    "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one.",
                     "body": {
                         "key": "$1",
                         "type": "multiValued",
@@ -4662,7 +4634,7 @@
                                     "title": "__type"
                                 },
                                 "groupType": {
-                                    "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                                     "enum": [
                                         "and",
                                         "or"
@@ -4706,7 +4678,7 @@
                                         "title": "__type"
                                     },
                                     "groupType": {
-                                        "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                                        "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                                         "enum": [
                                             "and",
                                             "or"
@@ -5284,7 +5256,7 @@
                     "title": "projection"
                 },
                 "sort": {
-                    "description": "Define sorting order for results.",
+                    "description": "Define sorting order for results: one `order` entry per attribute.",
                     "type": "object",
                     "properties": {
                         "attributes": {
@@ -5338,7 +5310,7 @@
                     "title": "__type"
                 },
                 "groupType": {
-                    "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                     "enum": [
                         "and",
                         "or"

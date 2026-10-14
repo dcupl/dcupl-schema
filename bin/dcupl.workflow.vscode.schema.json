@@ -1594,6 +1594,11 @@
                                                 "enabled": {
                                                     "type": "boolean",
                                                     "title": "enabled"
+                                                },
+                                                "maxSize": {
+                                                    "description": "Upper bound, in estimated bytes, for what a long-running instance keeps for queries it has\nanswered (#361). It applies separately to\n- the cached results of each list (every `dcupl.lists.create` list, and the internal list per\n  model behind `dcupl.query.execute` and `dcupl.fn.*`), when `enabled` is true, and\n- the indices each model builds for a query or a groupBy section (aggregates, groupBy,\n  suggestions); a list created with `listItemKeys` or `query` has its own. This bound applies\n  with the cache disabled too.\n\nWhen a new entry takes the total over the bound, the least recently used entries are dropped\nand rebuilt on their next use; an entry larger than the bound is not kept. Results stay the\nsame, only repeated queries may take longer. Sizes are estimates (cache key length plus\nthe number of result entries); an index on a whole attribute is never dropped.\n\nDefault: 64 MiB (`64 * 1024 * 1024`). `Infinity` turns the bound off.",
+                                                    "type": "number",
+                                                    "title": "maxSize"
                                                 }
                                             },
                                             "additionalProperties": false,
@@ -1630,10 +1635,6 @@
                                                     "description": "Threshold for item ratio (0-1). If more than this percentage of items in affected models change,\na full update will be triggered instead of a partial update.\nDefault: 0.5 (50%)",
                                                     "type": "number",
                                                     "title": "itemRatioThreshold"
-                                                },
-                                                "cacheInvalidationThreshold": {
-                                                    "type": "number",
-                                                    "title": "cacheInvalidationThreshold"
                                                 },
                                                 "enableDetailedLogging": {
                                                     "description": "Enable detailed logging of update decisions and performance metrics\nDefault: false",
@@ -1763,12 +1764,12 @@
                             "type": "object",
                             "properties": {
                                 "baseUrl": {
-                                    "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN",
+                                    "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN\n\nSet as the default `baseUrl` for the config fetch and all resources: an environment, process or\nglobal variable `baseUrl` wins over it, and the loader logs a warning when its value differs.",
                                     "type": "string",
                                     "title": "baseUrl"
                                 },
                                 "loaderFileName": {
-                                    "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'",
+                                    "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'\n\nSet as the default `loaderFileName`: an environment, process or global variable `loaderFileName`\nwins over it, and the loader logs a warning when its value differs.",
                                     "type": "string",
                                     "title": "loaderFileName"
                                 },
@@ -1874,6 +1875,7 @@
                                     "type": "object",
                                     "properties": {
                                         "defaultDataContainerUpdateType": {
+                                            "description": "How a container changes a model's rows. Containers are applied in the order\nthey were staged; keys are compared as strings.\n\n- `set` (default): replaces all rows. Rows with the same key are deduped:\n  the last row wins as a whole, and each replaced row is recorded as\n  `NonUniqueKey`.\n- `upsert`: merges each row into the row with the same key, or inserts it.\n- `update`: merges each row into the row with the same key; unknown keys\n  are ignored, also on a model without rows.\n- `remove`: deletes the rows with the given keys; unknown keys are ignored.",
                                             "enum": [
                                                 "remove",
                                                 "set",
@@ -1910,7 +1912,7 @@
                                             "type": "object",
                                             "properties": {
                                                 "autoGenerateProperties": {
-                                                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                                                     "anyOf": [
                                                         {
                                                             "type": "object",
@@ -2026,7 +2028,7 @@
                                                 "title": "autoGenerateKey"
                                             },
                                             "autoGenerateProperties": {
-                                                "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                                "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                                                 "anyOf": [
                                                     {
                                                         "type": "object",
@@ -2167,6 +2169,7 @@
             "type": "object",
             "properties": {
                 "type": {
+                    "description": "How a container changes a model's rows. Containers are applied in the order\nthey were staged; keys are compared as strings.\n\n- `set` (default): replaces all rows. Rows with the same key are deduped:\n  the last row wins as a whole, and each replaced row is recorded as\n  `NonUniqueKey`.\n- `upsert`: merges each row into the row with the same key, or inserts it.\n- `update`: merges each row into the row with the same key; unknown keys\n  are ignored, also on a model without rows.\n- `remove`: deletes the rows with the given keys; unknown keys are ignored.",
                     "enum": [
                         "remove",
                         "set",
@@ -2181,7 +2184,7 @@
                     "title": "model"
                 },
                 "keyProperty": {
-                    "description": "Specifies the property (or properties) on a row that uniquely identifies it.\n\n- A single string names one property: `keyProperty: 'id'`.\n- A non-empty array of strings produces a composite key by joining the\n  stringified values of each property with the configured separator\n  (default `::`): `keyProperty: ['ID', 'Language']` → `.key === 'A1::en'`.\n\nThe order of array entries is significant and preserved verbatim.",
+                    "description": "Specifies the property (or properties) on a row that uniquely identifies it.\n\n- A single string names one property: `keyProperty: 'id'`.\n- A non-empty array of strings produces a composite key by joining the\n  stringified values of each property with the configured separator\n  (default `::`): `keyProperty: ['ID', 'Language']` → `.key === 'A1::en'`.\n\nThe order of array entries is significant and preserved verbatim.\n\nA row whose key value is `undefined` or `null` — for a composite key: every\npart — is dropped and recorded as `MissingKey`. A composite key with only\nsome parts missing keeps them as `'undefined'`/`'null'` parts.",
                     "anyOf": [
                         {
                             "type": "array",
@@ -2204,7 +2207,7 @@
                     "title": "autoGenerateKey"
                 },
                 "autoGenerateProperties": {
-                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                    "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                     "anyOf": [
                         {
                             "type": "object",
@@ -2258,7 +2261,8 @@
                     "$ref": "#/definitions/PropertyString"
                 },
                 {
-                    "$ref": "#/definitions/PropertyBoolean"
+                    "$ref": "#/definitions/PropertyBoolean",
+                    "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted."
                 },
                 {
                     "$ref": "#/definitions/PropertyJson"
@@ -2582,10 +2586,6 @@
                 "groupOptions": {
                     "type": "object",
                     "properties": {
-                        "limit": {
-                            "type": "number",
-                            "title": "limit"
-                        },
                         "calculateNotFound": {
                             "type": "boolean",
                             "title": "calculateNotFound"
@@ -2615,17 +2615,10 @@
                     "additionalProperties": false,
                     "title": "groupOptions"
                 },
-                "excludeZeros": {
-                    "type": "boolean",
-                    "title": "excludeZeros"
-                },
                 "excludeUndefineds": {
+                    "description": "Leaves the `undefined` value out of `distinct`; the other types ignore it.",
                     "type": "boolean",
                     "title": "excludeUndefineds"
-                },
-                "excludeUnresolved": {
-                    "type": "boolean",
-                    "title": "excludeUnresolved"
                 }
             },
             "additionalProperties": false,
@@ -3677,9 +3670,11 @@
             ]
         },
         "PropertyBoolean": {
+            "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted.",
             "defaultSnippets": [
                 {
                     "label": "String Property",
+                    "description": "A boolean property. Raw values are read as follows: a boolean is kept; the strings 'true'/'1' and\n'false'/'0' (case-insensitive, also in CSV) and the numbers 1 and 0 become `true` and `false`; any\nother value (another string or number, an object, an array) is a WrongDataType and the value stays\nundefined. With `quality.forceStrictDataType` only real booleans are accepted.",
                     "body": {
                         "key": "$1",
                         "type": "^\"boolean\""
@@ -5260,9 +5255,11 @@
             "title": "Reference",
             "anyOf": [
                 {
+                    "description": "A reference to items of another model. A raw value of `null` (also a CSV `null` cell) is kept as\n`null` on the item and in the reference's index, as for a property, so `eq null` matches it and\n`typeof 'undefined'` does not; an absent or empty value leaves the reference undefined. A null\nreference reports `NullValue` unless `quality.nullable` is set, as a property does.",
                     "defaultSnippets": [
                         {
                             "label": "Default Reference",
+                            "description": "A reference to items of another model. A raw value of `null` (also a CSV `null` cell) is kept as\n`null` on the item and in the reference's index, as for a property, so `eq null` matches it and\n`typeof 'undefined'` does not; an absent or empty value leaves the reference undefined. A null\nreference reports `NullValue` unless `quality.nullable` is set, as a property does.",
                             "body": {
                                 "key": "$1",
                                 "type": "singleValued",
@@ -5523,7 +5520,7 @@
                 },
                 {
                     "$ref": "#/definitions/QueryReference",
-                    "description": "Queries a Reference from a foreign model"
+                    "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one."
                 },
                 {
                     "$ref": "#/definitions/DerivedReference",
@@ -5843,11 +5840,11 @@
             ]
         },
         "QueryReference": {
-            "description": "Queries a Reference from a foreign model",
+            "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one.",
             "defaultSnippets": [
                 {
                     "label": "Resolved Reference",
-                    "description": "Queries a Reference from a foreign model",
+                    "description": "Queries a Reference from a foreign model\n\nQuery references are computed on full updates only. An `update()` that\nchanges the owner model, the queried model or a model the queried model\nreferences therefore runs as a full update, even when the partial-update\nthresholds would allow a partial one.",
                     "body": {
                         "key": "$1",
                         "type": "multiValued",
@@ -6153,7 +6150,7 @@
                                     "title": "__type"
                                 },
                                 "groupType": {
-                                    "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                                     "enum": [
                                         "and",
                                         "or"
@@ -6197,7 +6194,7 @@
                                         "title": "__type"
                                     },
                                     "groupType": {
-                                        "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                                        "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                                         "enum": [
                                             "and",
                                             "or"
@@ -6775,7 +6772,7 @@
                     "title": "projection"
                 },
                 "sort": {
-                    "description": "Define sorting order for results.",
+                    "description": "Define sorting order for results: one `order` entry per attribute.",
                     "type": "object",
                     "properties": {
                         "attributes": {
@@ -6829,7 +6826,7 @@
                     "title": "__type"
                 },
                 "groupType": {
-                    "description": "Combination logic for conditions in this group.\n\nDefaults to `'and'` at evaluation time: a group that reaches the query engine without a\ngroupType (the root query, or a nested group passed inside a full query via\n`apply({ groupKey: 'root', ... })`, `init` or `execute`, or stored by `setGroup`\nreplacing an existing group) is evaluated exactly like `groupType: 'and'`.\n\nNote that groups *created* by the query builder (`addGroup` / `setGroup` / `apply(group)`\nfor a group not yet present) are stored as `'or'` when no groupType is given, and\n`addGroup` extending an existing keyed group keeps that group's current groupType. Set\nthe groupType explicitly to avoid depending on either default.",
+                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
                     "enum": [
                         "and",
                         "or"
@@ -7691,7 +7688,7 @@
                                             "title": "autoGenerateKey"
                                         },
                                         "autoGenerateProperties": {
-                                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                                             "anyOf": [
                                                 {
                                                     "type": "object",

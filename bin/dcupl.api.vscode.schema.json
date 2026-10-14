@@ -92,6 +92,7 @@
                             "type": "object",
                             "properties": {
                                 "defaultDataContainerUpdateType": {
+                                    "description": "How a container changes a model's rows. Containers are applied in the order\nthey were staged; keys are compared as strings.\n\n- `set` (default): replaces all rows. Rows with the same key are deduped:\n  the last row wins as a whole, and each replaced row is recorded as\n  `NonUniqueKey`.\n- `upsert`: merges each row into the row with the same key, or inserts it.\n- `update`: merges each row into the row with the same key; unknown keys\n  are ignored, also on a model without rows.\n- `remove`: deletes the rows with the given keys; unknown keys are ignored.",
                                     "enum": [
                                         "remove",
                                         "set",
@@ -128,7 +129,7 @@
                                     "type": "object",
                                     "properties": {
                                         "autoGenerateProperties": {
-                                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.",
+                                            "description": "Configures how property auto-generation inspects input data.\n\n- `true` / `false`: enable/disable auto-generation. When enabled with `true`,\n  only the first row of input data is inspected (fast, default behavior).\n- Object form lets you scan more rows:\n  - `deep: true` walks every row and reconciles types across them.\n  - `sampleSize: N` walks at most N rows (implies deep). Useful for large datasets\n    where row 1 alone may not represent the schema.\n\nWhen more than one row is scanned, empty values (`null`, `undefined`, `''`)\nare ignored during inference so a single blank cell does not poison a column's type.\n\nString values `'true'`/`'false'` infer as `boolean` in any case (`TRUE`, `False`);\n`'1'`/`'0'` infer as `int`.\n\nInference runs on `init()` and on every `update()` — partial or full — over the\nmodel's merged data, so an attribute the scanned rows carry gets a property even\nwhen it first appears in data added after `init()`. Once generated, the property\nholds the value of every row that carries the attribute, rows the update did not\ntouch included — as on `init()`. Properties are only ever added, never removed\nor retyped.",
                                             "anyOf": [
                                                 {
                                                     "type": "object",
@@ -167,12 +168,12 @@
                     "type": "object",
                     "properties": {
                         "baseUrl": {
-                            "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN",
+                            "description": "The base URL to use for all resources\nIf not set the baseUrl points to the draft version of the CDN\n\nSet as the default `baseUrl` for the config fetch and all resources: an environment, process or\nglobal variable `baseUrl` wins over it, and the loader logs a warning when its value differs.",
                             "type": "string",
                             "title": "baseUrl"
                         },
                         "loaderFileName": {
-                            "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'",
+                            "description": "The name of the loader file to use\nIf not set the loader file is named 'dcupl.lc.json'\n\nSet as the default `loaderFileName`: an environment, process or global variable `loaderFileName`\nwins over it, and the loader logs a warning when its value differs.",
                             "type": "string",
                             "title": "loaderFileName"
                         },
