@@ -1596,9 +1596,14 @@
                                                     "title": "enabled"
                                                 },
                                                 "maxSize": {
-                                                    "description": "Upper bound, in estimated bytes, for what a long-running instance keeps for queries it has\nanswered (#361). It applies separately to\n- the cached results of each list (every `dcupl.lists.create` list, and the internal list per\n  model behind `dcupl.query.execute` and `dcupl.fn.*`), when `enabled` is true, and\n- the indices each model builds for a query or a groupBy section (aggregates, groupBy,\n  suggestions); a list created with `listItemKeys` or `query` has its own. This bound applies\n  with the cache disabled too.\n\nWhen a new entry takes the total over the bound, the least recently used entries are dropped\nand rebuilt on their next use; an entry larger than the bound is not kept. Results stay the\nsame, only repeated queries may take longer. Sizes are estimates (cache key length plus\nthe number of result entries); an index on a whole attribute is never dropped.\n\nDefault: 64 MiB (`64 * 1024 * 1024`). `Infinity` turns the bound off.",
+                                                    "description": "Upper bound, in estimated bytes, for what a long-running instance keeps for queries it has\nanswered (#361). It applies separately to\n- the cached results of each list (every `dcupl.lists.create` list, and the internal list per\n  model behind `dcupl.query.execute` and `dcupl.fn.*`), when `enabled` is true, and\n- the indices each model builds for a query or a groupBy section (aggregates, groupBy,\n  suggestions); a list created with `listItemKeys` or `query` has its own. This bound applies\n  with the cache disabled too.\n\nWhen a new entry takes the total over the bound, the least recently used entries are dropped\nand rebuilt on their next use; an entry larger than the bound is not kept. Results stay the\nsame, only repeated queries may take longer. Sizes are estimates (cache key length plus\nthe number of result entries); an index on a whole attribute is never dropped. The projected\ncopies of deep facets and deep filters have their own bound, `maxProjectionSize`.\n\nDefault: 64 MiB (`64 * 1024 * 1024`). `Infinity` turns the bound off.",
                                                     "type": "number",
                                                     "title": "maxSize"
+                                                },
+                                                "maxProjectionSize": {
+                                                    "description": "Upper bound, in estimated bytes per list, for the projected copies that deep facets and deep\nfilters build (a dotted path in a list's query, a facet attribute or an `fn.*` query), when\n`enabled` is true (#443). A list keeps one copy per distinct set of dotted attributes. Each\ncopy owns its items, so it is sized from sampled rows rather than from its entry count.\n\nThe least recently used projections are dropped and projected again on their next use. A\nprojection larger than the bound is built and served but not kept, so every deep facet or deep\nfilter on that list projects again: raise the bound for deep facets on large lists. Results\nstay the same, only repeated calls may take longer.\n\nProjections have their own bound because they are much larger than a cached result: under the\nshared `maxSize`, one deep facet path interleaved with broad query results was projected\nagain on every call (48 to 159 ms mean on 80,000 rows).\n\nDefault: 256 MiB (`256 * 1024 * 1024`). `Infinity` turns the bound off.",
+                                                    "type": "number",
+                                                    "title": "maxProjectionSize"
                                                 }
                                             },
                                             "additionalProperties": false,
@@ -1664,6 +1669,11 @@
                                                 "enabled"
                                             ],
                                             "title": "autoUpdateLists"
+                                        },
+                                        "retainStagedData": {
+                                            "description": "`false`: `init()` drops the staged raw rows after a successful build (`dcupl.seal()`), which\nfrees 15–22 % of the retained heap on a typical dataset. After that every data or model write\nthrows `DcuplSealedError` and `init()`/`update()` resolve `false`; reads are unaffected. For\ninstances that load once and never update, such as an app-runner worker. Default `true`.\n\nLoaders must finish `process()` before `init()` (await it): with `false`, `init()` resolves\n`false`, logs, and leaves the instance unsealed when a loader resource is still pending (before\nor during the build) or a data or model write was staged during the build. The build stands in\nthe second case: call `update()`, then `seal()`.",
+                                            "type": "boolean",
+                                            "title": "retainStagedData"
                                         }
                                     },
                                     "additionalProperties": false,
