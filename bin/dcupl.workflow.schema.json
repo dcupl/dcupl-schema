@@ -103,10 +103,18 @@
             "title": "version"
         },
         "variables": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/%7Bname%3Astring%3Bvalue%3Astring%3Bdescription%3Astring%3B%7D"
-            },
+            "description": "An array of `{ name, value, description }` or a `{ name: value }` map; the runner accepts both (#327).",
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Record%3Cstring%2Cstring%3E"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/%7Bname%3Astring%3Bvalue%3Astring%3Bdescription%3Astring%3B%7D"
+                    }
+                }
+            ],
             "title": "variables"
         }
     },
