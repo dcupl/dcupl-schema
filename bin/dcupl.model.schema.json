@@ -456,6 +456,7 @@
                                 "title": "distinctOptions"
                             },
                             "groupOptions": {
+                                "description": "`groups` to count items into. A range group counts the items with `from <= value < to`: the lower\nbound is inclusive, the upper bound exclusive, so adjacent groups (`0-50`, `50-100`) hold every\nvalue once. With only `from` or only `to` the range is open-ended. `calculateNotFound` adds a\ngroup with the items that fall into no group.",
                                 "type": "object",
                                 "properties": {
                                     "calculateNotFound": {
@@ -465,6 +466,7 @@
                                     "groups": {
                                         "type": "array",
                                         "items": {
+                                            "description": "One group of the `group` aggregation: a range (`from`, `to`) or a list of values (`value`).\n\nA range holds the values with `from <= value < to`: `from` is inclusive, `to` is exclusive. With\nonly `from` it holds `value >= from`, with only `to` it holds `value < to`; a bound that is\n`undefined` or `null` is absent, and a group without a bound and without `value` matches nothing.\n\nA range compares numbers, non-empty strings and dates, with the JavaScript `<=` and `<` operators\n(dates by their time, against `Date` or epoch millisecond bounds). Every other value is in no range:\n`undefined`, `null`, `''`, a boolean, an object, and an array (an array-typed attribute without a\ndot path is not unwound). A value group can list such a value; `value: null` is an absent list.",
                                             "type": "object",
                                             "properties": {
                                                 "from": {
@@ -656,6 +658,7 @@
                                         "title": "distinctOptions"
                                     },
                                     "groupOptions": {
+                                        "description": "`groups` to count items into. A range group counts the items with `from <= value < to`: the lower\nbound is inclusive, the upper bound exclusive, so adjacent groups (`0-50`, `50-100`) hold every\nvalue once. With only `from` or only `to` the range is open-ended. `calculateNotFound` adds a\ngroup with the items that fall into no group.",
                                         "type": "object",
                                         "properties": {
                                             "calculateNotFound": {
@@ -665,6 +668,7 @@
                                             "groups": {
                                                 "type": "array",
                                                 "items": {
+                                                    "description": "One group of the `group` aggregation: a range (`from`, `to`) or a list of values (`value`).\n\nA range holds the values with `from <= value < to`: `from` is inclusive, `to` is exclusive. With\nonly `from` it holds `value >= from`, with only `to` it holds `value < to`; a bound that is\n`undefined` or `null` is absent, and a group without a bound and without `value` matches nothing.\n\nA range compares numbers, non-empty strings and dates, with the JavaScript `<=` and `<` operators\n(dates by their time, against `Date` or epoch millisecond bounds). Every other value is in no range:\n`undefined`, `null`, `''`, a boolean, an object, and an array (an array-typed attribute without a\ndot path is not unwound). A value group can list such a value; `value: null` is an absent list.",
                                                     "type": "object",
                                                     "properties": {
                                                         "from": {
@@ -1069,6 +1073,7 @@
                     "title": "distinctOptions"
                 },
                 "groupOptions": {
+                    "description": "`groups` to count items into. A range group counts the items with `from <= value < to`: the lower\nbound is inclusive, the upper bound exclusive, so adjacent groups (`0-50`, `50-100`) hold every\nvalue once. With only `from` or only `to` the range is open-ended. `calculateNotFound` adds a\ngroup with the items that fall into no group.",
                     "type": "object",
                     "properties": {
                         "calculateNotFound": {
@@ -1078,6 +1083,7 @@
                         "groups": {
                             "type": "array",
                             "items": {
+                                "description": "One group of the `group` aggregation: a range (`from`, `to`) or a list of values (`value`).\n\nA range holds the values with `from <= value < to`: `from` is inclusive, `to` is exclusive. With\nonly `from` it holds `value >= from`, with only `to` it holds `value < to`; a bound that is\n`undefined` or `null` is absent, and a group without a bound and without `value` matches nothing.\n\nA range compares numbers, non-empty strings and dates, with the JavaScript `<=` and `<` operators\n(dates by their time, against `Date` or epoch millisecond bounds). Every other value is in no range:\n`undefined`, `null`, `''`, a boolean, an object, and an array (an array-typed attribute without a\ndot path is not unwound). A value group can list such a value; `value: null` is an absent list.",
                                 "type": "object",
                                 "properties": {
                                     "from": {
@@ -4586,7 +4592,7 @@
                                     "title": "__type"
                                 },
                                 "groupType": {
-                                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
+                                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.\n\n`groupType` is the only combinator key: a group with an `operator` key, a groupType other than\n`'and'` / `'or'` (e.g. `'OR'`), or, without a groupType, `type` / `combinator` / `op` / `logic`\nholding and/or throws instead of running as `'and'` (#536).",
                                     "enum": [
                                         "and",
                                         "or"
@@ -4630,7 +4636,7 @@
                                         "title": "__type"
                                     },
                                     "groupType": {
-                                        "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
+                                        "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.\n\n`groupType` is the only combinator key: a group with an `operator` key, a groupType other than\n`'and'` / `'or'` (e.g. `'OR'`), or, without a groupType, `type` / `combinator` / `op` / `logic`\nholding and/or throws instead of running as `'and'` (#536).",
                                         "enum": [
                                             "and",
                                             "or"
@@ -4724,7 +4730,7 @@
                     "title": "operator"
                 },
                 "value": {
-                    "description": "Value to match against.\nNote: For indexed search optimization, use string or { key: string } values.",
+                    "description": "Value to match against.\nNote: For indexed search optimization, use string or { key: string } values.\nOn a `date` attribute: a `Date`, epoch milliseconds or an ISO 8601 string (`\"2023-01-31\"` is\nmidnight UTC, a date-time without a zone designator is read as UTC); any other string throws an\n`InvalidDateValue` error (#514).",
                     "title": "value"
                 }
             },
@@ -4801,7 +4807,7 @@
                     "title": "operator"
                 },
                 "value": {
-                    "description": "The values to match; any one of them matching is enough.\nNote: For indexed search optimization, use string or { key: string } values.",
+                    "description": "The values to match; any one of them matching is enough.\nNote: For indexed search optimization, use string or { key: string } values.\nOn a `date` attribute each entry takes the forms `eq` takes; one string that is no date throws\nan `InvalidDateValue` error (#514).",
                     "type": "array",
                     "items": {},
                     "title": "value"
@@ -4937,7 +4943,7 @@
                     "title": "operator"
                 },
                 "value": {
-                    "description": "Numeric value, date, or string representation for comparison.",
+                    "description": "Numeric value, date, or string representation for comparison. On a `date` attribute: a `Date`,\nepoch milliseconds or an ISO 8601 string (`\"2023-01-31\"` is midnight UTC, a date-time without a\nzone designator is read as UTC); any other string throws an `InvalidDateValue` error (#514).",
                     "anyOf": [
                         {
                             "type": "string",
@@ -5262,7 +5268,7 @@
                     "title": "__type"
                 },
                 "groupType": {
-                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.",
+                    "description": "Combination logic for conditions in this group. When omitted:\n\n- A whole query defaults to `'and'`: `query.execute`, `lists.create({ query })`,\n  `dcupl.fn.*`, a root `apply({ groupKey: 'root', ... }, { mode: 'set' })` and\n  `replaceQuery`, also when it replaces an `'or'` root. Every group nested inside a query\n  without its own groupType is evaluated as `'and'` too.\n- A group given to the query builder (`addGroup` / `setGroup` / `apply(group)`) defaults\n  to `'or'`, both when it is created and when it replaces an existing group. `addGroup`\n  extending an existing keyed group keeps that group's current groupType.\n\nSet the groupType explicitly to avoid depending on either default.\n\n`groupType` is the only combinator key: a group with an `operator` key, a groupType other than\n`'and'` / `'or'` (e.g. `'OR'`), or, without a groupType, `type` / `combinator` / `op` / `logic`\nholding and/or throws instead of running as `'and'` (#536).",
                     "enum": [
                         "and",
                         "or"

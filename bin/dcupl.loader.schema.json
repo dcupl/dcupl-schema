@@ -651,7 +651,7 @@
                     "title": "tags"
                 },
                 "scriptKey": {
-                    "description": "The operator name that can be used in a query",
+                    "description": "The key the script is registered under: a custom query operator name, or the key an endpoint or\nsort script is called by. Scripts carry no mode. Used as a query operator, a key with a built-in\noperator's name (e.g. `size`) never runs: the built-in does, and the SDK warns once.",
                     "type": "string",
                     "title": "scriptKey"
                 }
