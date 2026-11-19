@@ -2602,7 +2602,7 @@
                     "title": "distinctOptions"
                 },
                 "groupOptions": {
-                    "description": "`groups` to count items into. A range group counts the items with `from <= value < to`: the lower\nbound is inclusive, the upper bound exclusive, so adjacent groups (`0-50`, `50-100`) hold every\nvalue once. With only `from` or only `to` the range is open-ended. `calculateNotFound` adds a\ngroup with the items that fall into no group.",
+                    "description": "`groups` to count items into. A range group counts the items with `from <= value < to`: the lower\nbound is inclusive, the upper bound exclusive, so adjacent groups (`0-50`, `50-100`) hold every\nvalue once. With only `from` or only `to` the range is open-ended. Bounds are compared as given,\nwith no conversion to the attribute's type (a string bound on a date attribute aside). An\narray-typed attribute is unwound: an item is in every group one of its values falls into, once per\ngroup. `calculateNotFound` adds a group with the items that fall into no group.",
                     "type": "object",
                     "properties": {
                         "calculateNotFound": {
@@ -2612,7 +2612,7 @@
                         "groups": {
                             "type": "array",
                             "items": {
-                                "description": "One group of the `group` aggregation: a range (`from`, `to`) or a list of values (`value`).\n\nA range holds the values with `from <= value < to`: `from` is inclusive, `to` is exclusive. With\nonly `from` it holds `value >= from`, with only `to` it holds `value < to`; a bound that is\n`undefined` or `null` is absent, and a group without a bound and without `value` matches nothing.\n\nA range compares numbers, non-empty strings and dates, with the JavaScript `<=` and `<` operators\n(dates by their time, against `Date` or epoch millisecond bounds). Every other value is in no range:\n`undefined`, `null`, `''`, a boolean, an object, and an array (an array-typed attribute without a\ndot path is not unwound). A value group can list such a value; `value: null` is an absent list.",
+                                "description": "One group of the `group` aggregation: a range (`from`, `to`) or a list of values (`value`).\n\nA range holds the values with `from <= value < to`: `from` is inclusive, `to` is exclusive. With\nonly `from` it holds `value >= from`, with only `to` it holds `value < to`; a bound that is\n`undefined` or `null` is absent, and a group without a bound and without `value` matches nothing.\n\nA range compares numbers, strings with a non-whitespace character and dates, with the JavaScript\n`<=` and `<` operators, against the bounds as given (dates by their time, against `Date`, epoch\nmillisecond or ISO 8601 string bounds). Every other value is in no range: `undefined`, `null`, `''`,\na whitespace-only string, a boolean and an object. An array-typed attribute (`Array<int>`,\n`Array<string>`, a multi-valued reference) is unwound, as a dot path is: an item is in every group\none of its values falls into, once per group, and an empty array is in none. A value group can list\nany value; `value: null` is an absent list.",
                                 "type": "object",
                                 "properties": {
                                     "from": {
@@ -6137,7 +6137,7 @@
                         },
                         {
                             "$ref": "#/definitions/DcuplQueryFind",
-                            "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field."
+                            "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field.\n\nOn a `date` attribute (#514, #530) an ISO 8601 string or a `Date` matches that instant, a regex\ntests the date's `toISOString()` form (the same on every host), and `null` throws an\n`InvalidDateValue` error. Any other string matches nothing, without an error."
                         },
                         {
                             "$ref": "#/definitions/DcuplQueryNumbers",
@@ -6398,7 +6398,7 @@
             ]
         },
         "DcuplQueryFind": {
-            "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field.",
+            "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field.\n\nOn a `date` attribute (#514, #530) an ISO 8601 string or a `Date` matches that instant, a regex\ntests the date's `toISOString()` form (the same on every host), and `null` throws an\n`InvalidDateValue` error. Any other string matches nothing, without an error.",
             "title": "DcuplQueryFind",
             "additionalProperties": false,
             "type": "object",
@@ -6924,7 +6924,7 @@
                 },
                 {
                     "$ref": "#/definitions/DcuplQueryFind",
-                    "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field."
+                    "description": "Find query - regex / exact / object match.\n\nMatching depends on the shape of `value`:\n- **Bare string** (e.g. `'search'`) — exact-equality against the *whole* field\n  value, NOT a substring. `find` with `'Ball'` does not match `'Soccer Ball'`.\n- **Slash-delimited regex** (e.g. `'/search/'`, `'/^foo/'`) — the text between the\n  slashes is a JS regex; use this for substring and pattern matching. Flags go in\n  `options.regexFlags` (`'/^foo/'` + `regexFlags: 'i'`), not after the closing\n  slash: `'/^foo/i'` is a bare string and matches exactly.\n- **Object** (e.g. `{ key: 'value' }`) — property matching against the field.\n\nOn a `date` attribute (#514, #530) an ISO 8601 string or a `Date` matches that instant, a regex\ntests the date's `toISOString()` form (the same on every host), and `null` throws an\n`InvalidDateValue` error. Any other string matches nothing, without an error."
                 },
                 {
                     "$ref": "#/definitions/DcuplQueryNumbers",
